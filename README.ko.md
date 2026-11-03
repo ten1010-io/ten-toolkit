@@ -7,7 +7,7 @@
 | 플러그인 | 버전 | 스킬 |
 |---|---|---|
 | [`ten-toolkit`](#명령어) | `0.5.0` | `/aqa-inspect` · `/aqa-jira` · `/create-pr` · `/merge-check` |
-| [`java-team`](#java-team-플러그인) | `0.1.0` | `/java-team:meeting-prep` |
+| [`java-team`](#java-team-플러그인) | `0.1.1` | `/java-team:meeting-prep` |
 
 스킬은 플러그인 버전을 따라간다 — 스킬마다 따로 버전을 매기지 않는다. 설치된 것은 `/plugin` 으로 확인한다. **플러그인의 `version` 을 올릴 때 이 표도 같은 커밋에서 갱신한다.**
 

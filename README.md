@@ -7,7 +7,7 @@ By [Ten](https://github.com/ten1010-io) — Claude Code plugins for AI-powered Q
 | Plugin | Version | Skills |
 |---|---|---|
 | [`ten-toolkit`](#commands) | `0.5.0` | `/aqa-inspect` · `/aqa-jira` · `/create-pr` · `/merge-check` |
-| [`java-team`](#java-team-plugin) | `0.1.0` | `/java-team:meeting-prep` |
+| [`java-team`](#java-team-plugin) | `0.1.1` | `/java-team:meeting-prep` |
 
 Skills ship with their plugin — there is no separate skill version. Run `/plugin` to see what you have installed. **When you bump a plugin's `version`, update this table in the same commit.**
 
