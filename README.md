@@ -231,7 +231,7 @@ Turns one AIPub product topic (InfiniBand, Workspace, Job, PV/PVC, ...) into a s
 정책서:
 https://<site>.atlassian.net/wiki/spaces/<space>/pages/<id>/...
 Figma:
-https://www.figma.com/design/<file>/...
+https://www.figma.com/design/<file>/...?node-id=<frame-id>
 Jira:
 https://<site>.atlassian.net/browse/<KEY-123>
 Slack:
@@ -243,7 +243,7 @@ https://<workspace>.slack.com/archives/<channel>/p<ts>
 | Source | Used for |
 |---|---|
 | Policy pages (Confluence) | Behavior, numbers, wording. A folder link pulls in its child pages |
-| Figma | Layout and real copy of the layer-2 screen mock-ups |
+| Figma | Layout and real copy of the layer-2 screen mock-ups. Link the screen frames (with `node-id`), not just the file; a file link only exposes the page list |
 | Codebase (aipub-web) | Screen names, routes, i18n copy. Run inside it or attach with `--add-dir` |
 | Jira ticket | Scope and decisions |
 | Slack threads | Why the policy changed. Only the conclusion goes into the page |

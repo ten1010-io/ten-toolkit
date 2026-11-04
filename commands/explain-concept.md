@@ -23,7 +23,7 @@ Example:
 정책서:
 https://<site>.atlassian.net/wiki/spaces/<space>/pages/<id>/...
 Figma:
-https://www.figma.com/design/<file>/...
+https://www.figma.com/design/<file>/...?node-id=<frame-id>
 ```
 
 Links make the explainer accurate. Without them the skill searches Confluence and Figma by topic name and reports which documents it picked.

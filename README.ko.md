@@ -201,7 +201,7 @@ AIPub 제품 주제 하나(InfiniBand, Workspace, Job, PV·PVC 등)를 처음 �
 정책서:
 https://<site>.atlassian.net/wiki/spaces/<space>/pages/<id>/...
 Figma:
-https://www.figma.com/design/<file>/...
+https://www.figma.com/design/<file>/...?node-id=<frame-id>
 Jira:
 https://<site>.atlassian.net/browse/<KEY-123>
 Slack:
@@ -213,7 +213,7 @@ https://<workspace>.slack.com/archives/<channel>/p<ts>
 | 재료 | 설명서에서 쓰는 곳 |
 |---|---|
 | 정책서(Confluence) 링크 | 화면 동작·숫자·문구. 폴더 링크를 주면 하위 페이지까지 읽는다 |
-| Figma 링크 | 2층 화면 흉내의 모양과 실제 문구 |
+| Figma 링크 | 2층 화면 흉내의 모양과 실제 문구. 파일 링크가 아니라 화면 프레임 링크(`node-id` 포함)를 붙인다. 파일 링크만 주면 페이지 목록만 읽힌다 |
 | 코드베이스(aipub-web) | 화면 이름·라우트·문안. 작업 디렉터리에서 실행하거나 `--add-dir` 로 붙인다 |
 | Jira 티켓 | 기능의 범위와 결정 |
 | Slack 논의 스레드 | 정책이 바뀐 이유. 본문에는 결론만 쓴다 |
