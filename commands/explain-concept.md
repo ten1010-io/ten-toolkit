@@ -12,6 +12,18 @@ Follow the `explain-concept` skill (`skills/explain-concept/SKILL.md`). It reads
 
 ```
 /explain-concept <topic>
+<links to policy pages, Figma, Jira, Slack — optional but recommended>
 ```
 
-Example: `/explain-concept InfiniBand`
+Example:
+
+```
+/explain-concept WorkloadGroup
+
+정책서:
+https://<site>.atlassian.net/wiki/spaces/<space>/pages/<id>/...
+Figma:
+https://www.figma.com/design/<file>/...
+```
+
+Links make the explainer accurate. Without them the skill searches Confluence and Figma by topic name and reports which documents it picked.
