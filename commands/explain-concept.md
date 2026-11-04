@@ -26,4 +26,4 @@ Figma:
 https://www.figma.com/design/<file>/...?node-id=<frame-id>
 ```
 
-Links make the explainer accurate. Without them the skill searches Confluence and Figma by topic name and reports which documents it picked.
+Links make the explainer accurate. For Figma, link the screen frames (with `node-id`); a bare file link makes the skill hunt for frames page by page. Without them the skill searches Confluence and Figma by topic name and reports which documents it picked.

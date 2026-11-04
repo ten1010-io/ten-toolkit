@@ -243,7 +243,7 @@ https://<workspace>.slack.com/archives/<channel>/p<ts>
 | Source | Used for |
 |---|---|
 | Policy pages (Confluence) | Behavior, numbers, wording. A folder link pulls in its child pages |
-| Figma | Layout and real copy of the layer-2 screen mock-ups. Link the screen frames (with `node-id`), not just the file; a file link only exposes the page list |
+| Figma | Layout and real copy of the layer-2 screen mock-ups. Link the screen frames (with `node-id`). With only a file link the skill has to find the screens page by page, which is slower and may pick the wrong frames |
 | Codebase (aipub-web) | Screen names, routes, i18n copy. Run inside it or attach with `--add-dir` |
 | Jira ticket | Scope and decisions |
 | Slack threads | Why the policy changed. Only the conclusion goes into the page |
