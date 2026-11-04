@@ -197,7 +197,26 @@ AIPub 제품 주제 하나(InfiniBand, Workspace, Job, PV·PVC 등)를 처음 �
 
 ```
 /explain-concept <주제>
+
+정책서:
+https://<site>.atlassian.net/wiki/spaces/<space>/pages/<id>/...
+Figma:
+https://www.figma.com/design/<file>/...
+Jira:
+https://<site>.atlassian.net/browse/<KEY-123>
+Slack:
+https://<workspace>.slack.com/archives/<channel>/p<ts>
 ```
+
+**같이 붙이면 정확해지는 것:** 링크가 없으면 주제 이름으로 검색해서 문서를 고르므로 엉뚱한 문서를 읽을 수 있다. 가진 것은 모두 붙인다.
+
+| 재료 | 설명서에서 쓰는 곳 |
+|---|---|
+| 정책서(Confluence) 링크 | 화면 동작·숫자·문구. 폴더 링크를 주면 하위 페이지까지 읽는다 |
+| Figma 링크 | 2층 화면 흉내의 모양과 실제 문구 |
+| 코드베이스(aipub-web) | 화면 이름·라우트·문안. 작업 디렉터리에서 실행하거나 `--add-dir` 로 붙인다 |
+| Jira 티켓 | 기능의 범위와 결정 |
+| Slack 논의 스레드 | 정책이 바뀐 이유. 본문에는 결론만 쓴다 |
 
 **사전 요구사항:**
 - 정책서(Confluence)와 Figma 를 읽으려면 Atlassian·Figma MCP 가 연결되어 있어야 한다. 실제 리소스 값을 쓰려면 클러스터를 읽을 수 있어야 한다(읽기만 한다).

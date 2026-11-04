@@ -227,7 +227,26 @@ Turns one AIPub product topic (InfiniBand, Workspace, Job, PV/PVC, ...) into a s
 
 ```
 /explain-concept <topic>
+
+정책서:
+https://<site>.atlassian.net/wiki/spaces/<space>/pages/<id>/...
+Figma:
+https://www.figma.com/design/<file>/...
+Jira:
+https://<site>.atlassian.net/browse/<KEY-123>
+Slack:
+https://<workspace>.slack.com/archives/<channel>/p<ts>
 ```
+
+**Attach what you have:** without links the skill searches by topic name and may pick the wrong documents.
+
+| Source | Used for |
+|---|---|
+| Policy pages (Confluence) | Behavior, numbers, wording. A folder link pulls in its child pages |
+| Figma | Layout and real copy of the layer-2 screen mock-ups |
+| Codebase (aipub-web) | Screen names, routes, i18n copy. Run inside it or attach with `--add-dir` |
+| Jira ticket | Scope and decisions |
+| Slack threads | Why the policy changed. Only the conclusion goes into the page |
 
 **Prerequisites:**
 - Atlassian and Figma MCP servers to read policy pages and designs. Read access to a cluster if you want real resource values (it only reads).
