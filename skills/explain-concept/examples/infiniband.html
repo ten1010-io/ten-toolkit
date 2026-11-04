@@ -1,0 +1,3032 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>InfiniBand 터널 노선도</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* 그림책 설명서: 가운데 한 줄로 내려가며 칸마다 번호 → 질문 → 한 줄 답 → 큰 그림 → 짧은 글. 2층은 칸마다 펼치는 제품 데모 */
+:root {
+  --bg: #FBF7F0; --paper: #FFFFFF; --wash: #F3ECE0; --ink: #241F1A; --ink-2: #645B4F; --ink-3: #978C7D; --rule: #E6DDCE; --line: #2A241E;
+  --accent: #E8692A; --accent-ink: #AF470F; --accent-wash: #FDE5D3; --mark: #FFE07A;
+  --install: #8A6BD6; --admin: #3B7BF0; --system: #D08C12; --member: #1F9A66;
+  --team-a: #FF8DB3; --team-b: #55C6BC;
+  --ok: #13865A; --ok-wash: #DDF3E7; --warn: #B06600; --warn-wash: #FCEBCB; --bad: #C93A2B; --bad-wash: #FBE0DB;
+  --skin: #FFE1C4; --hair: #3B2B22; --blush: #FFB0A8;
+  --bldg: #E4EDFF; --bldg-2: #FFEAD4; --roof: #A6C0EE; --roof-2: #F5C597; --chip: #A6E3C5; --pcb: #74CFA0; --gold: #F3C24F;
+  --road: #D6CFC3; --car: #A2B5CA; --tunnel: #F28A3C; --tunnel-hi: #FFCB99; --tower: #FFD45E; --paper-ill: #FFFDF8; --seat: #F2E6D2;
+  --ui: #FFFFFF; --ui-fg: #0A0A0A; --ui-card: #FFFFFF; --ui-pop: #FFFFFF; --ui-side: #FAFAFA; --ui-active: #E0F4FF; --ui-line: #E5E5E5; --ui-head: #F5F5F5; --ui-mute: #737373; --ui-blue: #2E7BFF; --ui-blue-wash: #E8F1FF; --ui-ib: #F0F9FF;
+  --ub-ok-bg: #ECFDF5; --ub-ok: #047857; --ub-warn-bg: #FFEDD5; --ub-warn: #EA580C; --ub-bad-bg: #FEE2E2; --ub-bad: #DC2626; --pm: #E0664F;
+  --bar-this: #2E7BFF; --bar-other: #99D1FF; --bar-rel: #FFCD79; --bar-un: #F5F5F5;
+  --l2: #F5EFE4; --track: #2B2520; --track-2: #40372F; --track-ink: #EAE2D6; --on-accent: #FFFFFF;
+  --shadow: 0 10px 26px rgb(60 40 20 / .14);
+  --f-display: "Do Hyeon", "IBM Plex Sans KR", "Apple SD Gothic Neo", sans-serif;
+  --f-round: "Jua", "IBM Plex Sans KR", "Apple SD Gothic Neo", sans-serif;
+  --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --f-ui: "Inter", "IBM Plex Sans KR", "Apple SD Gothic Neo", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1A1714; --paper: #24201C; --wash: #2E2924; --ink: #F3EDE3; --ink-2: #C0B6A7; --ink-3: #8E8477; --rule: #3A342D; --line: #0E0C0A;
+    --accent: #F2874A; --accent-ink: #FFA772; --accent-wash: #3E2718; --mark: #6B561C;
+    --install: #AA93F2; --admin: #77A3FF; --system: #E8B04A; --member: #4CC994;
+    --team-a: #EE7AA3; --team-b: #43B7AD;
+    --ok: #4FD198; --ok-wash: #15342A; --warn: #F2B04A; --warn-wash: #3B2D14; --bad: #FF7565; --bad-wash: #3F1E1A;
+    --skin: #EDCBAA; --hair: #2A1E18; --blush: #DB8E88;
+    --bldg: #33405A; --bldg-2: #4A3A2B; --roof: #5D78A8; --roof-2: #8E6646; --chip: #4D9E79; --pcb: #3D8C65; --gold: #D9A93A;
+    --road: #58514A; --car: #718296; --tunnel: #F28A3C; --tunnel-hi: #FFB57D; --tower: #D9AE40; --paper-ill: #2F2A25; --seat: #433B33;
+  --ui: #0A0A0A; --ui-fg: #FAFAFA; --ui-card: #171717; --ui-pop: #262626; --ui-side: #171717; --ui-active: rgb(46 123 255 / .4); --ui-line: rgb(255 255 255 / .1); --ui-head: #262626; --ui-mute: #A3A3A3; --ui-blue: #2E7BFF; --ui-blue-wash: rgb(46 123 255 / .2); --ui-ib: rgb(46 123 255 / .12);
+  --ub-ok-bg: rgb(134 239 172 / .24); --ub-ok: #4ADE80; --ub-warn-bg: rgb(251 146 60 / .3); --ub-warn: #FB923C; --ub-bad-bg: rgb(239 68 68 / .3); --ub-bad: #EF4444; --pm: #F08A76;
+  --bar-this: #2E7BFF; --bar-other: rgb(97 168 255 / .6); --bar-rel: rgb(245 158 11 / .4); --bar-un: #262626;
+    --l2: #211D19; --track: #0F0D0B; --track-2: #2B2621; --track-ink: #DCD3C6; --on-accent: #FFFFFF;
+    --shadow: 0 10px 26px rgb(0 0 0 / .5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1A1714; --paper: #24201C; --wash: #2E2924; --ink: #F3EDE3; --ink-2: #C0B6A7; --ink-3: #8E8477; --rule: #3A342D; --line: #0E0C0A;
+  --accent: #F2874A; --accent-ink: #FFA772; --accent-wash: #3E2718; --mark: #6B561C;
+  --install: #AA93F2; --admin: #77A3FF; --system: #E8B04A; --member: #4CC994;
+  --team-a: #EE7AA3; --team-b: #43B7AD;
+  --ok: #4FD198; --ok-wash: #15342A; --warn: #F2B04A; --warn-wash: #3B2D14; --bad: #FF7565; --bad-wash: #3F1E1A;
+  --skin: #EDCBAA; --hair: #2A1E18; --blush: #DB8E88;
+  --bldg: #33405A; --bldg-2: #4A3A2B; --roof: #5D78A8; --roof-2: #8E6646; --chip: #4D9E79; --pcb: #3D8C65; --gold: #D9A93A;
+  --road: #58514A; --car: #718296; --tunnel: #F28A3C; --tunnel-hi: #FFB57D; --tower: #D9AE40; --paper-ill: #2F2A25; --seat: #433B33;
+  --ui: #0A0A0A; --ui-fg: #FAFAFA; --ui-card: #171717; --ui-pop: #262626; --ui-side: #171717; --ui-active: rgb(46 123 255 / .4); --ui-line: rgb(255 255 255 / .1); --ui-head: #262626; --ui-mute: #A3A3A3; --ui-blue: #2E7BFF; --ui-blue-wash: rgb(46 123 255 / .2); --ui-ib: rgb(46 123 255 / .12);
+  --ub-ok-bg: rgb(134 239 172 / .24); --ub-ok: #4ADE80; --ub-warn-bg: rgb(251 146 60 / .3); --ub-warn: #FB923C; --ub-bad-bg: rgb(239 68 68 / .3); --ub-bad: #EF4444; --pm: #F08A76;
+  --bar-this: #2E7BFF; --bar-other: rgb(97 168 255 / .6); --bar-rel: rgb(245 158 11 / .4); --bar-un: #262626;
+  --l2: #211D19; --track: #0F0D0B; --track-2: #2B2621; --track-ink: #DCD3C6; --on-accent: #FFFFFF;
+  --shadow: 0 10px 26px rgb(0 0 0 / .5);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { word-break: keep-all; overflow-wrap: break-word; background: var(--bg); color: var(--ink); font: 16px/1.75 var(--f-body); -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+a { color: var(--accent-ink); text-underline-offset: 3px; }
+code, .mono { font-family: var(--f-mono); font-size: .86em; }
+p code, li code, td code, .cap code, .qa code { background: var(--wash); padding: .05em .35em; border-radius: 4px; overflow-wrap: anywhere; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+mark { background: linear-gradient(transparent 52%, var(--mark) 52%, var(--mark) 92%, transparent 92%); color: inherit; padding: 0 .08em; }
+.wrap { max-width: 920px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.col { max-width: 680px; margin-inline: auto; }
+
+/* ── 표지 ── */
+.hero { padding-block: 64px 28px; display: grid; gap: 18px; justify-items: center; text-align: center; }
+.eyebrow { font: 500 12px/1.4 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 0; }
+.hero h1 { font: 400 clamp(56px, 12vw, 108px)/.95 var(--f-display); margin: 0; }
+.hero h1 .sub { display: block; font-size: .36em; margin-top: .4em; }
+.lead { max-width: 60ch; font-size: 17px; margin: 0; text-wrap: pretty; }
+.howto { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 8px 0 0; padding: 0; list-style: none; text-align: left; width: 100%; }
+.howto li { background: var(--paper); border: 2px solid var(--line); border-radius: 16px; padding: 12px 14px; font-size: 14px; line-height: 1.6; min-width: 0; box-shadow: 3px 3px 0 var(--line); }
+.howto li b { display: block; font: 400 18px/1.3 var(--f-round); margin-bottom: 2px; }
+.roles { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; font-size: 13.5px; color: var(--ink-2); }
+.roles span { display: inline-flex; align-items: center; gap: 6px; }
+.roles i, .rd { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; border: 1.5px solid var(--line); }
+.r-install { background: var(--install); } .r-admin { background: var(--admin); } .r-system { background: var(--system); } .r-member { background: var(--member); }
+
+.map { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; margin: 6px 0 0; padding: 0; list-style: none; }
+.mp { all: unset; box-sizing: border-box; width: 100%; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background: var(--paper); border: 1.5px solid var(--rule); text-align: left; font-size: 14px; line-height: 1.3; transition: border-color .2s, transform .2s; }
+.mp:hover { border-color: var(--line); transform: translateY(-1px); }
+.mp:focus-visible { outline: 3px solid var(--accent); }
+.mp .n { flex: none; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; font: 400 14px/1 var(--f-round); background: var(--paper); }
+.mp.seen .n { background: var(--accent); color: var(--on-accent); }
+
+/* ── 고정 막대 ── */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+.bar-in { display: flex; align-items: center; gap: 14px; padding-block: 8px; }
+.bar-name { font: 400 19px/1 var(--f-display); white-space: nowrap; }
+.dots { display: flex; gap: 5px; margin-left: auto; flex-wrap: nowrap; min-width: 0; }
+.dot { all: unset; cursor: pointer; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--rule); display: grid; place-items: center; font: 500 10.5px/1 var(--f-mono); color: var(--ink-3); background: var(--paper); flex: none; }
+.dot.seen { background: var(--accent-wash); border-color: var(--accent); color: var(--accent-ink); }
+.dot.here { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.dot:focus-visible { outline: 3px solid var(--accent); }
+
+/* ── 칸 ── */
+.stop { padding-block: 72px 56px; scroll-margin-top: 56px; display: grid; gap: 22px; min-width: 0; }
+.stop + .stop { border-top: 1.5px dashed var(--rule); }
+.sh { display: grid; justify-items: center; gap: 10px; text-align: center; }
+.sh .num { width: 44px; height: 44px; border-radius: 50%; background: var(--line); color: #FFFFFF; display: grid; place-items: center; font: 400 20px/1 var(--f-round); }
+:root[data-theme="dark"] .sh .num { background: var(--ink); color: var(--bg); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sh .num { background: var(--ink); color: var(--bg); } }
+.sh .ask { margin: 0; font: 400 17px/1.3 var(--f-round); color: var(--ink-2); }
+.sh h2 { margin: 0; font: 400 clamp(30px, 5vw, 42px)/1.25 var(--f-display); text-wrap: balance; max-width: 22ch; }
+.fig { margin: 0; background: var(--paper); border: 2px solid var(--line); border-radius: 22px; padding: 18px; overflow-x: auto; box-shadow: 4px 4px 0 var(--line); }
+.fig svg.dg { display: block; width: 100%; min-width: 500px; height: auto; margin-inline: auto; max-width: 760px; }
+.cap { font-size: 17px; margin: 0 auto; max-width: 60ch; text-align: center; text-wrap: pretty; }
+.cap b { background: linear-gradient(transparent 60%, var(--mark) 60%); font-weight: 600; }
+details.more { max-width: 680px; margin-inline: auto; width: 100%; border: 1.5px solid var(--rule); border-radius: 14px; background: var(--paper); }
+details.more summary { cursor: pointer; font: 400 16px/1 var(--f-round); color: var(--ink-2); list-style: none; display: flex; gap: 8px; align-items: center; padding: 14px 16px; }
+details.more summary::-webkit-details-marker { display: none; }
+details.more summary::before { content: "+"; font: 500 14px/1 var(--f-mono); width: 20px; height: 20px; border: 1.5px solid var(--ink-3); border-radius: 6px; display: grid; place-items: center; flex: none; }
+details.more[open] summary::before { content: "−"; }
+details.more .in { display: grid; gap: 10px; padding: 0 16px 16px; font-size: 15px; }
+details.more p { margin: 0; }
+details.more ul { margin: 0; padding-left: 18px; }
+.tbl-wrap { overflow-x: auto; }
+table.plain { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+table.plain th, table.plain td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+table.plain th { font: 500 12px/1.4 var(--f-mono); color: var(--ink-3); letter-spacing: .04em; }
+.diff { border: 1.5px solid var(--rule); border-left: 5px solid var(--install); background: var(--paper); border-radius: 12px; padding: 11px 15px; font-size: 14.5px; display: grid; gap: 5px; }
+.diff b { font: 500 11.5px/1.4 var(--f-mono); letter-spacing: .06em; color: var(--install); }
+.diff p { margin: 0; }
+
+/* ── 만져 보기 ── */
+.try { background: var(--paper); border: 2px solid var(--line); border-radius: 18px; padding: 18px; display: grid; gap: 12px; min-width: 0; box-shadow: 3px 3px 0 var(--line); }
+.try .ttl { font: 400 15px/1 var(--f-round); color: var(--accent-ink); display: inline-flex; gap: 6px; align-items: center; }
+.try .ttl::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--mark); border: 1.5px solid var(--line); }
+.try .q { margin: 0; font-weight: 600; }
+.ctrls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.ctrl { display: inline-flex; align-items: center; gap: 8px; font-size: 14.5px; flex-wrap: wrap; }
+.ctrl select { font: inherit; font-size: 14px; padding: 5px 8px; border-radius: 9px; border: 1.5px solid var(--rule); background: var(--bg); color: var(--ink); max-width: 100%; }
+.ctrl input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); }
+.stp { display: inline-flex; align-items: center; border: 2px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--paper); }
+.stp button { width: 34px; height: 32px; border: 0; background: transparent; cursor: pointer; font-size: 17px; }
+.stp button:hover:not(:disabled) { background: var(--wash); }
+.stp button:disabled { opacity: .3; cursor: default; }
+.stp output { min-width: 36px; text-align: center; font: 400 16px/32px var(--f-round); border-inline: 2px solid var(--line); }
+.res { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; }
+.res .big { font: 400 32px/1.1 var(--f-display); color: var(--accent-ink); }
+.slots { display: flex; flex-wrap: wrap; gap: 6px; }
+.slots i { width: 24px; height: 30px; border-radius: 6px; border: 2px dashed var(--ink-3); }
+.slots i.on { background: var(--tunnel); border: 2px solid var(--line); }
+.slots.doors { align-items: flex-end; padding: 12px 14px 0; background: var(--bldg); border: 2px solid var(--line); border-radius: 14px; min-height: 70px; }
+.slots.doors i { width: 30px; height: 46px; border-radius: 15px 15px 0 0; border: 2px solid var(--line); border-bottom: 0; background: var(--tunnel); position: relative; }
+.slots.doors i::after { content: ""; position: absolute; right: 6px; top: 24px; width: 4px; height: 4px; border-radius: 50%; background: var(--line); }
+.slots.doors i:not(.on) { display: none; }
+.tbar { display: flex; height: 26px; border-radius: 8px; overflow: hidden; background: var(--bar-un); border: 2px solid var(--line); font: 500 12px/22px var(--f-mono); }
+.tbar > div { flex: 0 1 0; text-align: center; color: #FFFFFF; transition: flex-grow .4s; overflow: hidden; min-width: 0; }
+.tbar .a { background: var(--bar-this); } .tbar .r { background: var(--bar-rel); color: #3A2A00; } .tbar .o { background: var(--bar-other); color: #0B2A3E; } .tbar .u { color: var(--ink-3); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.verdict { padding: 11px 13px; border-radius: 12px; background: var(--wash); font-size: 15px; }
+.verdict.good { background: var(--ok-wash); } .verdict.warn { background: var(--warn-wash); } .verdict.bad { background: var(--bad-wash); }
+.hint { margin: 0; font-size: 13px; color: var(--ink-3); }
+.jt { border-collapse: collapse; font-size: 14.5px; }
+.jt td, .jt th { padding: 6px 14px 6px 0; text-align: left; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.jt th { font: 500 12px/1.4 var(--f-mono); color: var(--ink-3); }
+.jt .good { color: var(--ok); font-weight: 600; } .jt .warn { color: var(--warn); font-weight: 600; } .jt .bad { color: var(--bad); font-weight: 600; }
+
+/* ── 2층 ── */
+.go2 { display: flex; justify-content: center; }
+.l2btn { display: inline-flex; align-items: center; gap: 12px; border: 2px solid var(--line); background: var(--paper); border-radius: 16px; padding: 10px 18px 10px 12px; cursor: pointer; text-align: left; box-shadow: 3px 3px 0 var(--line); transition: transform .15s, box-shadow .15s; }
+.l2btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--line); }
+.l2btn .pl { width: 34px; height: 34px; border-radius: 50%; background: var(--ui-blue); color: #FFFFFF; display: grid; place-items: center; flex: none; transition: transform .25s; }
+.l2btn .pl svg { width: 13px; height: 13px; fill: currentColor; }
+.l2btn b { display: block; font: 400 17px/1.25 var(--f-round); }
+.l2btn small { display: block; font-size: 12.5px; color: var(--ink-2); }
+.l2btn[aria-expanded="true"] { background: var(--ui-blue-wash); }
+.l2btn[aria-expanded="true"] .pl { transform: rotate(90deg); }
+.l2 { background: var(--l2); border: 2px solid var(--line); border-radius: 22px; padding: 20px; display: grid; gap: 16px; min-width: 0; }
+.l2-head { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; }
+.l2-lbl { font: 500 11.5px/1 var(--f-mono); letter-spacing: .08em; color: var(--ui-blue); margin-right: 4px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; padding: 3px 10px; border-radius: 999px; border: 1.5px solid var(--rule); background: var(--paper); white-space: nowrap; }
+.chip.fn { font-weight: 600; border-color: transparent; }
+.chip.read { background: var(--ui-blue-wash); color: var(--ui-blue); }
+.chip.create { background: var(--ok-wash); color: var(--ok); }
+.chip.update { background: var(--warn-wash); color: var(--warn); }
+.chip a { color: inherit; }
+.lead2 { margin: 0; font-size: 15.5px; }
+
+.player { border-radius: 16px; overflow: hidden; border: 2px solid var(--line); background: var(--wash); min-width: 0; }
+.viewport { overflow-x: auto; }
+.stage { position: relative; min-width: 600px; padding: 18px; }
+.timeline { background: var(--track); color: var(--track-ink); padding: 8px 14px 6px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 14px; align-items: center; }
+.tl-ctl { display: flex; gap: 6px; }
+.tl-ctl button { height: 30px; min-width: 30px; border-radius: 9px; border: 1px solid var(--track-2); background: var(--track-2); color: var(--track-ink); display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; padding: 0 9px; font-size: 13px; }
+.tl-ctl button:hover { border-color: var(--accent); }
+.tl-ctl button.on { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+.tl-ctl svg { width: 14px; height: 14px; fill: currentColor; flex: none; }
+.tl-cap { margin: 0; font-size: 14px; line-height: 1.45; color: #F6F0E6; min-height: 1.45em; display: flex; gap: 10px; align-items: baseline; }
+.tl-cap .no { font: 500 11.5px/1 var(--f-mono); color: var(--accent); flex: none; }
+.tl-track { grid-column: 1 / -1; position: relative; height: 22px; margin: 0 9px; }
+.tl-ruler { position: absolute; left: 0; right: 0; top: 2px; height: 6px; background: repeating-linear-gradient(90deg, var(--track-2) 0 1px, transparent 1px 12px); }
+.tl-base, .tl-done { position: absolute; left: 0; top: 12px; height: 3px; border-radius: 2px; }
+.tl-base { right: 0; background: var(--track-2); }
+.tl-done { width: 0; background: var(--accent); transition: width 1.1s linear; }
+.tl-head { position: absolute; top: 0; width: 2px; height: 22px; background: #FFFFFF; left: 0; transition: left 1.1s linear; border-radius: 1px; }
+.kf { position: absolute; top: 7.5px; width: 12px; height: 12px; margin-left: -6px; transform: rotate(45deg); background: var(--track); border: 2px solid var(--track-ink); border-radius: 2px; cursor: pointer; padding: 0; }
+.kf.on { background: var(--accent); border-color: var(--accent); }
+.kf.cur { box-shadow: 0 0 0 3px rgb(255 255 255 / .35); }
+.kf.next { border-color: #FFE07A; box-shadow: 0 0 0 3px rgb(255 224 122 / .45); }
+.kf:hover { border-color: #FFFFFF; }
+.player.paused .tl-done, .player.paused .tl-head, .player.snap .tl-done, .player.snap .tl-head { transition: none; }
+.hot { position: absolute; z-index: 14; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: var(--accent); border: 3px solid #FFFFFF; box-shadow: 0 2px 8px rgb(0 0 0 / .35); cursor: pointer; padding: 0; }
+.hot .ring { position: absolute; inset: -11px; border-radius: 50%; border: 3px solid var(--accent); animation: pulse 1.3s ease-out infinite; pointer-events: none; }
+.hot .lbl { position: absolute; left: 50%; top: calc(100% + 10px); transform: translateX(-50%); white-space: nowrap; background: var(--track); color: #FFFFFF; font: 400 13px/1 var(--f-round); padding: 6px 10px; border-radius: 8px; pointer-events: none; }
+@keyframes pulse { from { opacity: .9; transform: scale(.6); } to { opacity: 0; transform: scale(1.5); } }
+
+.links3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.lk { background: var(--paper); border: 1.5px solid var(--rule); border-radius: 14px; padding: 12px 14px; display: grid; gap: 4px; align-content: start; min-width: 0; font-size: 14px; }
+.lk .k { font: 400 17px/1.3 var(--f-round); color: var(--accent-ink); }
+.lk .s { color: var(--ink-2); }
+.lk code { font-size: 12px; color: var(--ink); overflow-wrap: anywhere; background: var(--wash); padding: 3px 6px; border-radius: 5px; justify-self: start; }
+
+/* ── 화면 흉내 (AIPub 부품) ── */
+.mock { display: grid; gap: 12px; }
+.ui { background: var(--ui); border: 1px solid var(--ui-line); border-radius: 12px; font: 12.5px/1.45 var(--f-ui); color: var(--ui-fg); overflow: visible; box-shadow: var(--shadow); position: relative; }
+.ui-chrome { display: flex; gap: 6px; align-items: center; padding: 8px 10px; background: var(--ui-head); border-bottom: 1px solid var(--ui-line); border-radius: 12px 12px 0 0; }
+.ui-chrome i { width: 9px; height: 9px; border-radius: 50%; background: var(--ui-line); flex: none; }
+.ui-url { font: 11px/1.4 var(--f-mono); color: var(--ui-mute); background: var(--ui); border: 1px solid var(--ui-line); border-radius: 6px; padding: 2px 9px; margin-left: 8px; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ui-logo { font: 700 12px/1 var(--f-body); margin-left: auto; color: var(--ui-mute); }
+.ui-body { padding: 14px; display: grid; gap: 12px; position: relative; }
+.ui-h { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.ui-h .n { color: var(--ui-blue); }
+.ui-mu { color: var(--ui-mute); }
+.ui-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.ui-sum { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; background: var(--ui-head); border-radius: 9px; padding: 8px 12px; }
+.ui-sum.ib { background: var(--ui-ib); }
+.ui-sum .k { color: var(--ui-mute); margin-right: 4px; }
+.ui-sum b { font-weight: 600; }
+.ui-sum .end { margin-left: auto; }
+.ui-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 500; padding: 1px 7px; border-radius: 5px; background: var(--ui-head); color: var(--ui-mute); white-space: nowrap; border: 1px solid transparent; }
+.ui-badge.ok { background: var(--ub-ok-bg); color: var(--ub-ok); }
+.ui-badge.warn { background: var(--ub-warn-bg); color: var(--ub-warn); }
+.ui-badge.bad { background: var(--ub-bad-bg); color: var(--ub-bad); }
+.ui-card, .ui-tbl { background: var(--ui-card); }
+.ui-pop, .ui-dialog { background: var(--ui-pop); }
+.ui-badge.blue { background: var(--ui-blue-wash); color: var(--ui-blue); }
+.ui-badge.ghost { background: transparent; border-color: var(--ui-line); }
+.ui-tbl { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid var(--ui-line); border-radius: 9px; overflow: hidden; }
+.ui-tbl th { background: var(--ui-head); font-weight: 500; color: var(--ui-mute); text-align: left; padding: 6px 9px; font-size: 11.5px; white-space: nowrap; }
+.ui-tbl td { padding: 7px 9px; border-top: 1px solid var(--ui-line); white-space: nowrap; vertical-align: middle; }
+.ui-tbl td.c, .ui-tbl th.c { text-align: center; }
+.ui-link { text-decoration: underline; text-underline-offset: 2px; }
+.ui-btn { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--ui-line); background: var(--ui); border-radius: 8px; padding: 4px 11px; font-weight: 500; white-space: nowrap; }
+.ui-btn.pri { background: var(--ui-blue); border-color: var(--ui-blue); color: #FFFFFF; }
+.ui-btn.dis { opacity: .42; }
+.ui-more { display: inline-grid; place-items: center; width: 18px; height: 16px; border: 1px solid var(--ui-line); border-radius: 4px; font-size: 9px; letter-spacing: 1px; color: var(--ui-mute); vertical-align: middle; }
+.ui-i { display: inline-grid; place-items: center; width: 13px; height: 13px; border-radius: 50%; background: currentColor; vertical-align: -2px; }
+.ui-i::after { content: "i"; color: var(--ui); font: 700 9px/1 var(--f-body); }
+.ui-barw { display: inline-flex; align-items: center; gap: 8px; }
+.ui-bar { display: inline-flex; width: 100px; height: 6px; border-radius: 3px; overflow: hidden; background: var(--bar-un); }
+.ui-bar i { flex: 0 1 0; transition: flex-grow .6s; }
+.ui-bar .a { background: var(--bar-this); } .ui-bar .r { background: var(--bar-rel); } .ui-bar .o { background: var(--bar-other); } .ui-bar .u { background: transparent; }
+.ui-cnt b { font-weight: 600; } .ui-cnt span { color: var(--ui-mute); }
+.ui-step { display: inline-flex; align-items: center; border: 1px solid var(--ui-line); border-radius: 8px; background: var(--ui); }
+.ui-step span { width: 26px; text-align: center; color: var(--ui-mute); }
+.ui-step b { min-width: 34px; text-align: center; font-weight: 500; border-inline: 1px solid var(--ui-line); line-height: 26px; }
+.ui-sw { width: 30px; height: 17px; border-radius: 9px; background: var(--ui-line); position: relative; display: inline-block; transition: background .25s; flex: none; }
+.ui-sw::after { content: ""; position: absolute; left: 2px; top: 2px; width: 13px; height: 13px; border-radius: 50%; background: #FFFFFF; transition: left .25s; box-shadow: 0 1px 2px rgb(0 0 0 / .25); }
+.ui-sw.on { background: var(--ui-blue); }
+.ui-sw.on::after { left: 15px; }
+.ui-pop { position: absolute; z-index: 6; background: var(--ui); border: 1px solid var(--ui-line); border-radius: 11px; box-shadow: var(--shadow); padding: 12px 14px; display: grid; gap: 8px; min-width: 220px; }
+.ui-pop .t { font-weight: 700; }
+.ui-kv { display: grid; grid-template-columns: auto 1fr; gap: 3px 16px; }
+.ui-kv span { color: var(--ui-mute); }
+.ui-note { display: flex; gap: 7px; align-items: flex-start; padding: 8px 11px; border-radius: 9px; background: var(--ui-ib); font-size: 12px; line-height: 1.55; }
+.ui-note.warn { background: var(--ub-warn-bg); }
+.ui-note.err { background: var(--ub-bad-bg); }
+.ui-note .ic { flex: none; margin-top: 1px; }
+.ui-gpu { background: var(--ui-ib); border-radius: 11px; padding: 12px 14px; display: grid; gap: 10px; }
+.ui-gcard { border: 1.5px solid var(--ui-blue); border-radius: 9px; padding: 8px 10px; background: var(--ui); display: grid; gap: 2px; width: 190px; }
+.ui-hr { height: 1px; background: var(--ui-line); }
+.ui-card { border: 1px solid var(--ui-line); border-radius: 11px; overflow: hidden; }
+.ui-card-h { display: grid; grid-template-columns: 1.8fr 1fr 1.2fr .8fr .8fr 24px; gap: 8px; padding: 9px 12px; align-items: center; }
+.ui-card-h small { display: block; color: var(--ui-mute); font-size: 11px; }
+.ui-card-b { padding: 0 12px 12px; display: grid; gap: 6px; }
+.ui-chev { display: inline-grid; place-items: center; width: 22px; height: 22px; transition: transform .3s; color: var(--ui-mute); }
+.ui-yaml { font: 11.5px/1.6 var(--f-mono); background: var(--ui-head); border-radius: 9px; padding: 10px 12px; white-space: pre; margin: 0; overflow: hidden; }
+.ui-yaml .c { color: var(--ui-mute); }
+.ui-dialog { position: absolute; left: 0; right: 0; margin-inline: auto; top: 84px; width: 640px; max-width: 92%; z-index: 5; box-shadow: 0 0 0 100vmax rgb(0 0 0 / .32), var(--shadow); }
+.ui-dialog .ui-body { gap: 10px; }
+.ui-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ui-tile { border: 1.5px solid var(--ui-line); border-radius: 11px; padding: 10px 12px; display: grid; gap: 8px; background: var(--ui); transition: border-color .25s, box-shadow .25s, transform .25s; }
+.ui-tile.on { border-color: var(--ui-blue); box-shadow: 0 0 0 4px var(--ui-blue-wash); transform: translateY(-2px); }
+.ui-tile .tt { font-weight: 700; display: flex; gap: 8px; align-items: center; justify-content: space-between; }
+.ui-tabs { display: inline-flex; gap: 2px; background: var(--ui-head); border-radius: 8px; padding: 2px; justify-self: start; }
+.ui-tabs span { padding: 2px 10px; border-radius: 6px; color: var(--ui-mute); }
+.ui-tabs span.on { background: var(--ui); color: var(--ui-fg); font-weight: 600; box-shadow: 0 1px 2px rgb(0 0 0 / .1); }
+.hl { background: var(--accent-wash); color: var(--accent-ink); border-radius: 3px; }
+.appear { animation: rise .35s ease-out; }
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.flash-ring { position: absolute; z-index: 11; pointer-events: none; border-radius: 6px; animation: flash 1.1s ease-out forwards; }
+@keyframes flash { 0% { box-shadow: 0 0 0 0 var(--accent); } 30% { box-shadow: 0 0 0 4px var(--accent); } 100% { box-shadow: 0 0 0 10px transparent; } }
+.cursor { position: absolute; left: 0; top: 0; width: 22px; height: 22px; z-index: 12; pointer-events: none; transform: translate(24px, 24px); transition: transform .68s cubic-bezier(.45, 0, .2, 1); }
+.cursor svg { width: 22px; height: 22px; filter: drop-shadow(0 2px 3px rgb(0 0 0 / .35)); }
+.cursor path { fill: #1E1A16; stroke: #FFFFFF; stroke-width: 1.4; stroke-linejoin: round; }
+.cursor .ring { position: absolute; left: -9px; top: -9px; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--accent); opacity: 0; }
+.cursor.click .ring { animation: ring .45s ease-out; }
+@keyframes ring { from { opacity: 1; transform: scale(.3); } to { opacity: 0; transform: scale(1.6); } }
+
+/* ── 그림 (SVG 일러스트) ── */
+.dg text { font-family: var(--f-round); fill: var(--ink); font-size: 15px; }
+.dg .s { font-size: 13px; fill: var(--ink-2); }
+.dg .b { font-size: 17px; }
+.dg .m { font-family: var(--f-mono); font-size: 11.5px; fill: var(--ink-2); }
+.dg .acc { fill: var(--accent-ink); }
+.dg .on-fill { fill: #2A241E; }
+.dg .wt { fill: #FFFFFF; }
+.dg .t-ok { fill: var(--ok); } .dg .t-bad { fill: var(--bad); } .dg .t-warn { fill: var(--warn); }
+.dg .o { stroke: var(--line); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+.dg .o2 { stroke: var(--line); stroke-width: 1.6; stroke-linejoin: round; }
+.dg .f-bldg { fill: var(--bldg); } .dg .f-bldg2 { fill: var(--bldg-2); } .dg .f-roof { fill: var(--roof); } .dg .f-roof2 { fill: var(--roof-2); }
+.dg .f-chip { fill: var(--chip); } .dg .f-pcb { fill: var(--pcb); } .dg .f-gold { fill: var(--gold); } .dg .f-road { fill: var(--road); } .dg .f-car { fill: var(--car); }
+.dg .f-tun { fill: var(--tunnel); } .dg .f-tower { fill: var(--tower); } .dg .f-paper { fill: var(--paper-ill); } .dg .f-seat { fill: var(--seat); }
+.dg .f-a { fill: var(--team-a); } .dg .f-b { fill: var(--team-b); } .dg .f-rel { fill: var(--bar-rel); } .dg .f-line { fill: var(--line); }
+.dg .f-ok { fill: var(--ok); } .dg .f-bad { fill: var(--bad); } .dg .f-warn { fill: var(--warn); } .dg .f-mute { fill: var(--ink-3); } .dg .f-mark { fill: var(--mark); }
+.dg .f-install { fill: var(--install); } .dg .f-admin { fill: var(--admin); } .dg .f-system { fill: var(--system); } .dg .f-member { fill: var(--member); }
+.dg .none { fill: none; }
+.dg .dashed { stroke-dasharray: 5 4; }
+.dg .lane-d { stroke: #FFFFFF; stroke-width: 2; stroke-dasharray: 10 8; fill: none; opacity: .9; }
+.dg .hi { stroke: var(--tunnel-hi); stroke-width: 3; stroke-linecap: round; fill: none; }
+.dg .wire { stroke: var(--line); stroke-width: 9; stroke-linecap: round; fill: none; }
+.dg .wire-in { stroke: var(--tunnel); stroke-width: 5; stroke-linecap: round; fill: none; }
+.dg .ln { stroke: var(--ink-3); stroke-width: 2; fill: none; stroke-linecap: round; }
+.dg .ln-ok { stroke: var(--ok); stroke-width: 3; fill: none; stroke-linecap: round; }
+.dg .ln-bad { stroke: var(--bad); stroke-width: 3; fill: none; stroke-dasharray: 7 6; stroke-linecap: round; }
+.dg .glow { opacity: .28; }
+.dg .c-a { color: var(--team-a); } .dg .c-b { color: var(--team-b); } .dg .c-admin { color: var(--admin); } .dg .c-member { color: var(--member); }
+.dg .c-install { color: var(--install); } .dg .c-system { color: var(--system); }
+.pk-run { animation: run var(--t, 2.6s) linear infinite; animation-delay: var(--dl, 0s); }
+@keyframes run { from { transform: translateX(0); opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } to { transform: translateX(var(--d)); opacity: 0; } }
+.bob { animation: bob 2.4s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .pk-run, .bob, .hot .ring { animation: none; } .cursor { transition: none; } }
+
+/* ── Q&A · 직접 보기 ── */
+.qa-list { display: grid; gap: 10px; }
+details.qa { background: var(--paper); border: 2px solid var(--line); border-radius: 16px; box-shadow: 3px 3px 0 var(--line); }
+details.qa summary { cursor: pointer; list-style: none; display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; font-weight: 600; font-size: 15.5px; line-height: 1.5; }
+details.qa summary::-webkit-details-marker { display: none; }
+details.qa summary::before { content: "Q"; flex: none; width: 26px; height: 26px; border-radius: 8px; background: var(--mark); border: 1.5px solid var(--line); display: grid; place-items: center; font: 400 15px/1 var(--f-round); }
+details.qa summary::after { content: "+"; margin-left: auto; font: 500 16px/1.5 var(--f-mono); color: var(--ink-3); }
+details.qa[open] summary::after { content: "−"; }
+details.qa .a { padding: 0 16px 16px 54px; display: grid; gap: 8px; font-size: 15px; }
+details.qa .a p { margin: 0; }
+details.qa .to { font-size: 13.5px; }
+.idx { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 15px; }
+.src { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.src > div { background: var(--paper); border: 1.5px solid var(--rule); border-radius: 14px; padding: 14px 16px; font-size: 14px; min-width: 0; }
+.src h3, .sub-h { margin: 0 0 6px; font: 400 19px/1.3 var(--f-round); }
+.src ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.srcs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.sg { background: var(--paper); border: 2px solid var(--line); border-radius: 16px; padding: 14px 16px; font-size: 14px; min-width: 0; box-shadow: 3px 3px 0 var(--line); }
+.sg h3 { margin: 0 0 8px; font: 400 17px/1.3 var(--f-round); }
+.sg ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; }
+.sg code { overflow-wrap: anywhere; }
+@media (max-width: 760px) { .srcs { grid-template-columns: 1fr; } }
+.hist { border-top: 1.5px dashed var(--rule); padding-top: 18px; }
+.hist ol { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 6px; font-size: 14px; color: var(--ink-2); }
+.hist b { font-family: var(--f-mono); font-weight: 500; color: var(--ink); margin-right: 8px; }
+.foot { padding-block: 32px 64px; color: var(--ink-3); font-size: 13px; text-align: center; }
+
+/* ── 2층 모달 · AIPub 앱 틀 ── */
+html:has(dialog[open]) { overflow: hidden; }
+dialog.modal { width: min(1240px, 96vw); max-width: none; height: min(94vh, 1000px); max-height: none; padding: 0; border: 2px solid var(--line); border-radius: 22px; background: var(--l2); color: var(--ink); overflow: hidden; box-shadow: 0 30px 80px rgb(0 0 0 / .35); }
+dialog.modal::backdrop { background: rgb(24 16 8 / .55); backdrop-filter: blur(3px); }
+.m-head { position: sticky; top: 0; z-index: 30; display: flex; gap: 12px; align-items: center; padding: 12px 18px; background: var(--paper); border-bottom: 1.5px solid var(--rule); }
+.m-head .m-k { font: 500 11.5px/1 var(--f-mono); letter-spacing: .06em; color: var(--ui-blue); white-space: nowrap; }
+.m-head b { font: 400 19px/1.3 var(--f-display); min-width: 0; }
+.m-close { margin-left: auto; width: 36px; height: 36px; flex: none; border-radius: 10px; border: 2px solid var(--line); background: var(--paper); cursor: pointer; font-size: 15px; }
+.m-close:hover { background: var(--wash); }
+dialog.modal[open] { display: flex; flex-direction: column; }
+.m-head { flex: none; }
+.modal .l2 { flex: 1; min-height: 0; overflow: auto; grid-auto-rows: max-content; align-content: start; border: 0; border-radius: 0; background: transparent; padding: 16px 20px 28px; }
+.modal .stage { min-width: 900px; padding: 12px 14px; }
+.ui.app { overflow: hidden; min-height: 0; font-family: var(--f-ui); }
+.app-top { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-bottom: 1px solid var(--ui-line); background: var(--ui); }
+.app-logo { font: 800 16px/1 var(--f-ui); display: flex; gap: 6px; align-items: center; letter-spacing: -.01em; }
+.app-logo i { font: 600 10.5px/1 var(--f-ui); font-style: normal; background: var(--ui-fg); color: var(--ui); border-radius: 999px; padding: 3px 8px; }
+.app-search { margin-left: auto; border: 1px solid var(--ui-line); border-radius: 8px; padding: 4px 10px; color: var(--ui-mute); font-size: 11.5px; min-width: 120px; }
+.app-tb { border: 1px solid var(--ui-line); border-radius: 8px; padding: 4px 10px; font-size: 11.5px; font-weight: 500; }
+.app-wrap { display: grid; grid-template-columns: 164px minmax(0, 1fr); min-height: 400px; }
+.app-side { border-right: 1px solid var(--ui-line); padding: 10px 8px; display: flex; flex-direction: column; gap: 1px; background: var(--ui-side); }
+.app-side p { margin: 8px 8px 2px; font-size: 10.5px; color: var(--ui-mute); }
+.app-side span { padding: 3px 9px; border-radius: 7px; font-size: 12px; }
+.app-side span.on { background: var(--ui-active); font-weight: 600; }
+.app-side .bm { border: 1px solid var(--ui-line); background: var(--ui); border-radius: 8px; font-weight: 600; margin-bottom: 4px; }
+.app-main { min-width: 0; position: relative; display: grid; align-content: start; }
+.app-crumb { padding: 12px 18px 0; font-size: 12px; color: var(--ui-mute); }
+.app-crumb i { font-style: normal; margin: 0 5px; }
+.app-crumb b { color: var(--ui-fg); font-weight: 500; }
+.app-main > .ui-body { padding: 12px 18px 20px; }
+.theme { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; border: 1.5px solid var(--rule); background: var(--paper); font-size: 12.5px; color: var(--ink-2); flex: none; }
+.theme svg { width: 14px; height: 14px; fill: currentColor; }
+.theme:focus-visible { outline: 3px solid var(--accent); }
+@media (max-width: 760px) { dialog.modal { width: 100vw; height: 100dvh; border-radius: 0; border: 0; } .m-head b { font-size: 16px; } }
+
+.modal .l2, .viewport { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+.modal .l2:hover, .viewport:hover { scrollbar-color: rgb(128 118 106 / .55) transparent; }
+.modal .l2::-webkit-scrollbar, .viewport::-webkit-scrollbar { width: 11px; height: 11px; }
+.modal .l2::-webkit-scrollbar-track, .viewport::-webkit-scrollbar-track { background: transparent; }
+.modal .l2::-webkit-scrollbar-thumb, .viewport::-webkit-scrollbar-thumb { background: transparent; border: 3px solid transparent; border-radius: 11px; background-clip: padding-box; }
+.modal .l2:hover::-webkit-scrollbar-thumb, .viewport:hover::-webkit-scrollbar-thumb { background-color: rgb(128 118 106 / .55); }
+.hot.free { width: auto; height: auto; margin: 0; transform: translateX(-50%); border-radius: 999px; padding: 9px 16px; background: var(--track); border: 2px solid #FFFFFF; color: #FFFFFF; }
+.hot.free .ring { display: none; }
+.hot.free .lbl { position: static; transform: none; background: none; padding: 0; font-size: 14px; }
+.l2-meta { display: grid; grid-template-columns: repeat(3, auto) 1fr; gap: 10px 22px; align-items: center; }
+.mi { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.ml { font: 500 11px/1 var(--f-mono); letter-spacing: .06em; color: var(--ink-3); }
+.where { font-size: 13.5px; font-weight: 600; }
+.where i { font-style: normal; color: var(--ink-3); margin: 0 4px; }
+.rl { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; }
+.fig-link { justify-self: end; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--paper); font-size: 13px; font-weight: 600; color: var(--ink); text-decoration: none; }
+.fig-link:hover { background: var(--wash); }
+.fig-link svg { width: 12px; height: 18px; }
+svg.av { width: 26px; height: 36px; flex: none; overflow: visible; }
+svg.av.lg { width: 46px; height: 64px; }
+.c-install { color: var(--install); } .c-admin { color: var(--admin); } .c-pm { color: var(--pm); } .c-pd { color: var(--member); } .c-system { color: var(--system); }
+.cast { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%; margin: 4px 0 0; padding: 0; list-style: none; }
+.cast li { flex: 0 1 calc((100% - 40px) / 5); min-width: 0; display: grid; justify-items: center; gap: 4px; text-align: center; font-size: 12.5px; line-height: 1.4; color: var(--ink-2); }
+@media (max-width: 760px) { .cast li { flex-basis: calc((100% - 20px) / 3); } }
+.cast b { display: block; color: var(--ink); font: 400 15px/1.3 var(--f-round); }
+.sh .ask { display: inline-flex; align-items: flex-end; gap: 8px; }
+.sh .ask span { position: relative; background: var(--paper); border: 2px solid var(--line); border-radius: 16px; padding: 5px 13px; color: var(--ink); }
+.sh .ask span::before { content: ""; position: absolute; left: -7px; bottom: 9px; width: 10px; height: 10px; background: var(--paper); border-left: 2px solid var(--line); border-bottom: 2px solid var(--line); transform: rotate(45deg); }
+@media (max-width: 760px) { .l2-meta { grid-template-columns: 1fr; } .fig-link { justify-self: start; } }
+
+@media (max-width: 760px) {
+  body { font-size: 15.5px; }
+  .howto, .links3, .src { grid-template-columns: 1fr; }
+  .map { grid-template-columns: 1fr 1fr; }
+  .bar-name { display: none; }
+  .dots { margin-left: 0; overflow-x: auto; }
+  .dot { width: 22px; height: 22px; font-size: 10px; }
+  .timeline { grid-template-columns: 1fr; }
+  .tl-ctl span { display: none; }
+  .l2 { padding: 12px; }
+  .stage { padding: 12px; }
+  .fig { padding: 12px; }
+  details.qa .a { padding-left: 16px; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-person" viewBox="0 0 40 56">
+      <path d="M5 55 C5 39 12 33 20 33 C28 33 35 39 35 55 Z" style="fill:currentColor;stroke:var(--line);stroke-width:2.2;stroke-linejoin:round"/>
+      <circle cx="20" cy="18" r="12" style="fill:var(--skin);stroke:var(--line);stroke-width:2.2"/>
+      <path d="M8.3 17 C8.5 9 14 5.6 20 5.6 C26.5 5.6 31.6 9 31.7 17 C27.5 12.8 22 12 16 13 C12.6 13.6 10.2 14.8 8.3 17 Z" style="fill:var(--hair);stroke:var(--line);stroke-width:2;stroke-linejoin:round"/>
+      <circle cx="15.5" cy="19.5" r="1.7" style="fill:var(--line)"/><circle cx="24.5" cy="19.5" r="1.7" style="fill:var(--line)"/>
+      <path d="M16.6 24 Q20 27 23.4 24" style="fill:none;stroke:var(--line);stroke-width:1.7;stroke-linecap:round"/>
+      <circle cx="12.3" cy="23" r="2.1" style="fill:var(--blush)"/><circle cx="27.7" cy="23" r="2.1" style="fill:var(--blush)"/>
+    </symbol>
+    <symbol id="i-bot" viewBox="0 0 40 56">
+      <line x1="20" y1="2.5" x2="20" y2="8" style="stroke:var(--line);stroke-width:2;stroke-linecap:round"/><circle cx="20" cy="3" r="2.6" style="fill:var(--bad);stroke:var(--line);stroke-width:1.5"/>
+      <rect x="3.5" y="14" width="4" height="9" rx="1.6" style="fill:var(--line)"/><rect x="32.5" y="14" width="4" height="9" rx="1.6" style="fill:var(--line)"/>
+      <rect x="7" y="8" width="26" height="21" rx="7" style="fill:var(--paper-ill);stroke:var(--line);stroke-width:2.2"/>
+      <rect x="10.5" y="12" width="19" height="13" rx="4.5" style="fill:#2A241E"/>
+      <circle cx="16" cy="18" r="2.1" style="fill:#7DF0C2"/><circle cx="24" cy="18" r="2.1" style="fill:#7DF0C2"/><path d="M17.5 22 Q20 23.6 22.5 22" style="fill:none;stroke:#7DF0C2;stroke-width:1.3;stroke-linecap:round"/>
+      <rect x="17" y="29" width="6" height="4" style="fill:var(--line)"/>
+      <rect x="1.5" y="36" width="6" height="13" rx="3" style="fill:currentColor;stroke:var(--line);stroke-width:1.8"/><rect x="32.5" y="36" width="6" height="13" rx="3" style="fill:currentColor;stroke:var(--line);stroke-width:1.8"/>
+      <rect x="7" y="33" width="26" height="22" rx="6" style="fill:currentColor;stroke:var(--line);stroke-width:2.2"/>
+      <rect x="12" y="38" width="16" height="9" rx="2.5" style="fill:var(--paper-ill);stroke:var(--line);stroke-width:1.5"/>
+      <circle cx="16" cy="42.5" r="1.7" style="fill:var(--ok)"/><circle cx="20" cy="42.5" r="1.7" style="fill:var(--gold)"/><circle cx="24" cy="42.5" r="1.7" style="fill:var(--bad)"/>
+    </symbol>
+    <symbol id="i-infra" viewBox="0 0 40 56"><use href="#i-person" width="40" height="56"/>
+      <path d="M7.5 14 C7.5 5 32.5 5 32.5 14 Z" style="fill:var(--gold);stroke:var(--line);stroke-width:2;stroke-linejoin:round"/><rect x="4" y="13" width="32" height="4.5" rx="2.2" style="fill:var(--gold);stroke:var(--line);stroke-width:2"/><rect x="18" y="5.5" width="4" height="8" rx="1.5" style="fill:var(--line)"/></symbol>
+    <symbol id="i-admin" viewBox="0 0 40 56"><use href="#i-person" width="40" height="56"/>
+      <path d="M15 34 L20 39 L25 34" style="fill:var(--paper-ill);stroke:var(--line);stroke-width:1.8;stroke-linejoin:round"/><path d="M20 39 L17.5 42 L20 53 L22.5 42 Z" style="fill:#2A3550;stroke:var(--line);stroke-width:1.6;stroke-linejoin:round"/></symbol>
+    <symbol id="i-pm" viewBox="0 0 40 56"><use href="#i-person" width="40" height="56"/>
+      <rect x="22" y="37" width="14" height="17" rx="2.5" style="fill:var(--paper-ill);stroke:var(--line);stroke-width:1.8"/><rect x="25.5" y="35" width="7" height="4" rx="1.5" style="fill:var(--line)"/><path d="M25 44 h8 M25 48 h6" style="stroke:var(--line);stroke-width:1.5;stroke-linecap:round"/></symbol>
+    <symbol id="i-pd" viewBox="0 0 40 56"><use href="#i-person" width="40" height="56"/>
+      <rect x="9" y="41" width="22" height="12" rx="2" style="fill:#AEB7C2;stroke:var(--line);stroke-width:1.8"/><circle cx="20" cy="47" r="1.6" style="fill:var(--paper-ill)"/><path d="M5 54 H35" style="stroke:var(--line);stroke-width:3;stroke-linecap:round"/></symbol>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink-2)"/></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">AIPub 개념 설명서</p>
+    <h1>InfiniBand<span class="sub">서버 사이에 판 <mark>전용 터널</mark></span></h1>
+    <p class="lead"><b>서버는 건물이고, InfiniBand 는 건물끼리 잇는 전용 터널입니다.</b> GPU 여러 대가 함께 학습할 때 서버끼리 주고받는 데이터를 일반 도로 대신 이 터널로 빠르게 보냅니다.</p>
+    <ul class="howto">
+      <li><b>값 바꿔 보기</b>노란 동그라미가 붙은 상자에서 숫자나 조건을 바꾸면 그림과 결과가 함께 바뀝니다.</li>
+      <li><b>AIPub 화면에서 보기</b>칸마다 이 버튼을 누르면 큰 창이 열리고, 커서가 AIPub 화면을 눌러 가며 저절로 보여 줍니다.</li>
+      <li><b>직접 눌러 보기</b>재생기 왼쪽 아래의 손 모양 버튼을 누르면, 깜빡이는 점을 직접 눌러 한 단계씩 넘길 수 있습니다.</li>
+    </ul>
+    <ul class="cast" aria-label="등장인물"><li><svg class="av lg c-install" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-infra"/></svg><span><b>인프라 담당자</b>설치 때 방법을 고름</span></li><li><svg class="av lg c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg><span><b>관리자</b>문 개수를 정함</span></li><li><svg class="av lg c-pm" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pm"/></svg><span><b>프로젝트 매니저</b>배정 현황을 봄</span></li><li><svg class="av lg c-pd" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pd"/></svg><span><b>프로젝트 디벨로퍼</b>팀원 · 문을 요청함</span></li><li><svg class="av lg c-system" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-bot"/></svg><span><b>시스템</b>operator 프로그램</span></li></ul>
+    <ol class="map" aria-label="목차">
+      <li><button class="mp" type="button" data-go="why"><span class="n">1</span>왜 터널을 파나</button></li>
+      <li><button class="mp" type="button" data-go="door"><span class="n">2</span>큰 문과 작은 문</button></li>
+      <li><button class="mp" type="button" data-go="mode"><span class="n">3</span>문을 빌려주는 방법</button></li>
+      <li><button class="mp" type="button" data-go="fence"><span class="n">4</span>관제탑과 출입증</button></li>
+      <li><button class="mp" type="button" data-go="who"><span class="n">5</span>누가 무엇을 정하나</button></li>
+      <li><button class="mp" type="button" data-go="ledger"><span class="n">6</span>계약서와 장부</button></li>
+      <li><button class="mp" type="button" data-go="flow"><span class="n">7</span>문을 받기까지</button></li>
+      <li><button class="mp" type="button" data-go="ipoib"><span class="n">8</span>터널 주소</button></li>
+      <li><button class="mp" type="button" data-go="release"><span class="n">9</span>문 반납</button></li>
+      <li><button class="mp" type="button" data-go="status"><span class="n">10</span>문 상태 표시등</button></li>
+      <li><button class="mp" type="button" data-go="see"><span class="n">11</span>직접 보기 · 용어</button></li>
+      <li><button class="mp" type="button" data-go="qna"><span class="n">?</span>자주 묻는 질문</button></li>
+    </ol>
+  </header>
+</div>
+
+<div class="bar">
+  <div class="wrap bar-in">
+    <span class="bar-name">InfiniBand</span>
+    <nav class="dots" aria-label="칸으로 가기">
+      <button class="dot" type="button" data-go="why" aria-label="1 왜 터널을 파나">1</button>
+      <button class="dot" type="button" data-go="door" aria-label="2 큰 문과 작은 문">2</button>
+      <button class="dot" type="button" data-go="mode" aria-label="3 문을 빌려주는 방법">3</button>
+      <button class="dot" type="button" data-go="fence" aria-label="4 관제탑과 출입증">4</button>
+      <button class="dot" type="button" data-go="who" aria-label="5 누가 무엇을 정하나">5</button>
+      <button class="dot" type="button" data-go="ledger" aria-label="6 계약서와 장부">6</button>
+      <button class="dot" type="button" data-go="flow" aria-label="7 문을 받기까지">7</button>
+      <button class="dot" type="button" data-go="ipoib" aria-label="8 터널 주소">8</button>
+      <button class="dot" type="button" data-go="release" aria-label="9 문 반납">9</button>
+      <button class="dot" type="button" data-go="status" aria-label="10 문 상태 표시등">10</button>
+      <button class="dot" type="button" data-go="see" aria-label="11 직접 보기와 용어">11</button>
+      <button class="dot" type="button" data-go="qna" aria-label="자주 묻는 질문">?</button>
+    </nav>
+    <button class="theme" type="button" id="theme"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13z"/><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>자동</span></button>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- ═════════ 1 왜 ═════════ -->
+<section class="stop" id="why" data-stop>
+  <header class="sh"><span class="num">1</span><p class="ask"><svg class="av c-pd" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pd"/></svg><span>InfiniBand 가 뭘까요?</span></p><h2>서버 사이에 판 <mark>전용 터널</mark>입니다</h2></header>
+  <figure class="fig">
+    <svg class="dg" viewBox="0 0 600 290" role="img" aria-label="건물 두 채 사이에 차가 막힌 일반 도로와 짐이 빠르게 오가는 전용 터널이 있다">
+      <rect class="o f-road" x="170" y="80" width="260" height="30" rx="6"/>
+      <line class="lane-d" x1="178" y1="95" x2="422" y2="95"/>
+      <g class="o2">
+        <rect class="f-car" x="232" y="84" width="28" height="18" rx="6"/><rect class="f-paper" x="246" y="88" width="9" height="6" rx="2"/>
+        <rect class="f-car" x="266" y="84" width="28" height="18" rx="6"/><rect class="f-paper" x="280" y="88" width="9" height="6" rx="2"/>
+        <rect class="f-car" x="300" y="84" width="28" height="18" rx="6"/><rect class="f-paper" x="314" y="88" width="9" height="6" rx="2"/>
+        <rect class="f-car" x="334" y="84" width="28" height="18" rx="6"/><rect class="f-paper" x="348" y="88" width="9" height="6" rx="2"/>
+      </g>
+      <text x="300" y="66" text-anchor="middle" class="s">일반 도로 · 이더넷</text>
+      <text x="300" y="134" text-anchor="middle" class="t-warn">꽉 막혀요</text>
+      <rect class="o f-tun" x="170" y="176" width="260" height="34" rx="17"/>
+      <line class="hi" x1="186" y1="185" x2="414" y2="185"/>
+      <g class="pk-run" style="--d:210px;--t:1.7s"><rect class="o2 f-gold" x="188" y="186" width="14" height="13" rx="2"/></g>
+      <g class="pk-run" style="--d:210px;--t:1.7s;--dl:.57s"><rect class="o2 f-gold" x="188" y="186" width="14" height="13" rx="2"/></g>
+      <g class="pk-run" style="--d:210px;--t:1.7s;--dl:1.13s"><rect class="o2 f-gold" x="188" y="186" width="14" height="13" rx="2"/></g>
+      <text x="300" y="238" text-anchor="middle" class="b acc">전용 터널 · InfiniBand</text>
+      <g transform="translate(14 34)">
+        <rect class="o f-bldg" x="8" y="18" width="156" height="200" rx="10"/>
+        <rect class="o f-roof" x="0" y="6" width="172" height="24" rx="8"/>
+        <text x="86" y="56" text-anchor="middle" class="b">건물 A</text>
+        <rect class="o f-chip" x="24" y="74" width="54" height="42" rx="7"/><text x="51" y="100" text-anchor="middle" class="s on-fill">GPU</text>
+        <rect class="o f-chip" x="94" y="74" width="54" height="42" rx="7"/><text x="121" y="100" text-anchor="middle" class="s on-fill">GPU</text>
+        <rect class="o f-chip" x="24" y="132" width="54" height="42" rx="7"/><text x="51" y="158" text-anchor="middle" class="s on-fill">GPU</text>
+        <rect class="o f-chip" x="94" y="132" width="54" height="42" rx="7"/><text x="121" y="158" text-anchor="middle" class="s on-fill">GPU</text>
+        <path class="o none" d="M78 95 H94 M78 153 H94 M51 116 V132 M121 116 V132" style="stroke-width:4"/>
+        <text x="86" y="202" text-anchor="middle" class="s">복도 = NVLink</text>
+      </g>
+      <g transform="translate(414 34)">
+        <rect class="o f-bldg2" x="8" y="18" width="156" height="200" rx="10"/>
+        <rect class="o f-roof2" x="0" y="6" width="172" height="24" rx="8"/>
+        <text x="86" y="56" text-anchor="middle" class="b">건물 B</text>
+        <rect class="o f-chip" x="24" y="74" width="54" height="42" rx="7"/><text x="51" y="100" text-anchor="middle" class="s on-fill">GPU</text>
+        <rect class="o f-chip" x="94" y="74" width="54" height="42" rx="7"/><text x="121" y="100" text-anchor="middle" class="s on-fill">GPU</text>
+        <rect class="o f-chip" x="24" y="132" width="54" height="42" rx="7"/><text x="51" y="158" text-anchor="middle" class="s on-fill">GPU</text>
+        <rect class="o f-chip" x="94" y="132" width="54" height="42" rx="7"/><text x="121" y="158" text-anchor="middle" class="s on-fill">GPU</text>
+        <path class="o none" d="M78 95 H94 M78 153 H94 M51 116 V132 M121 116 V132" style="stroke-width:4"/>
+        <text x="86" y="202" text-anchor="middle" class="s">복도 = NVLink</text>
+      </g>
+      <text x="300" y="278" text-anchor="middle" class="s">터널로 온 짐은 접수처(CPU)를 거치지 않고 창고(메모리)로 바로 들어갑니다 = RDMA</text>
+    </svg>
+  </figure>
+  <p class="cap">GPU 여러 대가 한 모델을 함께 학습하면 계산 결과를 계속 주고받습니다. 같은 건물 안에서는 <b>복도</b>로 금방 만나지만, 다른 건물과는 <b>일반 도로</b>를 건너야 해서 금방 막힙니다. 그래서 건물 사이에 <b>전용 터널</b>을 따로 팝니다.</p>
+  <details class="more"><summary>조금 더 자세히</summary><div class="in">
+    <p>InfiniBand(IB)는 서버 사이 고속 데이터 전송을 위한 전용 네트워크입니다. 카드, 케이블, 스위치를 합친 망 전체를 <b>fabric</b> 이라고 부릅니다. 서버 안 GPU 끼리는 NVLink 로, 서버 사이는 이 망으로 통신합니다.</p>
+    <p><b>RDMA</b> 는 네트워크 카드가 상대 서버의 메모리에 직접 쓰는 방식입니다. CPU 와 운영체제가 중간에서 하는 일이 줄어 지연이 짧습니다. NCCL, Mooncake, UCX 같은 분산 학습·추론 도구가 이 방식을 씁니다. IB 위에서 IP 로 통신하는 IPoIB 는 보조 기능이지만, 고객이 이번 기능에서 꼭 원한 것 중 하나입니다.</p>
+    <p>예전 방식은 카드가 몇 장이든 노드마다 <code>ten1010.io/rdma</code> 리소스가 1개였습니다. 그래서 노드당 IB Workspace 가 하나로 묶였고, 여러 Pod 가 같은 카드를 나눠 쓸 때 각자 몫이 정해지지 않았고, 다른 프로젝트 Pod 와도 통신할 수 있었습니다.</p>
+  </div></details>
+  <div class="go2"><button class="l2btn" type="button" aria-haspopup="dialog" aria-controls="l2-why"><span class="pl"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span><b>AIPub 화면에서 보기</b><small>프로젝트 상세 · Workspace 생성 · Workspace 상세 · 노드 상세</small></span></button></div>
+  <dialog class="modal" id="l2-why" aria-label="AIPub 화면에서 보기: 서버 사이에 판 전용 터널입니다"><div class="m-head"><span class="m-k">AIPub 화면에서 보기</span><b>서버 사이에 판 전용 터널입니다</b><button type="button" class="m-close" aria-label="닫기">✕</button></div>
+  <div class="l2">
+    <div class="l2-meta"><div class="mi"><span class="ml">하는 일</span><span class="chip fn update">수정</span><span class="chip fn create">생성</span><span class="chip fn read">조회</span></div><div class="mi"><span class="ml">누가</span><span class="rl"><svg class="av c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg>관리자</span><span class="rl"><svg class="av c-pd" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pd"/></svg>프로젝트 디벨로퍼</span></div><div></div><a class="fig-link" href="#"><svg viewBox="0 0 12 18" aria-hidden="true"><path d="M3 0h3v6H3a3 3 0 0 1 0-6z" fill="#F24E1E"/><path d="M6 0h3a3 3 0 0 1 0 6H6z" fill="#FF7262"/><path d="M3 6h3v6H3a3 3 0 0 1 0-6z" fill="#A259FF"/><circle cx="9" cy="9" r="3" fill="#1ABCFE"/><path d="M3 12h3v3a3 3 0 1 1-3-3z" fill="#0ACF83"/></svg>Figma 에서 보기</a></div>
+    <p class="lead2">터널은 AIPub 화면 네 곳에 나옵니다. Admin 은 프로젝트 상세에서 팀마다 문 개수를 정하고, 노드 상세에서 문 상태를 봅니다. 팀원은 Workspace 를 만들 때 문을 요청하고, Workspace 상세에서 받은 문을 확인합니다.</p>
+    <div class="player" data-scene="tour">
+      <div class="viewport"><div class="stage"><div class="mock">
+        <div class="ui app">
+          <div class="ui-chrome"><i></i><i></i><i></i><span class="ui-url" data-k="url">/projects/llm-team</span></div>
+          <div class="ui-body">
+            <div data-k="v1" style="display:grid;gap:12px">
+              <div class="ui-h">Nodes <span class="n">2</span></div>
+              <div class="ui-sum ib"><span>InfiniBand</span><span><span class="k">Assigned</span><b>8</b></span><span><span class="k">Nodes</span><b>2</b></span><span><span class="k">In use</span><b>3</b></span><span class="ui-btn end" data-k="t1">⚙ InfiniBand</span></div>
+              <table class="ui-tbl"><tr><th>Name</th><th>GPU</th><th>CPU</th><th>InfiniBand</th></tr>
+                <tr><td class="ui-link">gpu-node-1</td><td>Block / L40</td><td>24 core</td><td><span class="ui-barw"><span class="ui-bar"><i class="a" style="flex-grow:4"></i><i class="o" style="flex-grow:4"></i><i class="u" style="flex-grow:8"></i></span><span class="ui-cnt"><b>4</b> <span>/ 16</span></span></span></td></tr>
+                <tr><td class="ui-link">gpu-node-2</td><td>Block / L40</td><td>24 core</td><td><span class="ui-barw"><span class="ui-bar"><i class="a" style="flex-grow:4"></i><i class="o" style="flex-grow:2"></i><i class="u" style="flex-grow:10"></i></span><span class="ui-cnt"><b>4</b> <span>/ 16</span></span></span></td></tr>
+              </table>
+            </div>
+            <div data-k="v2" hidden style="display:grid;gap:12px">
+              <div class="ui-h">리소스</div>
+              <div class="ui-gpu">
+                <div class="ui-gcard"><b style="color:var(--ui-blue)">L40 <span class="ui-badge" style="float:right">Block</span></b><span class="ui-mu">VRAM 460 MB</span></div>
+                <div class="ui-row"><span style="width:96px">GPU 수량</span><span class="ui-step"><span>−</span><b>1</b><span>+</span></span><span class="ui-mu">가용 4 · 최대 4</span></div>
+                <div class="ui-hr"></div>
+                <div class="ui-row" data-k="t2"><span style="width:96px">InfiniBand 사용</span><span class="ui-sw on"></span><span class="ui-step"><span>−</span><b>2</b><span>+</span></span><span class="ui-mu">가용 3 · 최대 4</span><span class="ui-more">···</span></div>
+              </div>
+            </div>
+            <div data-k="v3" hidden style="display:grid;gap:12px">
+              <div class="ui-tabs"><span class="on">Containers</span><span>Read me</span><span>Commits</span></div>
+              <table class="ui-tbl"><tr><th>No</th><th>Name</th><th>Node</th><th>Pod IP</th><th>InfiniBand</th><th>Status</th></tr>
+                <tr><td>1</td><td>train-ws-0</td><td>gpu-node-1</td><td>10.244.3.17</td><td data-k="t3">mlx5_3 +1 <span class="ui-more">···</span></td><td>Running</td></tr>
+                <tr><td>2</td><td>train-ws-1</td><td>gpu-node-2</td><td>10.244.5.17</td><td>mlx5_12 +1 <span class="ui-more">···</span></td><td>Running</td></tr>
+              </table>
+            </div>
+            <div data-k="v4" hidden style="display:grid;gap:12px">
+              <div class="ui-tabs"><span>Resources</span><span>Workloads</span><span class="on">InfiniBand</span></div>
+              <div class="ui-sum"><span class="ui-badge blue">SR-IOV On</span><span><span class="k">PF</span><b>2</b></span><span><span class="k">VF</span><b>16</b></span><span><span class="k">Assigned</span><b>13 / 16</b></span><span><span class="k">In use</span><b>9 / 16</b></span><span class="end">Fabric 정보 <span class="ui-more">···</span></span></div>
+              <table class="ui-tbl"><tr><th>No</th><th>RDMA device</th><th>Project</th><th>Workload</th><th>Status</th></tr>
+                <tr data-k="t4"><td>1</td><td>mlx5_12</td><td>llm-team</td><td>Workspace <span class="ui-link">train-ws</span></td><td><span class="ui-badge ok">Active</span></td></tr>
+                <tr><td>2</td><td>mlx5_13</td><td>vision</td><td>Job <span class="ui-link">bench</span></td><td><span class="ui-badge ok">Active</span></td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="timeline"></div>
+    </div>
+    <div class="links3">
+      <div class="lk"><span class="k">터널이 깔린 건물</span><span class="s">InfiniBand 탭이 보이는 노드</span><code>aipub.ten1010.io/ib-subnet 라벨 + ib-pf 어노테이션</code></div>
+      <div class="lk"><span class="k">팀</span><span class="s">프로젝트. 모든 프로젝트가 자동으로 IB 대상입니다</span><code>IBNetwork (프로젝트당 1개, 이름 = 프로젝트)</code></div>
+      <div class="lk"><span class="k">문 요청</span><span class="s">Workspace 리소스의 InfiniBand 개수</span><code>ten1010.io/ib-&lt;프로젝트&gt;</code></div>
+    </div>
+  </div>
+  </dialog>
+</section>
+
+<!-- ═════════ 2 문 ═════════ -->
+<section class="stop" id="door" data-stop>
+  <header class="sh"><span class="num">2</span><p class="ask"><svg class="av c-pd" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pd"/></svg><span>터널 입구는 어떻게 생겼을까요?</span></p><h2>진짜 문은 <mark>PF</mark>, 나눈 작은 문은 <mark>VF</mark>입니다</h2></header>
+  <figure class="fig">
+    <svg class="dg" viewBox="0 0 600 290" role="img" aria-label="건물 벽에 큰 문 두 개가 있고, 그중 하나는 칸막이로 작은 문 네 개가 되어 같은 폭의 터널을 나눠 쓴다">
+      <rect class="o f-tun" x="196" y="76" width="390" height="30" rx="15"/>
+      <line class="hi" x1="214" y1="84" x2="570" y2="84"/>
+      <g class="pk-run" style="--d:340px;--t:2.2s"><rect class="o2 f-gold" x="216" y="85" width="16" height="14" rx="2"/></g>
+      <path class="wire" d="M206 164 C246 164 252 194 290 194 M206 186 C246 186 252 194 290 194 M206 208 C246 208 252 194 290 194 M206 230 C246 230 252 194 290 194"/>
+      <path class="wire-in" d="M206 164 C246 164 252 194 290 194 M206 186 C246 186 252 194 290 194 M206 208 C246 208 252 194 290 194 M206 230 C246 230 252 194 290 194"/>
+      <rect class="o f-tun" x="284" y="179" width="302" height="30" rx="15"/>
+      <line class="hi" x1="300" y1="187" x2="570" y2="187"/>
+      <g class="pk-run" style="--d:250px;--t:2.2s"><circle class="o2 f-a" cx="306" cy="194" r="6"/></g>
+      <g class="pk-run" style="--d:250px;--t:2.2s;--dl:.55s"><circle class="o2 f-b" cx="306" cy="194" r="6"/></g>
+      <g class="pk-run" style="--d:250px;--t:2.2s;--dl:1.1s"><circle class="o2 f-gold" cx="306" cy="194" r="6"/></g>
+      <g class="pk-run" style="--d:250px;--t:2.2s;--dl:1.65s"><circle class="o2 f-paper" cx="306" cy="194" r="6"/></g>
+      <rect class="o f-bldg" x="20" y="34" width="176" height="234" rx="12"/>
+      <rect class="o f-roof" x="12" y="22" width="192" height="24" rx="8"/>
+      <text x="108" y="76" text-anchor="middle" class="b">건물</text>
+      <rect class="o f-pcb" x="44" y="96" width="98" height="150" rx="8"/>
+      <g class="o2 f-gold"><rect x="38" y="112" width="10" height="9" rx="2"/><rect x="38" y="130" width="10" height="9" rx="2"/><rect x="38" y="148" width="10" height="9" rx="2"/><rect x="38" y="166" width="10" height="9" rx="2"/><rect x="38" y="184" width="10" height="9" rx="2"/></g>
+      <rect class="o f-chip" x="70" y="134" width="48" height="48" rx="6"/><text x="94" y="164" text-anchor="middle" class="on-fill">IB</text>
+      <text x="93" y="232" text-anchor="middle" class="s on-fill">IB 카드</text>
+      <path class="o f-tun" d="M168 120 V82 a16 16 0 0 1 32 0 V120 Z"/><circle cx="192" cy="102" r="2.6" class="f-line"/>
+      <g class="o f-tun"><rect x="168" y="154" width="32" height="20" rx="5"/><rect x="168" y="176" width="32" height="20" rx="5"/><rect x="168" y="198" width="32" height="20" rx="5"/><rect x="168" y="220" width="32" height="20" rx="5"/></g>
+      <text x="220" y="62" class="b">PF 0 · 큰 문 그대로</text>
+      <text x="586" y="128" text-anchor="end" class="s">폭 200 Gb/s 를 혼자 씁니다</text>
+      <text x="300" y="164" class="b">PF 1 · 칸막이(SR-IOV)로 작은 문 4개</text>
+      <text x="586" y="232" text-anchor="end" class="s">같은 폭을 넷이 나눠 씁니다</text>
+      <text x="390" y="270" text-anchor="middle" class="m">mlx5_0 (PF) · mlx5_12, mlx5_13 … (VF)</text>
+    </svg>
+  </figure>
+  <p class="cap">건물 벽에 뚫린 진짜 터널 문이 <b>PF</b> 입니다. SR-IOV 는 그 문에 칸막이를 세워 <b>작은 문(VF)</b> 여러 개로 나눕니다. 문은 늘어나도 <b>터널 폭은 그대로</b>라서, 작은 문끼리 폭을 나눠 씁니다.</p>
+  <div class="try col" style="width:100%" data-let="w=Math.round(2000/n)/10">
+    <span class="ttl">값 바꿔 보기</span>
+    <p class="q">큰 문 하나를 작은 문 몇 개로 나눌까요?</p>
+    <div class="ctrls"><span class="ctrl">작은 문(VF) 개수 <span class="stp" data-var="n" data-min="1" data-max="8" data-val="4" aria-label="작은 문 개수"></span></span></div>
+    <div class="slots doors" data-slots="8:n"></div>
+    <div class="verdict" data-text="'작은 문 ' + n + '개가 생겼습니다. 모두 한꺼번에 꽉 채워 보내면 문 하나에 약 ' + w + ' Gb/s 씩 돌아갑니다. 터널 폭 200 Gb/s 는 그대로입니다.'"></div>
+    <p class="hint">200 Gb/s 는 개발 클러스터 카드 속도를 빌렸고, 나눈 값은 단순 계산한 예시입니다. 실제 VF 수는 카드 펌웨어 값이 정하고 화면에서는 바꾸지 않습니다.</p>
+  </div>
+  <details class="more"><summary>조금 더 자세히</summary><div class="in">
+    <p><b>PF</b>(Physical Function)는 IB 카드의 실제 포트입니다. 카드 한 장에 1~2개 있고, 서버 한 대에 카드가 여러 장 꽂히기도 합니다(SDI 서버는 포트가 12개까지 있습니다). 이름은 <code>mlx5_0</code>, <code>ibp193s0f0</code> 같은 모양입니다.</p>
+    <p><b>VF</b>(Virtual Function)는 PF 를 소프트웨어로 나눈 가상 PCI 장치입니다. Pod 안에서는 진짜 장치처럼 보이고 <code>mlx5_12</code> 같은 이름이 붙습니다. 번호는 미리 알기 어렵습니다. PF 하나에서 나오는 VF 수는 카드 펌웨어 값(<code>NUM_OF_VFS</code>)이 정하고, 펌웨어에서 SR-IOV 가 꺼져 있으면 그 PF 는 Blocked 가 됩니다.</p>
+  </div></details>
+  <div class="go2"><button class="l2btn" type="button" aria-haspopup="dialog" aria-controls="l2-door"><span class="pl"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span><b>AIPub 화면에서 보기</b><small>노드 상세 › InfiniBand 탭 (Admin)</small></span></button></div>
+  <dialog class="modal" id="l2-door" aria-label="AIPub 화면에서 보기: 진짜 문은 PF, 나눈 작은 문은 VF입니다"><div class="m-head"><span class="m-k">AIPub 화면에서 보기</span><b>진짜 문은 PF, 나눈 작은 문은 VF입니다</b><button type="button" class="m-close" aria-label="닫기">✕</button></div>
+  <div class="l2">
+    <div class="l2-meta"><div class="mi"><span class="ml">하는 일</span><span class="chip fn read">조회</span></div><div class="mi"><span class="ml">누가</span><span class="rl"><svg class="av c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg>관리자만</span></div><div class="mi"><span class="ml">어디서</span><span class="where">노드 상세 <i>›</i> InfiniBand 탭</span></div><a class="fig-link" href="#"><svg viewBox="0 0 12 18" aria-hidden="true"><path d="M3 0h3v6H3a3 3 0 0 1 0-6z" fill="#F24E1E"/><path d="M6 0h3a3 3 0 0 1 0 6H6z" fill="#FF7262"/><path d="M3 6h3v6H3a3 3 0 0 1 0-6z" fill="#A259FF"/><circle cx="9" cy="9" r="3" fill="#1ABCFE"/><path d="M3 12h3v3a3 3 0 1 1-3-3z" fill="#0ACF83"/></svg>Figma 에서 보기</a></div>
+    <p class="lead2">노드 상세의 InfiniBand 탭은 큰 문(PF)을 카드 한 장으로, 거기서 나온 작은 문(VF)을 카드 안의 표로 그립니다. 다른 프로젝트 이름과 Workload 가 함께 보여서 Admin 에게만 이 탭이 보입니다.</p>
+    <div class="player" data-scene="door">
+      <div class="viewport"><div class="stage"><div class="mock">
+        <div class="ui app">
+          <div class="ui-chrome"><i></i><i></i><i></i><span class="ui-url" data-k="url">/nodes/gpu-node-1</span></div>
+          <div class="ui-body">
+            <div class="ui-tabs"><span>Resources</span><span>Workloads</span><span class="on">InfiniBand</span></div>
+            <div class="ui-sum" data-k="sum"><span class="ui-badge blue">SR-IOV On</span><span><span class="k">PF</span><b>2</b></span><span><span class="k">VF</span><b>16</b></span><span><span class="k">Assigned</span><b>13 / 16</b></span><span><span class="k">In use</span><b>9 / 16</b></span><span class="end">Fabric 정보 <span class="ui-more">···</span></span></div>
+            <div class="ui-card">
+              <div class="ui-card-h"><span><small>PF</small>0000:61:00.0 <span class="ui-mu">(ibp97s0f0)</span></span><span><small>Status</small><span class="ui-badge ok">Active</span></span><span><small>Project</small>llm-team <span class="ui-more">···</span></span><span><small>Assigned</small>7 / 8</span><span><small>In use</small>5 / 8</span><span class="ui-chev" style="transform:rotate(180deg)">⌄</span></div>
+              <div class="ui-card-b">
+                <span class="ui-mu">VF 8</span>
+                <table class="ui-tbl"><tr><th>No</th><th>RDMA device</th><th>Project</th><th>Workload</th><th>Status</th></tr>
+                  <tr data-k="r1"><td>1</td><td>mlx5_12</td><td>llm-team</td><td>Workspace <span class="ui-link">train-ws</span></td><td><span class="ui-badge ok">Active</span></td></tr>
+                  <tr><td>2</td><td>mlx5_13</td><td>llm-team</td><td>Workspace <span class="ui-link">train-ws</span></td><td><span class="ui-badge ok">Active</span></td></tr>
+                  <tr data-k="r3"><td>3</td><td>mlx5_14</td><td>llm-team</td><td>Job <span class="ui-link">nccl-test</span></td><td><span class="ui-badge ok">Active</span></td></tr>
+                  <tr><td>4</td><td>mlx5_15 <span class="ui-badge" data-k="rel">Releasing</span></td><td>llm-team</td><td>-</td><td><span class="ui-badge ok">Active</span></td></tr>
+                  <tr><td colspan="5" class="ui-mu">… 5~8 번 줄 생략</td></tr>
+                </table>
+              </div>
+            </div>
+            <div class="ui-card">
+              <div class="ui-card-h"><span><small>PF</small>0000:e1:00.0 <span class="ui-mu">(ibp225s0f0)</span></span><span><small>Status</small><span class="ui-badge ok">Active</span></span><span><small>Project</small>vision <span class="ui-more">···</span></span><span><small>Assigned</small>6 / 8</span><span><small>In use</small>4 / 8</span><span class="ui-chev" data-k="chev2">⌄</span></div>
+              <div class="ui-card-b" data-k="vfs2" hidden>
+                <table class="ui-tbl"><tr><th>No</th><th>RDMA device</th><th>Project</th><th>Workload</th><th>Status</th></tr>
+                  <tr><td>1</td><td>mlx5_20</td><td>vision</td><td>Workspace <span class="ui-link">seg-ws</span></td><td><span class="ui-badge ok">Active</span></td></tr>
+                  <tr><td>2</td><td>mlx5_21</td><td>-</td><td>-</td><td><span class="ui-badge ok">Active</span></td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="timeline"></div>
+    </div>
+    <p class="hint">노드와 숫자는 예시입니다. 화면 구성은 Figma 와 코드(<code>infiniband-devices.tsx</code>)를 따랐습니다.</p>
+    <div class="links3">
+      <div class="lk"><span class="k">큰 문</span><span class="s">PF 카드 한 장</span><code>SriovNodeState status.pfs[] (hca · state · totalVfs)</code></div>
+      <div class="lk"><span class="k">작은 문</span><span class="s">카드 안 VF 표 한 줄</span><code>spec.vfs[] 와 status.vfs[] 를 (pf, index) 로 짝지음</code></div>
+      <div class="lk"><span class="k">짝 맞추기</span><span class="s">행 만들기 · 배지 고르기</span><code>buildIbDevices() · src/lib/infiniband.ts</code></div>
+    </div>
+  </div>
+  </dialog>
+</section>
+
+<!-- ═════════ 3 방법 ═════════ -->
+<section class="stop" id="mode" data-stop>
+  <header class="sh"><span class="num">3</span><p class="ask"><svg class="av c-pm" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pm"/></svg><span>문은 어떻게 빌려줄까요?</span></p><h2><mark>통째로</mark> 빌려주거나, <mark>하나씩</mark> 나눠 줍니다</h2></header>
+  <figure class="fig">
+    <svg class="dg" viewBox="0 0 600 300" role="img" aria-label="PF 모드는 큰 문 하나 앞의 자리 여덟 개에 같은 팀 작업자가 나눠 앉고, SR-IOV 모드는 작은 문마다 작업자 한 명이 선다">
+      <text x="150" y="30" text-anchor="middle" class="b">PF 모드 · 기본</text>
+      <text x="150" y="52" text-anchor="middle" class="s">큰 문을 팀에 통째로 빌려줍니다</text>
+      <path class="o f-a" d="M34 238 V112 a36 36 0 0 1 72 0 V238 Z"/><circle cx="96" cy="176" r="3" class="f-line"/>
+      <text x="70" y="140" text-anchor="middle" class="b on-fill">PF</text>
+      <g class="o f-seat">
+        <rect x="128" y="84" width="58" height="30" rx="10"/><rect x="198" y="84" width="58" height="30" rx="10"/>
+        <rect x="128" y="124" width="58" height="30" rx="10"/><rect x="198" y="124" width="58" height="30" rx="10"/>
+        <rect x="128" y="164" width="58" height="30" rx="10"/><rect x="198" y="164" width="58" height="30" rx="10"/>
+        <rect x="128" y="204" width="58" height="30" rx="10"/><rect x="198" y="204" width="58" height="30" rx="10"/>
+      </g>
+      <use href="#i-person" x="145" y="78" width="24" height="34" class="c-a"/>
+      <use href="#i-person" x="215" y="78" width="24" height="34" class="c-a"/>
+      <use href="#i-person" x="145" y="118" width="24" height="34" class="c-a"/>
+      <text x="150" y="266" text-anchor="middle" class="s">자리(슬롯) 8개를 같은 팀 3명이 나눠 앉습니다</text>
+      <text x="150" y="288" text-anchor="middle" class="s">Admin 은 PF 로, 팀원은 자리 수로 셉니다</text>
+      <line x1="300" y1="16" x2="300" y2="292" class="ln dashed"/>
+      <text x="450" y="30" text-anchor="middle" class="b">SR-IOV 모드</text>
+      <text x="450" y="52" text-anchor="middle" class="s">작은 문을 한 명에게 하나씩 줍니다</text>
+      <path class="o f-a" d="M332 168 V104 a20 20 0 0 1 40 0 V168 Z"/>
+      <path class="o f-a" d="M392 168 V104 a20 20 0 0 1 40 0 V168 Z"/>
+      <path class="o f-b" d="M452 168 V104 a20 20 0 0 1 40 0 V168 Z"/>
+      <path class="o f-paper dashed" d="M512 168 V104 a20 20 0 0 1 40 0 V168 Z"/>
+      <use href="#i-person" x="337" y="176" width="30" height="42" class="c-a"/>
+      <use href="#i-person" x="397" y="176" width="30" height="42" class="c-a"/>
+      <use href="#i-person" x="457" y="176" width="30" height="42" class="c-b"/>
+      <text x="532" y="204" text-anchor="middle" class="s">비어 있음</text>
+      <text x="352" y="238" text-anchor="middle" class="m">VF 0</text><text x="412" y="238" text-anchor="middle" class="m">VF 1</text><text x="472" y="238" text-anchor="middle" class="m">VF 2</text><text x="532" y="238" text-anchor="middle" class="m">VF 3</text>
+      <text x="450" y="266" text-anchor="middle" class="s">문 하나에 작업자 한 명</text>
+      <text x="450" y="288" text-anchor="middle" class="s">Admin 도 팀원도 VF 로 셉니다</text>
+    </svg>
+  </figure>
+  <p class="cap"><b>PF 모드</b>는 큰 문을 팀에 통째로 빌려주고, 팀원 여럿이 문 앞 자리(슬롯)를 나눠 앉습니다. <b>SR-IOV 모드</b>는 작은 문 하나를 작업자 한 명에게 줍니다. 설치하는 사람이 처음에 하나를 고르면 클러스터 전체가 그 방법을 씁니다.</p>
+  <div class="try col" style="width:100%" data-let="dev = sriov ? pfs*8 : pfs; req = pfs*8">
+    <span class="ttl">값 바꿔 보기</span>
+    <p class="q">같은 노드를 두 방법으로 설치하면 숫자가 어떻게 달라질까요?</p>
+    <div class="ctrls">
+      <span class="ctrl">노드의 PF 수 <span class="stp" data-var="pfs" data-min="1" data-max="4" data-val="1" aria-label="PF 수"></span></span>
+      <label class="ctrl" for="try-sriov"><input type="checkbox" id="try-sriov" data-var="sriov"> SR-IOV 모드로 설치</label>
+    </div>
+    <div class="res"><span class="big" data-text="(sriov ? 'VF ' : 'PF ') + dev + '개'"></span><span data-text="'노드 상세에 ' + (sriov ? 'VF' : 'PF') + ' 표 ' + dev + '줄이 나오고, Admin 은 이 단위로 나눠 줍니다.'"></span></div>
+    <div class="slots" data-slots="req:req"></div>
+    <div class="verdict" data-text="'팀원은 Pod 하나에 최대 ' + req + '개를 요청할 수 있습니다. ' + (sriov ? '문 하나를 Pod 하나가 혼자 씁니다.' : '자리 8개가 큰 문 하나를 함께 씁니다.')"></div>
+    <p class="hint">PF 하나를 VF 8개로 나눈다고 가정한 예시입니다. PF 모드의 자리 수 8 은 설치 기본값입니다.</p>
+  </div>
+  <details class="more"><summary>조금 더 자세히</summary><div class="in">
+    <div class="tbl-wrap"><table class="plain">
+      <tr><th></th><th>PF 모드 (SR-IOV Off, 기본)</th><th>SR-IOV 모드 (SR-IOV On)</th></tr>
+      <tr><td>Admin 이 배정하는 단위</td><td>PF</td><td>VF</td></tr>
+      <tr><td>팀원이 요청하는 단위</td><td>슬롯. PF 하나 = 슬롯 8개(<code>pf.slotsPerPf</code>)</td><td>VF</td></tr>
+      <tr><td>노드당 장치 수</td><td>PF 수 (예 4)</td><td>모든 PF 의 VF 합 (예 16)</td></tr>
+      <tr><td>노드 상세 모양</td><td>PF 표 하나</td><td>PF 카드 + PF 별 VF 표</td></tr>
+      <tr><td>팀별 출입증(P-Key)</td><td>기본 꺼짐 (켜는 것은 실험 기능)</td><td>항상 켜짐</td></tr>
+    </table></div>
+    <p>모드는 클러스터 단위입니다. 설치할 때 차트 값 <code>mode</code> 로 정하고 한 클러스터에 섞지 않습니다. 화면은 단위를 붙이지 않고 모두 "개" 로 씁니다.</p>
+  </div></details>
+  <div class="go2"><button class="l2btn" type="button" aria-haspopup="dialog" aria-controls="l2-mode"><span class="pl"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span><b>AIPub 화면에서 보기</b><small>노드 상세 요약 줄 · 개발 클러스터 노드</small></span></button></div>
+  <dialog class="modal" id="l2-mode" aria-label="AIPub 화면에서 보기: 통째로 빌려주거나, 하나씩 나눠 줍니다"><div class="m-head"><span class="m-k">AIPub 화면에서 보기</span><b>통째로 빌려주거나, 하나씩 나눠 줍니다</b><button type="button" class="m-close" aria-label="닫기">✕</button></div>
+  <div class="l2">
+    <div class="l2-meta"><div class="mi"><span class="ml">하는 일</span><span class="chip fn read">조회</span></div><div class="mi"><span class="ml">누가</span><span class="rl"><svg class="av c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg>관리자만</span><span class="rl"><svg class="av c-install" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-infra"/></svg>인프라 담당자가 설치 때 정함</span></div><div class="mi"><span class="ml">어디서</span><span class="where">노드 상세 <i>›</i> InfiniBand 탭 요약 줄</span></div><a class="fig-link" href="#"><svg viewBox="0 0 12 18" aria-hidden="true"><path d="M3 0h3v6H3a3 3 0 0 1 0-6z" fill="#F24E1E"/><path d="M6 0h3a3 3 0 0 1 0 6H6z" fill="#FF7262"/><path d="M3 6h3v6H3a3 3 0 0 1 0-6z" fill="#A259FF"/><circle cx="9" cy="9" r="3" fill="#1ABCFE"/><path d="M3 12h3v3a3 3 0 1 1-3-3z" fill="#0ACF83"/></svg>Figma 에서 보기</a></div>
+    <p class="lead2">어느 방법을 쓰는지는 설치할 때 정해집니다. 화면에 바꾸는 스위치는 없고, 노드 상세의 요약 줄 배지와 장치 목록 모양이 방법에 따라 달라집니다. 아래는 개발 클러스터 노드를 따라 그렸습니다.</p>
+    <div class="player" data-scene="mode">
+      <div class="viewport"><div class="stage"><div class="mock">
+        <div class="ui app">
+          <div class="ui-chrome"><i></i><i></i><i></i><span class="ui-url" data-k="url">/nodes/gpu-node-3</span></div>
+          <div class="ui-body">
+            <div class="ui-tabs"><span>Resources</span><span>Workloads</span><span class="on">InfiniBand</span></div>
+            <div class="ui-sum"><span class="ui-badge ghost" data-k="badge">SR-IOV Off</span><span><span class="k">PF</span><b>1</b></span><span><span class="k">Assigned</span><b>1 / 1</b></span><span><span class="k">In use</span><b>1 / 1</b></span><span class="end">Fabric 정보 <span class="ui-more">···</span></span></div>
+            <div class="ui-pop" data-k="tip" hidden style="left:14px;top:96px;max-width:330px">InfiniBand 포트(PF)를 나누지 않고 통째로 프로젝트에 배정합니다. 한 PF를 같은 프로젝트의 여러 Pod가 나눠 씁니다. 클러스터 설치 시 정해지는 값입니다.</div>
+            <table class="ui-tbl"><tr><th>No</th><th>PF</th><th>RDMA device</th><th>Project</th><th>Workload</th><th>Status</th></tr>
+              <tr data-k="row"><td>1</td><td>0000:04:00.0 <span class="ui-mu">(ib0)</span></td><td>mlx5_0</td><td>test-fe</td><td data-k="wl">Workspace <span class="ui-link">test-ws</span></td><td><span class="ui-badge ok">Active</span></td></tr>
+            </table>
+            <div class="ui-card" data-k="alt" hidden>
+              <div class="ui-card-h" style="grid-template-columns:auto 1fr 1fr 1fr"><span class="ui-badge blue">SR-IOV On 이라면</span><span><small>PF</small>0000:04:00.0</span><span><small>Assigned</small>3 / 8</span><span><small>In use</small>2 / 8</span></div>
+              <div class="ui-card-b"><table class="ui-tbl"><tr><th>RDMA device</th><th>Project</th><th>Workload</th></tr><tr><td>mlx5_12</td><td>test-fe</td><td>Workspace <span class="ui-link">test-ws</span></td></tr><tr><td>mlx5_13</td><td>test-fe</td><td>Workspace <span class="ui-link">test-ws</span></td></tr></table></div>
+            </div>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="timeline"></div>
+    </div>
+    <p class="hint">첫 화면은 개발 클러스터에서 읽은 값입니다. 노드 장부(SriovNodeState)의 배정·사용·상태도 그대로입니다. 마지막 "SR-IOV On 이라면" 카드만 예시입니다.</p>
+    <div class="links3">
+      <div class="lk"><span class="k">빌려주는 방법</span><span class="s">SR-IOV Off · On 배지와 툴팁</span><code>SriovNodeState spec.mode: pf | vf (프로젝트 화면은 IBNetwork status.mode)</code></div>
+      <div class="lk"><span class="k">자리</span><span class="s">Workspace 의 InfiniBand 개수</span><code>pf.slotsPerPf (기본 8)</code></div>
+      <div class="lk"><span class="k">화면 모양</span><span class="s">Off 는 PF 표, On 은 PF 카드와 VF 표</span><code>src/domains/node/components/infiniband-devices.tsx</code></div>
+    </div>
+  </div>
+  </dialog>
+</section>
+
+<!-- ═════════ 4 관제탑과 출입증 ═════════ -->
+<section class="stop" id="fence" data-stop>
+  <header class="sh"><span class="num">4</span><p class="ask"><svg class="av c-pm" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pm"/></svg><span>다른 팀과 섞이지 않을까요?</span></p><h2><mark>관제탑</mark>이 팀마다 <mark>출입증</mark>을 줍니다</h2></header>
+  <figure class="fig">
+    <svg class="dg" viewBox="0 0 600 310" role="img" aria-label="관제탑이 문마다 번호표를 주고, 출입증 색이 같은 A팀 문끼리는 통하지만 다른 색 문이나 주인 없는 문과는 막힌다">
+      <path class="o f-bldg" d="M52 286 L64 152 H90 L102 286 Z"/>
+      <line class="o" x1="58" y1="220" x2="96" y2="220"/>
+      <rect class="o f-tower" x="30" y="100" width="94" height="58" rx="10"/>
+      <path class="o f-roof2" d="M22 104 L77 70 L132 104 Z"/>
+      <line class="o" x1="77" y1="70" x2="77" y2="50"/><circle class="o f-bad" cx="77" cy="46" r="5"/>
+      <path class="ln" d="M90 40 a16 16 0 0 1 0 14 M96 34 a26 26 0 0 1 0 26"/>
+      <rect class="o f-paper" x="40" y="114" width="34" height="26" rx="4"/><rect class="o f-paper" x="80" y="114" width="34" height="26" rx="4"/>
+      <text x="57" y="132" text-anchor="middle" style="font-size:11px">대장</text><text x="97" y="132" text-anchor="middle" style="font-size:11px">대기</text>
+      <text x="77" y="304" text-anchor="middle" class="b">관제탑 (SM)</text>
+      <path class="ln dashed" d="M128 128 H172" marker-end="url(#ar)"/>
+      <text x="150" y="118" text-anchor="middle" class="s">번호표</text>
+      <path class="o f-a" d="M190 150 V96 a35 35 0 0 1 70 0 V150 Z"/><text x="225" y="122" text-anchor="middle" class="on-fill">A팀</text>
+      <path class="o f-a" d="M290 150 V96 a35 35 0 0 1 70 0 V150 Z"/><text x="325" y="122" text-anchor="middle" class="on-fill">A팀</text>
+      <path class="o f-b" d="M390 150 V96 a35 35 0 0 1 70 0 V150 Z"/><text x="425" y="122" text-anchor="middle" class="on-fill">B팀</text>
+      <path class="o f-paper dashed" d="M490 150 V96 a35 35 0 0 1 70 0 V150 Z"/><text x="525" y="122" text-anchor="middle" class="s">빈 문</text>
+      <text x="225" y="172" text-anchor="middle" class="m">P-Key 0x0001</text>
+      <text x="325" y="172" text-anchor="middle" class="m">P-Key 0x0001</text>
+      <text x="425" y="172" text-anchor="middle" class="m">P-Key 0x0002</text>
+      <text x="525" y="172" text-anchor="middle" class="m">기본 파티션만</text>
+      <path class="ln-ok" d="M225 184 Q275 248 325 184"/>
+      <path class="ln-bad" d="M325 184 Q375 282 425 184"/>
+      <path class="ln-bad" d="M425 184 Q475 248 525 184"/>
+      <circle class="o f-ok" cx="275" cy="218" r="13"/><path d="M269 218 l4 4 l8 -9" style="fill:none;stroke:#FFFFFF;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"/>
+      <circle class="o f-bad" cx="375" cy="236" r="13"/><path d="M370 231 l10 10 M380 231 l-10 10" style="fill:none;stroke:#FFFFFF;stroke-width:2.6;stroke-linecap:round"/>
+      <circle class="o f-bad" cx="475" cy="218" r="13"/><path d="M470 213 l10 10 M480 213 l-10 10" style="fill:none;stroke:#FFFFFF;stroke-width:2.6;stroke-linecap:round"/>
+      <text x="275" y="252" text-anchor="middle" class="s">같은 팀끼리 통함</text>
+      <text x="375" y="272" text-anchor="middle" class="s">다른 팀은 막힘</text>
+      <text x="485" y="252" text-anchor="middle" class="s">빈 문도 막힘</text>
+    </svg>
+  </figure>
+  <p class="cap">터널에 들어가려면 관제탑이 준 <b>번호표</b>가 있어야 합니다. 관제탑은 팀마다 <b>출입증 색</b>을 정해 두고, 색이 같은 문끼리만 이야기하게 합니다. 그래서 A팀 작업자는 B팀 작업자에게 터널로 말을 걸 수 없습니다.</p>
+  <div class="try col" style="width:100%" data-let="same = a===b; ok = !pk || same || a===6 || b===6 || (a<=2 && b<=2)">
+    <span class="ttl">값 바꿔 보기</span>
+    <p class="q">어느 문과 어느 문이 터널로 이야기할 수 있을까요?</p>
+    <div class="ctrls">
+      <label class="ctrl" for="try-from">보내는 문 <select id="try-from" data-var="a"><option value="1">A팀 문 ①</option><option value="2">A팀 문 ②</option><option value="3" selected>B팀 문</option><option value="4">빈 문 ①</option><option value="5">빈 문 ②</option><option value="6">PF·SM 같은 다른 장비</option></select></label>
+      <label class="ctrl" for="try-to">받는 문 <select id="try-to" data-var="b"><option value="1" selected>A팀 문 ①</option><option value="2">A팀 문 ②</option><option value="3">B팀 문</option><option value="4">빈 문 ①</option><option value="5">빈 문 ②</option><option value="6">PF·SM 같은 다른 장비</option></select></label>
+      <label class="ctrl" for="try-pk"><input type="checkbox" id="try-pk" data-var="pk" checked> 출입증(P-Key)을 켠 설치</label>
+    </div>
+    <div class="verdict" data-cls="good: ok; bad: !ok" data-text="same ? '같은 문입니다. 다른 문을 골라 보세요.' : !pk ? '통신합니다. 출입증을 쓰지 않는 설치라서 모든 문이 서로 통합니다. 개발 클러스터가 이 경우입니다.' : (a===6 || b===6) ? '통신합니다. 상대가 기본 파티션의 정식 멤버라서 제한 멤버인 VF 도 말을 걸 수 있습니다. 그래서 격리는 다른 프로젝트 VF 사이까지만 보장합니다.' : (a<=2 && b<=2) ? '통신합니다. 둘 다 A팀 파티션의 정식 멤버입니다.' : '막힙니다. 둘이 함께 속한 곳은 기본 파티션뿐이고, 거기서 둘 다 제한 멤버라서 카드와 스위치가 패킷을 버립니다.'"></div>
+  </div>
+  <details class="more"><summary>조금 더 자세히</summary><div class="in">
+    <p><b>Subnet Manager(SM)</b> 는 fabric 전체를 관리하는 프로그램입니다. 포트마다 주소(LID)를 주고 통신 권한(P-Key)을 적용합니다. SM 이 없으면 케이블이 꽂혀 있어도 새 장치가 통신을 시작하지 못합니다. AIPub 은 스위치 안의 SM 을 끄고, SM 노드 2대에서 opensm 을 대장(master)과 대기(standby)로 돌립니다. 스위치 SM 은 VF 를 알아보지 못하기 때문입니다.</p>
+    <p><b>P-Key</b> 는 이더넷의 VLAN 과 비슷한 파티션 키입니다. 프로젝트마다 하나씩 나오고, 같은 P-Key 의 정식 멤버끼리만 통신합니다. 우리 VF 는 모두 기본 파티션(<code>0x7fff</code>)에서 제한 멤버로 내려가서, 다른 팀 VF 나 주인 없는 VF 와는 막힙니다. 다만 PF, SM, 다른 조직 장비처럼 정식 멤버인 장비와는 통신합니다.</p>
+    <p>SM 노드 2대가 모두 멈추면 이미 통신 중인 장치는 대부분 계속 통신합니다. 대신 새 Pod 의 장치가 올라오지 않고, 배정을 바꿔도 반영되지 않고, 케이블이나 장비에 문제가 생기면 복구되지 않습니다.</p>
+    <p>기본 설치(PF 모드, <code>isolation: none</code>)는 출입증을 쓰지 않고 고객사가 원래 쓰던 SM 을 그대로 씁니다. 우리 쪽에서 SM 상태를 알 수 없어서 SM 경고도 띄우지 않습니다. 개발 클러스터가 이 경우입니다.</p>
+  </div></details>
+  <div class="go2"><button class="l2btn" type="button" aria-haspopup="dialog" aria-controls="l2-fence"><span class="pl"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span><b>AIPub 화면에서 보기</b><small>Fabric 정보 · SM 없음 경고</small></span></button></div>
+  <dialog class="modal" id="l2-fence" aria-label="AIPub 화면에서 보기: 관제탑이 팀마다 출입증을 줍니다"><div class="m-head"><span class="m-k">AIPub 화면에서 보기</span><b>관제탑이 팀마다 출입증을 줍니다</b><button type="button" class="m-close" aria-label="닫기">✕</button></div>
+  <div class="l2">
+    <div class="l2-meta"><div class="mi"><span class="ml">하는 일</span><span class="chip fn read">조회</span></div><div class="mi"><span class="ml">누가</span><span class="rl"><svg class="av c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg>관리자</span></div><div class="mi"><span class="ml">어디서</span><span class="where">노드 상세 <i>›</i> Fabric 정보 · 프로젝트 상세 요약</span></div><a class="fig-link" href="#"><svg viewBox="0 0 12 18" aria-hidden="true"><path d="M3 0h3v6H3a3 3 0 0 1 0-6z" fill="#F24E1E"/><path d="M6 0h3a3 3 0 0 1 0 6H6z" fill="#FF7262"/><path d="M3 6h3v6H3a3 3 0 0 1 0-6z" fill="#A259FF"/><circle cx="9" cy="9" r="3" fill="#1ABCFE"/><path d="M3 12h3v3a3 3 0 1 1-3-3z" fill="#0ACF83"/></svg>Figma 에서 보기</a></div>
+    <p class="lead2">출입증을 쓰는지는 노드 상세의 Fabric 정보에 나옵니다. 출입증을 켠 설치에서 관제탑이 모두 멈추면 노드 상세와 프로젝트 상세에 경고가 뜨고, Admin 은 그동안 문 개수를 바꿀 수 없습니다.</p>
+    <div class="player" data-scene="fence">
+      <div class="viewport"><div class="stage"><div class="mock">
+        <div class="ui app">
+          <div class="ui-chrome"><i></i><i></i><i></i><span class="ui-url" data-k="url">/nodes/gpu-node-3</span></div>
+          <div class="ui-body">
+            <div data-k="v1" style="display:grid;gap:12px">
+              <div class="ui-sum"><span class="ui-badge ghost">SR-IOV Off</span><span><span class="k">PF</span><b>1</b></span><span><span class="k">Assigned</span><b>1 / 1</b></span><span><span class="k">In use</span><b>1 / 1</b></span><span class="end" data-k="fab">Fabric 정보 <span class="ui-more">···</span></span></div>
+              <div class="ui-pop" data-k="pop1" hidden style="right:14px;top:56px"><span class="t">Fabric 정보</span><div class="ui-kv"><span>Subnet</span><b>tenib</b><span>P-Key</span><b data-k="pk">Off</b></div></div>
+              <table class="ui-tbl"><tr><th>PF</th><th>RDMA device</th><th>Project</th><th>Status</th></tr><tr><td>0000:04:00.0 <span class="ui-mu">(ib0)</span></td><td>mlx5_0</td><td>test-fe</td><td><span class="ui-badge ok">Active</span></td></tr></table>
+            </div>
+            <div data-k="v2" hidden style="display:grid;gap:12px">
+              <div class="ui-note err" data-k="ban" hidden><span class="ic">⚠</span><span><b>Subnet Manager가 없습니다.</b><br>기존 통신은 유지되지만 새 Pod와 배정 변경은 반영되지 않습니다. SM 노드 상태를 확인하세요.</span></div>
+              <div class="ui-sum"><span class="ui-badge blue">SR-IOV On</span><span><span class="k">PF</span><b>2</b></span><span><span class="k">VF</span><b>16</b></span><span><span class="k">Assigned</span><b>12 / 16</b></span><span><span class="k">In use</span><b>8 / 16</b></span><span class="end" data-k="fab2">Fabric 정보 <span class="ui-more">···</span></span></div>
+              <div class="ui-pop" data-k="pop2" hidden style="right:14px;top:56px"><span class="t">Fabric 정보</span><div class="ui-kv"><span>Subnet</span><b>fabric-a</b><span>SM</span><b>-</b><span>Master GUID</span><b class="mono">0x9c63c00300a1b2c4</b></div></div>
+              <table class="ui-tbl"><tr><th>RDMA device</th><th>Project</th><th>Status</th></tr><tr><td>mlx5_12</td><td>llm-team</td><td><span class="ui-badge ok">Active</span></td></tr></table>
+            </div>
+            <div data-k="v3" hidden style="display:grid;gap:10px">
+              <div class="ui-h">Nodes <span class="n">3</span></div>
+              <div class="ui-sum ib"><span>InfiniBand</span><span><span class="k">Assigned</span><b>6</b></span><span><span class="k">Nodes</span><b>2</b></span><span><span class="k">In use</span><b>3</b></span><span class="ui-btn dis end" data-k="sbtn">⚙ InfiniBand</span></div>
+              <div class="ui-note warn" data-k="snote"><span class="ic">⚠</span><span>Subnet Manager가 없어 InfiniBand 배정 변경이 반영되지 않습니다. 새 Pod의 InfiniBand도 올라오지 않습니다. 기존 통신은 대부분 유지됩니다.</span></div>
+            </div>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="timeline"></div>
+    </div>
+    <p class="hint">첫 화면의 Subnet <code>tenib</code> 은 개발 클러스터 노드 라벨 <code>aipub.ten1010.io/ib-subnet</code> 에서 읽은 값입니다. 출입증을 켠 노드(fabric-a, Master GUID)와 프로젝트 화면 숫자는 예시입니다.</p>
+    <div class="links3">
+      <div class="lk"><span class="k">관제탑</span><span class="s">SM 없음 배너 · 프로젝트 경고</span><code>SM 노드들의 SriovNodeState status.sm.role 을 모아 판단 · resolveSubnetSm()</code></div>
+      <div class="lk"><span class="k">출입증을 쓰나</span><span class="s">Fabric 정보의 P-Key 줄</span><code>spec.isolation: none | pkey · needsSmCheck()</code></div>
+      <div class="lk"><span class="k">팀 출입증 번호</span><span class="s">화면에는 보이지 않음</span><code>IBNetwork status.pkey (P-Key 를 켠 설치만)</code></div>
+    </div>
+  </div>
+  </dialog>
+</section>
+
+<!-- ═════════ 5 누가 정하나 ═════════ -->
+<section class="stop" id="who" data-stop>
+  <header class="sh"><span class="num">5</span><p class="ask"><svg class="av c-pd" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pd"/></svg><span>누가 무엇을 정할까요?</span></p><h2>관리자는 <mark>개수</mark>만, 어느 문인지는 <mark>시스템</mark>이 정합니다</h2></header>
+  <figure class="fig">
+    <svg class="dg" viewBox="0 0 600 380" role="img" aria-label="인프라 담당자, 관리자, 프로젝트 매니저, 프로젝트 디벨로퍼, 시스템이 각자 정하는 것을 다섯 줄로 나눴다">
+      <use href="#i-infra" x="16" y="8" width="44" height="62" class="c-install"/>
+      <text x="70" y="36" class="b">인프라 담당자</text><text x="70" y="56" class="s">설치할 때</text>
+      <g class="o f-paper"><rect x="200" y="16" width="88" height="32" rx="16"/><rect x="298" y="16" width="88" height="32" rx="16"/><rect x="396" y="16" width="88" height="32" rx="16"/><rect x="494" y="16" width="88" height="32" rx="16"/></g>
+      <text x="244" y="37" text-anchor="middle">방법</text><text x="342" y="37" text-anchor="middle">출입증 쓸지</text><text x="440" y="37" text-anchor="middle">주소 대역</text><text x="538" y="37" text-anchor="middle">자리 수</text>
+      <text x="244" y="66" text-anchor="middle" class="m">mode</text><text x="342" y="66" text-anchor="middle" class="m">isolation</text><text x="440" y="66" text-anchor="middle" class="m">ipoib.cidr</text><text x="538" y="66" text-anchor="middle" class="m">slotsPerPf</text>
+      <use href="#i-admin" x="16" y="82" width="44" height="62" class="c-admin"/>
+      <text x="70" y="110" class="b">관리자</text><text x="70" y="130" class="s">Admin</text>
+      <rect class="o f-paper" x="200" y="90" width="150" height="32" rx="16"/><text x="275" y="111" text-anchor="middle">노드 붙이기 · 빼기</text>
+      <rect class="o f-mark" x="362" y="90" width="170" height="32" rx="16"/><text x="447" y="111" text-anchor="middle">노드마다 문 개수</text>
+      <text x="447" y="140" text-anchor="middle" class="m">spec.nodes[].numVfs</text>
+      <use href="#i-pm" x="16" y="156" width="44" height="62" class="c-pm"/>
+      <text x="70" y="184" class="b">프로젝트 매니저</text><text x="70" y="204" class="s">PM</text>
+      <rect class="o f-paper" x="200" y="164" width="190" height="32" rx="16"/><text x="295" y="185" text-anchor="middle">배정 현황 보기 (조회만)</text>
+      <use href="#i-pd" x="16" y="230" width="44" height="62" class="c-pd"/>
+      <text x="70" y="258" class="b">프로젝트 디벨로퍼</text><text x="70" y="278" class="s">PD · 팀원</text>
+      <rect class="o f-mark" x="200" y="238" width="190" height="32" rx="16"/><text x="295" y="259" text-anchor="middle">Pod 하나에 문 몇 개</text>
+      <text x="295" y="288" text-anchor="middle" class="m">ten1010.io/ib-&lt;프로젝트&gt;</text>
+      <use href="#i-bot" x="16" y="304" width="44" height="62" class="c-system"/>
+      <text x="70" y="332" class="b">시스템</text><text x="70" y="352" class="s">operator 프로그램</text>
+      <g class="o f-paper"><rect x="200" y="312" width="88" height="32" rx="16"/><rect x="298" y="312" width="88" height="32" rx="16"/><rect x="396" y="312" width="88" height="32" rx="16"/><rect x="494" y="312" width="88" height="32" rx="16"/></g>
+      <text x="244" y="333" text-anchor="middle">어느 문을</text><text x="342" y="333" text-anchor="middle">출입증 번호</text><text x="440" y="333" text-anchor="middle">반납 처리</text><text x="538" y="333" text-anchor="middle">주소 붙이기</text>
+      <text x="244" y="362" text-anchor="middle" class="m">owner</text><text x="342" y="362" text-anchor="middle" class="m">status.pkey</text><text x="440" y="362" text-anchor="middle" class="m">releasing</text><text x="538" y="362" text-anchor="middle" class="m">IPoIB IP</text>
+    </svg>
+  </figure>
+  <p class="cap">인프라 담당자가 방법을 고르고, 관리자는 팀마다 <b>건물별 문 개수</b>만 적습니다. 프로젝트 매니저는 배정 현황을 봅니다. <b>어느 문</b>을 줄지는 시스템(operator 프로그램)이 자동으로 고르고, 팀원은 작업자 한 명에게 <b>문이 몇 개</b> 필요한지만 말합니다.</p>
+  <details class="more"><summary>조금 더 자세히</summary><div class="in">
+    <ul>
+      <li>노드를 프로젝트에 붙이면 그 노드의 문은 <b>0개로 시작</b>합니다. Admin 이 InfiniBand 설정에서 개수를 정해야 그 노드에서 쓸 수 있습니다.</li>
+      <li>저장한 개수는 시스템이 바꾸지 않습니다. 0개로 저장할 수도 있습니다.</li>
+      <li>서버(웹훅)는 네 경우에 저장을 거부하고, 화면은 서버 메시지를 그대로 토스트로 보여 줍니다. 남은 개수보다 많이 요청할 때, Blocked 노드의 개수를 늘릴 때, 노드들이 서로 다른 fabric 일 때, IP 대역의 주소가 모자랄 때입니다.</li>
+      <li>개수를 늘리면 시스템은 반납 중인 자기 문부터 되살리고, 모자라면 빈 문을 줍니다.</li>
+    </ul>
+  </div></details>
+  <div class="go2"><button class="l2btn" type="button" aria-haspopup="dialog" aria-controls="l2-who"><span class="pl"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span><b>AIPub 화면에서 보기</b><small>프로젝트 상세 › InfiniBand 설정 팝업 (Admin)</small></span></button></div>
+  <dialog class="modal" id="l2-who" aria-label="AIPub 화면에서 보기: 관리자는 개수만, 어느 문인지는 시스템이 정합니다"><div class="m-head"><span class="m-k">AIPub 화면에서 보기</span><b>관리자는 개수만, 어느 문인지는 시스템이 정합니다</b><button type="button" class="m-close" aria-label="닫기">✕</button></div>
+  <div class="l2">
+    <div class="l2-meta"><div class="mi"><span class="ml">하는 일</span><span class="chip fn update">수정</span></div><div class="mi"><span class="ml">누가</span><span class="rl"><svg class="av c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg>관리자만 · PM · PD 는 조회</span></div><div class="mi"><span class="ml">어디서</span><span class="where">프로젝트 상세 <i>›</i> Nodes <i>›</i> InfiniBand 설정</span></div><a class="fig-link" href="#"><svg viewBox="0 0 12 18" aria-hidden="true"><path d="M3 0h3v6H3a3 3 0 0 1 0-6z" fill="#F24E1E"/><path d="M6 0h3a3 3 0 0 1 0 6H6z" fill="#FF7262"/><path d="M3 6h3v6H3a3 3 0 0 1 0-6z" fill="#A259FF"/><circle cx="9" cy="9" r="3" fill="#1ABCFE"/><path d="M3 12h3v3a3 3 0 1 1-3-3z" fill="#0ACF83"/></svg>Figma 에서 보기</a></div>
+    <p class="lead2">Admin 은 프로젝트 상세의 Nodes 영역에서 InfiniBand 설정 팝업을 열고, 노드마다 문 개수를 스테퍼로 정합니다. Save 를 누르면 바꾼 노드를 한 번에 저장합니다.</p>
+    <div class="player" data-scene="who">
+      <div class="viewport"><div class="stage"><div class="mock">
+        <div class="ui app" style="min-height:460px">
+          <div class="ui-chrome"><i></i><i></i><i></i><span class="ui-url" data-k="url">/projects/llm-team</span></div>
+          <div class="ui-body">
+            <div class="ui-h">Nodes <span class="n">4</span></div>
+            <div class="ui-sum ib"><span>InfiniBand</span><span><span class="k">Assigned</span><b data-k="asg">6</b></span><span><span class="k">Nodes</span><b>3</b></span><span><span class="k">In use</span><b>3</b></span><span class="ui-btn end" data-k="btn">⚙ InfiniBand</span></div>
+            <div class="ui-note" data-k="unset"><span class="ic">ⓘ</span><span>InfiniBand 개수가 정해지지 않은 노드가 1개 있습니다. 이 노드에서는 InfiniBand를 쓸 수 없습니다. <span class="ui-link" style="color:var(--ui-blue)">InfiniBand 설정</span></span></div>
+            <table class="ui-tbl"><tr><th>Name</th><th>GPU</th><th>InfiniBand</th></tr>
+              <tr><td class="ui-link">gpu-node-1</td><td>Block / L40</td><td><span class="ui-barw"><span class="ui-bar"><i class="a" style="flex-grow:4"></i><i class="o" style="flex-grow:4"></i><i class="u" style="flex-grow:8"></i></span><span class="ui-cnt"><b>4</b> <span>/ 16</span></span></span></td></tr>
+              <tr><td class="ui-link">gpu-node-2</td><td>Block / L40</td><td><span class="ui-barw"><span class="ui-bar"><i class="a" style="flex-grow:2"></i><i class="o" style="flex-grow:6"></i><i class="u" style="flex-grow:8"></i></span><span class="ui-cnt"><b>2</b> <span>/ 16</span></span></span></td></tr>
+              <tr><td class="ui-link">gpu-node-3</td><td>Block / L40</td><td><span class="ui-barw"><span class="ui-bar"><i class="a" data-k="b3a" style="flex-grow:0"></i><i class="u" data-k="b3u" style="flex-grow:16"></i></span><span class="ui-cnt"><b data-k="c3">0</b> <span>/ 16</span></span></span></td></tr>
+              <tr><td class="ui-link">gpu-node-4</td><td>Block / L40</td><td>-</td></tr>
+            </table>
+          </div>
+          <div class="ui ui-dialog" data-k="dlg" hidden>
+            <div class="ui-body">
+              <div class="ui-h">InfiniBand 설정</div>
+              <table class="ui-tbl"><tr><th>Node</th><th>InfiniBand</th><th>Assigned</th><th>In use</th></tr>
+                <tr><td class="ui-link">gpu-node-1</td><td><span class="ui-cnt"><b>4</b> <span>/ 16</span></span></td><td><span class="ui-row"><span class="ui-step"><span>−</span><b>4</b><span>+</span></span><span class="ui-mu">미할당 <b>8</b> · 최대 <b>12</b></span></span></td><td>3</td></tr>
+                <tr><td class="ui-link">gpu-node-2 <span class="ui-badge warn">Degraded</span></td><td><span class="ui-cnt"><b>2</b> <span>/ 16</span></span></td><td><span class="ui-row"><span class="ui-step"><span>−</span><b>2</b><span>+</span></span><span class="ui-mu">미할당 <b>8</b> · 최대 <b>10</b></span></span></td><td>0</td></tr>
+                <tr><td class="ui-link">gpu-node-3</td><td><span class="ui-cnt"><b>0</b> <span>/ 16</span></span></td><td><span class="ui-row"><span class="ui-step"><span>−</span><b data-k="n3">0</b><span data-k="p3">+</span></span><span class="ui-mu">미할당 <b>16</b> · 최대 <b>16</b></span></span></td><td>0</td></tr>
+                <tr><td class="ui-link">gpu-node-4 <span class="ui-badge bad">Blocked</span></td><td class="c">-</td><td class="c ui-mu" data-k="blk">배정 불가</td><td>0</td></tr>
+              </table>
+              <div class="legend"><span><i style="background:var(--bar-this)"></i>현재 프로젝트 할당</span><span><i style="background:var(--bar-other)"></i>다른 프로젝트 할당</span><span><i style="background:var(--bar-rel)"></i>회수 대기 (노드 전체)</span><span><i style="background:var(--bar-un);outline:1px solid #A3A3A3"></i>미할당</span></div>
+              <div class="ui-row" style="justify-content:flex-end"><span class="ui-btn">Cancel</span><span class="ui-btn pri" data-k="save">Save</span></div>
+            </div>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="timeline"></div>
+    </div>
+    <p class="hint">노드 이름과 숫자는 예시입니다. 팝업 구성과 문구는 Figma 와 코드(<code>infiniband-settings-modal.tsx</code>, <code>project.yaml</code>)를 따랐습니다.</p>
+    <div class="try" data-let="un = Math.max(0, 16 - other - cur); mx = blk ? cur : un + cur; bad = other + cur > 16">
+      <span class="ttl">값 바꿔 보기</span>
+      <p class="q">문이 16개인 노드에서 스테퍼의 최대는 어떻게 정해질까요?</p>
+      <div class="ctrls">
+        <span class="ctrl">다른 프로젝트가 가진 수 <span class="stp" data-var="other" data-min="0" data-max="16" data-val="4" aria-label="다른 프로젝트가 가진 수"></span></span>
+        <span class="ctrl">이 프로젝트의 지금 수 <span class="stp" data-var="cur" data-min="0" data-max="16" data-val="4" aria-label="이 프로젝트의 지금 수"></span></span>
+        <label class="ctrl" for="try-blk"><input type="checkbox" id="try-blk" data-var="blk"> Blocked 노드</label>
+      </div>
+      <div class="res"><span class="big" data-text="'미할당 ' + un + ' · 최대 ' + mx"></span></div>
+      <div class="tbar"><div class="a" data-grow="Math.min(cur, 16)"></div><div class="o" data-grow="Math.min(other, 16 - Math.min(cur,16))"></div><div class="u" data-grow="un"></div></div>
+      <div class="verdict" data-cls="bad: bad; warn: blk && !bad" data-text="bad ? '노드에 문이 16개뿐이라 이 조합은 생기지 않습니다.' : blk ? (cur ? 'Blocked 노드는 지금 가진 ' + cur + '개보다 늘릴 수 없고, 줄이는 것만 됩니다.' : 'Blocked 노드에 배정이 0개면 스테퍼 대신 배정 불가가 나옵니다.') : '스테퍼는 0 부터 ' + mx + ' 까지 움직입니다. 최대 = 미할당 + 지금 수입니다.'"></div>
+    </div>
+    <div class="links3">
+      <div class="lk"><span class="k">건물마다 문 개수</span><span class="s">Assigned 스테퍼</span><code>IBNetwork spec.nodes[].numVfs</code></div>
+      <div class="lk"><span class="k">미할당 · 최대</span><span class="s">스테퍼 오른쪽 숫자</span><code>ibAssignableRange() · 웹훅처럼 numVfs 합으로 셈</code></div>
+      <div class="lk"><span class="k">못 늘리는 건물</span><span class="s">Blocked 배지 · 배정 불가</span><code>status.conditions Blocked · isIbNodeBlocked()</code></div>
+    </div>
+  </div>
+  </dialog>
+</section>
+
+<!-- ═════════ 6 계약서와 장부 ═════════ -->
+<section class="stop" id="ledger" data-stop>
+  <header class="sh"><span class="num">6</span><p class="ask"><svg class="av c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg><span>그 숫자는 어디에 적힐까요?</span></p><h2>팀 <mark>계약서</mark>와 건물 <mark>장부</mark>에 적힙니다</h2></header>
+  <figure class="fig">
+    <svg class="dg" viewBox="0 0 640 300" role="img" aria-label="Admin 이 계약서에 숫자를 적으면 시스템이 건물 장부에 문마다 주인을 적고, 노드는 그 문을 팀 이름으로 광고한다">
+      <rect class="o f-paper" x="22" y="40" width="210" height="200" rx="14"/>
+      <g class="o f-paper"><rect x="44" y="26" width="9" height="26" rx="4.5"/><rect x="76" y="26" width="9" height="26" rx="4.5"/><rect x="108" y="26" width="9" height="26" rx="4.5"/><rect x="140" y="26" width="9" height="26" rx="4.5"/><rect x="172" y="26" width="9" height="26" rx="4.5"/><rect x="204" y="26" width="9" height="26" rx="4.5"/></g>
+      <text x="127" y="84" text-anchor="middle" class="b">팀 계약서</text>
+      <line x1="42" y1="98" x2="212" y2="98" style="stroke:var(--line);stroke-width:2.4"/>
+      <text x="44" y="130">gpu-node-1</text><text x="210" y="130" text-anchor="end" class="acc">문 2개</text>
+      <line x1="42" y1="144" x2="212" y2="144" style="stroke:var(--rule);stroke-width:1.5"/>
+      <text x="44" y="172">gpu-node-2</text><text x="210" y="172" text-anchor="end" class="acc">문 0개</text>
+      <text x="127" y="222" text-anchor="middle" class="m">IBNetwork · llm-team</text>
+      <use href="#i-admin" x="8" y="232" width="36" height="50" class="c-admin"/>
+      <text x="50" y="268" class="s">관리자는 숫자만 적습니다</text>
+      <path class="ln" d="M236 140 H262" marker-end="url(#ar)"/>
+      <use href="#i-bot" x="266" y="104" width="48" height="67" class="c-system"/>
+      <text x="290" y="190" text-anchor="middle" class="s">시스템</text>
+      <path class="ln" d="M318 140 H340" marker-end="url(#ar)"/>
+      <rect class="o f-paper" x="346" y="40" width="186" height="232" rx="14"/>
+      <g class="o f-paper"><rect x="366" y="26" width="9" height="26" rx="4.5"/><rect x="398" y="26" width="9" height="26" rx="4.5"/><rect x="430" y="26" width="9" height="26" rx="4.5"/><rect x="462" y="26" width="9" height="26" rx="4.5"/><rect x="494" y="26" width="9" height="26" rx="4.5"/></g>
+      <text x="439" y="84" text-anchor="middle" class="b">건물 장부</text>
+      <line x1="364" y1="98" x2="514" y2="98" style="stroke:var(--line);stroke-width:2.4"/>
+      <path class="o2 f-a" d="M366 132 V120 a8 8 0 0 1 16 0 V132 Z"/><text x="392" y="130" style="font-size:14px">문 0 · llm-team</text>
+      <path class="o2 f-a" d="M366 162 V150 a8 8 0 0 1 16 0 V162 Z"/><text x="392" y="160" style="font-size:14px">문 1 · llm-team</text>
+      <path class="o2 f-b" d="M366 192 V180 a8 8 0 0 1 16 0 V192 Z"/><text x="392" y="190" style="font-size:14px">문 2 · vision</text>
+      <path class="o2 f-paper dashed" d="M366 222 V210 a8 8 0 0 1 16 0 V222 Z"/><text x="392" y="220" class="s">문 3 · 주인 없음</text>
+      <text x="439" y="254" text-anchor="middle" class="m" style="font-size:10.5px">SriovNodeState gpu-node-1</text>
+      <path class="ln" d="M536 140 H550" marker-end="url(#ar)"/>
+      <line class="o" x1="596" y1="174" x2="596" y2="232"/>
+      <rect class="o f-tower" x="554" y="104" width="84" height="72" rx="10"/>
+      <text x="596" y="128" text-anchor="middle" class="s on-fill">노드가 광고</text>
+      <text x="596" y="148" text-anchor="middle" class="m" style="fill:#2A241E">ib-llm-team</text>
+      <text x="596" y="168" text-anchor="middle" class="b on-fill">× 2</text>
+      <text x="596" y="252" text-anchor="middle" class="s">Workspace 는</text>
+      <text x="596" y="270" text-anchor="middle" class="s">이 이름으로 요청</text>
+    </svg>
+  </figure>
+  <p class="cap">Admin 은 팀 <b>계약서</b>에 "건물 1 에서 문 2개" 처럼 숫자만 적습니다. 시스템은 계약서를 보고 건물 <b>장부</b>에 어느 문이 그 팀 것인지 적습니다. 장부에는 다른 팀 정보도 함께 있어서 Admin 화면에서만 읽습니다.</p>
+  <details class="more"><summary>조금 더 자세히</summary><div class="in">
+    <p><b>IBNetwork</b> 는 프로젝트마다 하나씩 자동으로 생기고 이름이 프로젝트 이름과 같습니다(60자 이하 DNS-1123). Admin 이 고치는 칸은 <code>spec.nodes[].numVfs</code> 하나이고, 주소 대역은 <code>spec.ipoib.cidr</code> 입니다. 시스템이 채우는 <code>status</code> 에는 <code>mode</code> · <code>isolation</code> · <code>pkey</code> · <code>resourceName</code> 과 노드별 <code>desired</code> · <code>current</code> · <code>active</code> · <code>allocated</code> · <code>pendingRelease</code> 가 있습니다.</p>
+    <p><b>SriovNodeState</b> 는 IB 노드마다 하나입니다. 노드에 <code>ib-subnet</code> 라벨과 <code>ib-pf</code> 어노테이션이 있으면 생깁니다. <code>spec.vfs[]</code> 에 문마다 주인(<code>owner</code>)과 반납 여부(<code>releasing</code>)를, <code>status.vfs[]</code> 에 장치 이름·상태(<code>phase</code>)·쓰는 Pod(<code>allocatedTo</code>)를 적습니다.</p>
+    <p>노드는 주인이 정해진 문을 <code>ten1010.io/ib-&lt;프로젝트&gt;</code> 리소스로 kubelet 에 광고합니다. 예전 <code>ten1010.io/rdma</code> 는 없어집니다. 옛 키로 만든 Workspace 를 편집하면 화면이 새 키로 바꿔 채우고, 저장하면 Workspace 가 한 번 다시 시작된다고 안내합니다.</p>
+  </div></details>
+  <div class="go2"><button class="l2btn" type="button" aria-haspopup="dialog" aria-controls="l2-ledger"><span class="pl"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span><b>AIPub 화면에서 보기</b><small>Save 를 누른 뒤 데이터에 일어나는 일</small></span></button></div>
+  <dialog class="modal" id="l2-ledger" aria-label="AIPub 화면에서 보기: 팀 계약서와 건물 장부에 적힙니다"><div class="m-head"><span class="m-k">AIPub 화면에서 보기</span><b>팀 계약서와 건물 장부에 적힙니다</b><button type="button" class="m-close" aria-label="닫기">✕</button></div>
+  <div class="l2">
+    <div class="l2-meta"><div class="mi"><span class="ml">하는 일</span><span class="chip fn update">수정</span><span class="chip fn read">조회</span></div><div class="mi"><span class="ml">누가</span><span class="rl"><svg class="av c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg>관리자</span></div><div class="mi"><span class="ml">어디서</span><span class="where">InfiniBand 설정 Save 뒤에 일어나는 일</span></div><span></span></div>
+    <p class="lead2">설정 팝업에서 Save 를 누르면 화면은 계약서(IBNetwork)의 숫자 한 칸만 바꿉니다. 장부(SriovNodeState)는 시스템이 고치고, 화면은 장부를 다시 읽어 막대를 그립니다.</p>
+    <div class="player" data-scene="ledger">
+      <div class="viewport"><div class="stage"><div class="mock" style="grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);align-items:start">
+        <div class="ui">
+          <div class="ui-chrome"><i></i><i></i><i></i><span class="ui-url" data-k="url">/projects/llm-team</span></div>
+          <div class="ui-body">
+            <div class="ui-h">InfiniBand 설정</div>
+            <div class="ui-row"><span class="ui-link">gpu-node-1</span><span class="ui-step"><span>−</span><b data-k="n">1</b><span data-k="plus">+</span></span></div>
+            <span class="ui-mu">미할당 <b>7</b> · 최대 <b>8</b></span>
+            <div class="ui-row" style="justify-content:flex-end"><span class="ui-btn">Cancel</span><span class="ui-btn pri" data-k="save">Save</span></div>
+          </div>
+        </div>
+        <div style="display:grid;gap:10px">
+          <pre class="ui-yaml"><span class="c"># 계약서 · IBNetwork</span>
+metadata:
+  name: llm-team
+spec:
+  nodes:
+  - name: gpu-node-1
+    <span data-k="y1">numVfs: 1</span></pre>
+          <pre class="ui-yaml" data-k="patch" hidden><span class="c"># 화면이 보내는 JSON Patch</span>
+[{"op": "test", "path": "/spec/nodes/0/name", "value": "gpu-node-1"},
+ {"op": "replace", "path": "/spec/nodes/0/numVfs", "value": 2}]</pre>
+          <pre class="ui-yaml"><span class="c"># 건물 장부 · SriovNodeState gpu-node-1</span>
+spec:
+  vfs:
+  - pf: 0000:61:00.0
+    index: 0
+    owner: {name: llm-team}
+  - pf: 0000:61:00.0
+    index: 1
+<span data-k="o1" hidden>    owner: {name: llm-team}</span>
+<span class="c"># 노드가 광고하는 수 (allocatable)</span>
+<span data-k="al">ten1010.io/ib-llm-team: 1</span></pre>
+        </div>
+      </div></div></div>
+      <div class="timeline"></div>
+    </div>
+    <p class="hint">필드 이름과 JSON Patch 모양은 코드(<code>updateIbNetworkNodes()</code>)와 생성 SDK 타입을 따랐습니다. 값은 예시이고 SR-IOV 모드 기준입니다. PF 모드라면 광고 수는 배정 PF × 8 입니다.</p>
+    <div class="links3">
+      <div class="lk"><span class="k">계약서</span><span class="s">설정 팝업 Save</span><code>IBNetwork spec.nodes[].numVfs (JSON Patch test + replace)</code></div>
+      <div class="lk"><span class="k">장부</span><span class="s">노드 막대 · 노드 상세 표</span><code>SriovNodeState spec.vfs[].owner · status.vfs[]</code></div>
+      <div class="lk"><span class="k">문 이름표</span><span class="s">Workspace 리소스 키 (화면에는 안 보임)</span><code>ten1010.io/ib-&lt;프로젝트&gt;</code></div>
+    </div>
+  </div>
+  </dialog>
+</section>
+
+<!-- ═════════ 7 문을 받기까지 ═════════ -->
+<section class="stop" id="flow" data-stop>
+  <header class="sh"><span class="num">7</span><p class="ask"><svg class="av c-pd" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pd"/></svg><span>작업자는 문을 어떻게 받을까요?</span></p><h2><mark>일곱 정거장</mark>을 지나 문이 붙습니다</h2></header>
+  <figure class="fig">
+    <svg class="dg" viewBox="0 0 640 280" role="img" aria-label="요청부터 장부 기록까지 일곱 정거장을 지나 Pod 에 문이 붙는다. 첫 정거장만 팀원이 화면에서 한다">
+      <rect class="o f-tun" x="26" y="86" width="588" height="20" rx="10"/>
+      <g class="pk-run" style="--d:560px;--t:6s"><rect class="o2 f-gold" x="34" y="89" width="16" height="14" rx="2"/></g>
+      <g text-anchor="middle">
+        <text x="40" y="60" class="b">요청</text><circle class="o f-member" cx="40" cy="96" r="16"/><text x="40" y="101" class="wt">1</text><text x="40" y="138" class="s">팀원</text><text x="40" y="158" class="m">ib-…: 2</text>
+        <text x="133" y="60" class="b">검증</text><circle class="o f-system" cx="133" cy="96" r="16"/><text x="133" y="101" class="wt">2</text><text x="133" y="138" class="s">웹훅</text><text x="133" y="158" class="m">남의 키 거부</text>
+        <text x="227" y="60" class="b">덧붙이기</text><circle class="o f-system" cx="227" cy="96" r="16"/><text x="227" y="101" class="wt">3</text><text x="227" y="138" class="s">웹훅</text><text x="227" y="158" class="m">IPC_LOCK 등</text>
+        <text x="320" y="60" class="b">노드 고르기</text><circle class="o f-system" cx="320" cy="96" r="16"/><text x="320" y="101" class="wt">4</text><text x="320" y="138" class="s">스케줄러</text><text x="320" y="158" class="m">Free ≥ 2</text>
+        <text x="413" y="60" class="b">장치 꽂기</text><circle class="o f-system" cx="413" cy="96" r="16"/><text x="413" y="101" class="wt">5</text><text x="413" y="138" class="s">node-agent</text><text x="413" y="158" class="m">VF 2개</text>
+        <text x="507" y="60" class="b">주소 붙이기</text><circle class="o f-system" cx="507" cy="96" r="16"/><text x="507" y="101" class="wt">6</text><text x="507" y="138" class="s">Multus</text><text x="507" y="158" class="m">IPoIB IP</text>
+        <text x="600" y="60" class="b">장부 적기</text><circle class="o f-system" cx="600" cy="96" r="16"/><text x="600" y="101" class="wt">7</text><text x="600" y="138" class="s">node-agent</text><text x="600" y="158" class="m">allocatedTo</text>
+      </g>
+      <use href="#i-pd" x="22" y="190" width="40" height="56" class="c-pd"/>
+      <rect class="o f-paper" x="74" y="188" width="490" height="72" rx="14"/>
+      <text x="92" y="214" style="font-size:14px">① 만 팀원이 화면에서 하고, 나머지는 시스템이 30초 안에 합니다.</text>
+      <text x="92" y="240" style="font-size:14px">④ 는 배치 가이드가 미리 보여 주고, ⑦ 뒤에 Workspace 상세에 보입니다.</text>
+      <use href="#i-bot" x="574" y="190" width="40" height="56" class="c-system"/>
+    </svg>
+  </figure>
+  <p class="cap">팀원이 "작업자 한 명에 문 2개" 를 요청하면 <b>일곱 정거장</b>을 지나 문이 붙습니다. 팀원이 화면에서 직접 하는 일은 <b>첫 정거장뿐</b>이고, 나머지는 시스템이 처리합니다.</p>
+  <details class="more"><summary>조금 더 자세히</summary><div class="in">
+    <ul>
+      <li>② 웹훅은 그 프로젝트에 연결되지 않은 Namespace 의 요청을 거부합니다. 다른 프로젝트 문을 요청하지 못하게 막는 유일한 지점입니다.</li>
+      <li>③ 웹훅이 네트워크 어노테이션을 요청 수만큼 붙이고 <code>IPC_LOCK</code> 권한과 <code>NCCL_IB_PKEY=1</code> 을 넣습니다. 그래서 화면은 이 값을 받지 않습니다.</li>
+      <li>Pod 하나는 노드 한 곳에만 뜹니다. 그래서 화면의 가용·최대는 노드 합계가 아니라 노드별 값 중 가장 큰 값입니다. InfiniBand 에는 Quota 를 적용하지 않고, 회수 대기 문은 Free 에 넣지 않습니다.</li>
+      <li>InfiniBand 입력은 Workspace 생성·편집과 Workspace 템플릿에만 있습니다. Operation, Job, CronJob, ChainJob, File server 는 지원하지 않습니다.</li>
+    </ul>
+  </div></details>
+  <div class="go2"><button class="l2btn" type="button" aria-haspopup="dialog" aria-controls="l2-flow"><span class="pl"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span><b>AIPub 화면에서 보기</b><small>Workspace 생성 › 리소스 · 노드별 배치 가이드 (팀원)</small></span></button></div>
+  <dialog class="modal" id="l2-flow" aria-label="AIPub 화면에서 보기: 일곱 정거장을 지나 문이 붙습니다"><div class="m-head"><span class="m-k">AIPub 화면에서 보기</span><b>일곱 정거장을 지나 문이 붙습니다</b><button type="button" class="m-close" aria-label="닫기">✕</button></div>
+  <div class="l2">
+    <div class="l2-meta"><div class="mi"><span class="ml">하는 일</span><span class="chip fn create">생성</span></div><div class="mi"><span class="ml">누가</span><span class="rl"><svg class="av c-pd" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pd"/></svg>프로젝트 디벨로퍼</span></div><div class="mi"><span class="ml">어디서</span><span class="where">Workspace 생성 <i>›</i> 리소스 · 노드별 배치 가이드</span></div><a class="fig-link" href="#"><svg viewBox="0 0 12 18" aria-hidden="true"><path d="M3 0h3v6H3a3 3 0 0 1 0-6z" fill="#F24E1E"/><path d="M6 0h3a3 3 0 0 1 0 6H6z" fill="#FF7262"/><path d="M3 6h3v6H3a3 3 0 0 1 0-6z" fill="#A259FF"/><circle cx="9" cy="9" r="3" fill="#1ABCFE"/><path d="M3 12h3v3a3 3 0 1 1-3-3z" fill="#0ACF83"/></svg>Figma 에서 보기</a></div>
+    <p class="lead2">팀원은 Workspace 생성의 GPU 영역에서 InfiniBand 사용 스위치를 켜고 Pod 하나에 쓸 개수를 넣습니다. 아래 노드별 배치 가이드가 그 개수까지 따져 노드마다 배치 가능 여부를 다시 판정합니다.</p>
+    <div class="player" data-scene="flow">
+      <div class="viewport"><div class="stage"><div class="mock">
+        <div class="ui app">
+          <div class="ui-chrome"><i></i><i></i><i></i><span class="ui-url" data-k="url">/workspaces/create</span></div>
+          <div class="ui-body">
+            <div class="ui-gpu">
+              <div class="ui-gcard"><b style="color:var(--ui-blue)">L40 <span class="ui-badge" style="float:right">Block</span></b><span class="ui-mu">VRAM 460 MB</span></div>
+              <div class="ui-row"><span style="width:96px">GPU 수량</span><span class="ui-step"><span>−</span><b>1</b><span>+</span></span><span class="ui-mu">가용 4 · 최대 4</span></div>
+              <div class="ui-hr"></div>
+              <div class="ui-row"><span style="width:96px">InfiniBand 사용</span><span class="ui-sw" data-k="sw"></span><span class="ui-row" data-k="grp" hidden><span class="ui-step"><span>−</span><b data-k="n">1</b><span data-k="plus">+</span></span><span class="ui-mu">가용 3 · 최대 4</span><span class="ui-more">···</span></span></div>
+            </div>
+            <div style="display:grid;gap:8px" data-k="guide">
+              <div class="ui-row"><b>노드별 배치 가이드</b><span class="ui-mu">파드 1개당 VRAM 460 MB · CPU 1 core <span data-k="ibt" hidden>· InfiniBand 1</span></span></div>
+              <table class="ui-tbl"><tr><th>노드</th><th>GPU</th><th>CPU</th><th class="c">배치 가능</th></tr>
+                <tr><td>gpu-node-1</td><td><span class="ui-bar"><i class="a" style="flex-grow:5"></i><i class="u" style="flex-grow:5"></i></span></td><td><span class="ui-bar"><i class="a" style="flex-grow:3"></i><i class="u" style="flex-grow:7"></i></span></td><td class="c"><span data-k="p1">3개</span></td></tr>
+                <tr><td>gpu-node-2</td><td><span class="ui-bar"><i class="a" style="flex-grow:6"></i><i class="u" style="flex-grow:4"></i></span></td><td><span class="ui-bar"><i class="a" style="flex-grow:4"></i><i class="u" style="flex-grow:6"></i></span></td><td class="c"><span class="ui-badge ghost" data-k="p2">2개</span> <span class="ui-i" data-k="i2" hidden style="color:var(--warn)"></span></td></tr>
+                <tr><td>gpu-node-3</td><td><span class="ui-bar"><i class="a" style="flex-grow:2"></i><i class="u" style="flex-grow:8"></i></span></td><td><span class="ui-bar"><i class="a" style="flex-grow:2"></i><i class="u" style="flex-grow:8"></i></span></td><td class="c"><span class="ui-badge ghost" data-k="p3">3개</span> <span class="ui-i" data-k="i3" hidden style="color:var(--bad)"></span></td></tr>
+              </table>
+            </div>
+            <div class="ui-pop" data-k="pop" hidden style="right:14px;bottom:64px;width:330px">
+              <span class="t"><span style="color:var(--bad)">용량 초과</span> gpu-node-3</span>
+              <table class="ui-tbl"><tr><th>리소스</th><th>Request</th><th>Free</th><th>Total</th></tr>
+                <tr><td>CPU</td><td>1 core</td><td>18 core</td><td>24 core</td></tr>
+                <tr style="color:var(--bad)"><td>InfiniBand</td><td>2</td><td>0</td><td>0</td></tr></table>
+              <span class="ui-mu">즉시 배치 0개 · 총량 기준 0개</span>
+              <span><b>이 노드에는 프로젝트에 배정된 InfiniBand가 없어요.</b><br><span class="ui-mu">InfiniBand를 끄거나, 관리자에게 이 노드의 InfiniBand 배정을 요청하세요.</span></span>
+            </div>
+            <div class="ui-row" style="justify-content:flex-end"><span class="ui-btn">Cancel</span><span class="ui-btn pri" data-k="create">Create</span></div>
+            <pre class="ui-yaml" data-k="yaml" hidden><span class="c"># 저장되는 값 (컨테이너 리소스)</span>
+requests: { ten1010.io/ib-llm-team: 2 }
+limits:   { ten1010.io/ib-llm-team: 2 }</pre>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="timeline"></div>
+    </div>
+    <p class="hint">노드와 숫자는 예시입니다. 배치 가이드는 GPU · CPU 두 열만 그렸고, 실제 화면에는 Memory 와 Ephemeral Storage 열도 있습니다. 이 프로젝트 몫은 gpu-node-1 이 Free 3 · Total 4, gpu-node-2 가 Free 1 · Total 4, gpu-node-3 은 배정이 없습니다.</p>
+    <div class="try" data-let="j1 = per>4 ? 'bad' : per>3 ? 'warn' : 'good'; j2 = per>4 ? 'bad' : per>1 ? 'warn' : 'good'; over = per>4">
+      <span class="ttl">값 바꿔 보기</span>
+      <p class="q">Pod 하나에 문을 몇 개 요청할까요? InfiniBand 만 따져 노드마다 판정합니다.</p>
+      <div class="ctrls"><span class="ctrl">Pod 당 InfiniBand <span class="stp" data-var="per" data-min="1" data-max="6" data-val="2" aria-label="Pod 당 InfiniBand"></span></span><span style="font-size:14px;color:var(--ink-2)">가용 3 · 최대 4</span></div>
+      <div class="tbl-wrap"><table class="jt">
+        <tr><th>노드</th><th>Free</th><th>Total</th><th>배치 가능</th></tr>
+        <tr><td>gpu-node-1</td><td>3</td><td>4</td><td data-cls="good: j1==='good'; warn: j1==='warn'; bad: j1==='bad'" data-text="j1==='bad' ? '용량 초과' : j1==='warn' ? '여유 부족' : Math.floor(3/per) + '개'"></td></tr>
+        <tr><td>gpu-node-2</td><td>1</td><td>4</td><td data-cls="good: j2==='good'; warn: j2==='warn'; bad: j2==='bad'" data-text="j2==='bad' ? '용량 초과' : j2==='warn' ? '여유 부족' : Math.floor(1/per) + '개'"></td></tr>
+        <tr><td>gpu-node-3</td><td>0</td><td>0</td><td class="bad">용량 초과</td></tr>
+      </table></div>
+      <div class="verdict" data-cls="bad: over; good: !over && per<=3; warn: !over && per>3" data-text="over ? '최대 4개까지 입력할 수 있습니다. 어느 노드의 몫(Total)보다도 많아서 화면이 필드 오류로 막습니다.' : per>3 ? '가용(3)보다 많아서 지금 바로 뜰 노드는 없고, 자원이 반납되면 gpu-node-1 이나 gpu-node-2 에 뜰 수 있습니다.' : '바로 뜰 수 있는 노드가 있습니다. gpu-node-3 은 이 프로젝트 배정이 없어서 스위치를 켜면 늘 용량 초과입니다.'"></div>
+      <p class="hint">Free 보다 많으면 여유 부족, Total 보다 많으면 용량 초과입니다. 실제 배치 가이드는 GPU · CPU · Memory · Ephemeral Storage 와 함께 판정합니다. 값은 예시입니다.</p>
+    </div>
+    <div class="links3">
+      <div class="lk"><span class="k">작업자 한 명에 문 몇 개</span><span class="s">InfiniBand 사용 스위치와 개수</span><code>requests · limits 의 ten1010.io/ib-&lt;프로젝트&gt; (같은 값)</code></div>
+      <div class="lk"><span class="k">빈 문 · 전체 몫</span><span class="s">가용 · 최대 (노드별 최댓값)</span><code>NodeResource status.free · allocatable</code></div>
+      <div class="lk"><span class="k">못 들어가는 이유</span><span class="s">여유 부족 · 용량 초과 팝오버</span><code>src/domains/workload/components/resource/node-allocation.tsx</code></div>
+    </div>
+  </div>
+  </dialog>
+</section>
+
+<!-- ═════════ 8 터널 주소 ═════════ -->
+<section class="stop" id="ipoib" data-stop>
+  <header class="sh"><span class="num">8</span><p class="ask"><svg class="av c-pd" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pd"/></svg><span>터널 안에도 주소가 있을까요?</span></p><h2>문마다 <mark>터널 주소</mark>가 하나씩 붙습니다</h2></header>
+  <figure class="fig">
+    <svg class="dg" viewBox="0 0 640 270" role="img" aria-label="작업실에는 도로 주소 하나가 있고, 터널 문 두 개에 터널 주소가 하나씩 붙는다">
+      <rect class="o f-road" x="0" y="168" width="210" height="28" rx="6"/><line class="lane-d" x1="8" y1="182" x2="200" y2="182"/>
+      <text x="100" y="222" text-anchor="middle" class="s">일반 도로</text>
+      <rect class="o f-tun" x="440" y="108" width="210" height="26" rx="13"/><line class="hi" x1="458" y1="115" x2="640" y2="115"/>
+      <rect class="o f-tun" x="440" y="178" width="210" height="26" rx="13"/><line class="hi" x1="458" y1="185" x2="640" y2="185"/>
+      <path class="o f-roof2" d="M180 92 L315 30 L450 92 Z"/>
+      <rect class="o f-bldg2" x="196" y="86" width="238" height="160" rx="10"/>
+      <text x="315" y="78" text-anchor="middle" class="b on-fill">작업실 (Pod)</text>
+      <g class="bob"><use href="#i-person" class="c-a" x="292" y="128" width="46" height="64"/></g>
+      <text x="315" y="222" text-anchor="middle" class="m" style="fill:var(--ink)">train-ws-0</text>
+      <path class="o f-tun" d="M422 140 V114 a12 12 0 0 1 24 0 V140 Z"/>
+      <path class="o f-tun" d="M422 210 V184 a12 12 0 0 1 24 0 V210 Z"/>
+      <line class="o" x1="100" y1="150" x2="100" y2="168"/>
+      <rect class="o f-paper" x="22" y="96" width="158" height="54" rx="10"/>
+      <text x="36" y="118" class="s">도로 주소 · Pod IP</text>
+      <text x="36" y="138" class="m" style="fill:var(--ink);font-size:13px">10.244.3.17</text>
+      <rect class="o f-paper" x="476" y="40" width="150" height="54" rx="10"/><line class="o" x1="550" y1="94" x2="550" y2="108"/>
+      <text x="490" y="62" class="s">mlx5_3 · 터널 주소</text><text x="490" y="82" class="m" style="fill:var(--ink);font-size:13px">10.10.0.5</text>
+      <rect class="o f-paper" x="476" y="212" width="150" height="54" rx="10"/><line class="o" x1="550" y1="204" x2="550" y2="212"/>
+      <text x="490" y="234" class="s">mlx5_4 · 터널 주소</text><text x="490" y="254" class="m" style="fill:var(--ink);font-size:13px">10.10.0.6</text>
+    </svg>
+  </figure>
+  <p class="cap">모든 작업실에는 일반 <b>도로 주소(Pod IP)</b>가 하나 있습니다. 터널 문을 받으면 문마다 <b>터널 주소(IPoIB IP)</b>가 하나씩 더 붙습니다. 팀 계약서에 주소 대역이 적혀 있을 때만 붙고, 기본 설치에는 대역이 없습니다.</p>
+  <details class="more"><summary>조금 더 자세히</summary><div class="in">
+    <p>주소 대역은 IBNetwork 의 <code>spec.ipoib.cidr</code> 입니다. 자동으로 생기는 IBNetwork 는 설치 값 <code>defaultIpoibCidr</code>(기본 빈 값)를 받고, 한 번 정하면 바꿀 수 없습니다. 주소가 모자라면 배정 저장이 422 로, Pod 생성이 403 으로 거부되고 화면은 서버 메시지를 그대로 보여 줍니다.</p>
+    <p>PF 모드에서도 IP 는 자리(슬롯)마다 하나씩 붙습니다. 같은 PF 의 자리를 여러 개 받으면 장치 이름은 반복되고 IP 만 다릅니다. 화면은 Pod 어노테이션 <code>aipub.ten1010.io/ib-interfaces</code> 를 읽어 한 항목을 한 줄로 그리고, <code>net1</code> 같은 인터페이스 이름은 보여 주지 않습니다.</p>
+    <p>그림의 주소들은 BE 답변에 적힌 예시 값입니다.</p>
+  </div></details>
+  <div class="go2"><button class="l2btn" type="button" aria-haspopup="dialog" aria-controls="l2-ipoib"><span class="pl"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span><b>AIPub 화면에서 보기</b><small>Workspace 상세 › Containers (팀원)</small></span></button></div>
+  <dialog class="modal" id="l2-ipoib" aria-label="AIPub 화면에서 보기: 문마다 터널 주소가 하나씩 붙습니다"><div class="m-head"><span class="m-k">AIPub 화면에서 보기</span><b>문마다 터널 주소가 하나씩 붙습니다</b><button type="button" class="m-close" aria-label="닫기">✕</button></div>
+  <div class="l2">
+    <div class="l2-meta"><div class="mi"><span class="ml">하는 일</span><span class="chip fn read">조회</span></div><div class="mi"><span class="ml">누가</span><span class="rl"><svg class="av c-pd" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pd"/></svg>프로젝트 디벨로퍼</span></div><div class="mi"><span class="ml">어디서</span><span class="where">Workspace 상세 <i>›</i> Containers</span></div><a class="fig-link" href="#"><svg viewBox="0 0 12 18" aria-hidden="true"><path d="M3 0h3v6H3a3 3 0 0 1 0-6z" fill="#F24E1E"/><path d="M6 0h3a3 3 0 0 1 0 6H6z" fill="#FF7262"/><path d="M3 6h3v6H3a3 3 0 0 1 0-6z" fill="#A259FF"/><circle cx="9" cy="9" r="3" fill="#1ABCFE"/><path d="M3 12h3v3a3 3 0 1 1-3-3z" fill="#0ACF83"/></svg>Figma 에서 보기</a></div>
+    <p class="lead2">Containers 표에 Pod IP 열과 InfiniBand 열이 있습니다. InfiniBand 칸의 ··· 를 누르면 받은 문마다 장치 이름과 터널 주소가 한 줄씩 나옵니다. 대역이 없는 프로젝트는 IPoIB IP 열이 빠집니다.</p>
+    <div class="player" data-scene="ipoib">
+      <div class="viewport"><div class="stage"><div class="mock">
+        <div class="ui app">
+          <div class="ui-chrome"><i></i><i></i><i></i><span class="ui-url" data-k="url">/workspaces/train-ws?namespace=llm-team</span></div>
+          <div class="ui-body">
+            <div class="ui-tabs"><span class="on">Containers</span><span>Read me</span><span>Commits</span></div>
+            <div data-k="v1">
+              <table class="ui-tbl"><tr><th>No</th><th>Name</th><th>Node</th><th data-k="pip">Pod IP</th><th>InfiniBand</th><th>Status</th></tr>
+                <tr><td>1</td><td>train-ws-0</td><td>gpu-node-1</td><td>10.244.3.17</td><td data-k="c1">mlx5_3 +1 <span class="ui-more" data-k="m1">···</span></td><td>Running</td></tr>
+                <tr><td>2</td><td>train-ws-1</td><td>gpu-node-2</td><td>10.244.5.17</td><td>mlx5_12 +1 <span class="ui-more">···</span></td><td>Running</td></tr>
+              </table>
+              <div class="ui-pop" data-k="pop1" hidden style="right:90px;top:112px">
+                <span class="t">train-ws-0 InfiniBand <span class="ui-mu" style="font-weight:400">gpu-node-1</span></span>
+                <table class="ui-tbl"><tr><th>No</th><th>RDMA Device</th><th data-k="ipc">IPoIB IP</th></tr><tr><td>1</td><td>mlx5_3</td><td>10.10.0.5</td></tr><tr><td>2</td><td>mlx5_4</td><td>10.10.0.6</td></tr></table>
+              </div>
+            </div>
+            <div data-k="v2" hidden>
+              <table class="ui-tbl"><tr><th>No</th><th>Name</th><th>Node</th><th>Pod IP</th><th>InfiniBand</th><th>Status</th></tr>
+                <tr><td>1</td><td>test-ws-598b0f88-0</td><td>gpu-node-3</td><td>10.244.0.28</td><td>mlx5_0 +3 <span class="ui-more" data-k="m2">···</span></td><td>Running</td></tr>
+              </table>
+              <div class="ui-pop" data-k="pop2" hidden style="right:14px;top:120px">
+                <span class="t">test-ws-598b0f88-0 InfiniBand <span class="ui-mu" style="font-weight:400">gpu-node-3</span></span>
+                <table class="ui-tbl"><tr><th>No</th><th>RDMA Device</th></tr><tr><td>1</td><td>mlx5_0</td></tr><tr><td>2</td><td>mlx5_0</td></tr><tr><td>3</td><td>mlx5_0</td></tr><tr><td>4</td><td>mlx5_0</td></tr></table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="timeline"></div>
+    </div>
+    <p class="hint">앞의 train-ws 는 예시 값이고, 뒤의 test-ws 는 개발 클러스터에서 읽은 값입니다. 이 Pod 의 어노테이션 네 항목은 <code>rdmaDevice</code> 가 모두 <code>mlx5_0</code> 이고 <code>ip</code> 는 비어 있습니다.</p>
+    <div class="links3">
+      <div class="lk"><span class="k">도로 주소</span><span class="s">Pod IP 열</span><code>Pod status.podIP</code></div>
+      <div class="lk"><span class="k">터널 문 이름</span><span class="s">InfiniBand 칸 · RDMA Device</span><code>aipub.ten1010.io/ib-interfaces[].rdmaDevice</code></div>
+      <div class="lk"><span class="k">터널 주소</span><span class="s">IPoIB IP 열 (하나라도 있을 때만)</span><code>ib-interfaces[].ip · 대역 spec.ipoib.cidr</code></div>
+    </div>
+  </div>
+  </dialog>
+</section>
+
+<!-- ═════════ 9 반납 ═════════ -->
+<section class="stop" id="release" data-stop>
+  <header class="sh"><span class="num">9</span><p class="ask"><svg class="av c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg><span>개수를 줄이면 바로 빠질까요?</span></p><h2>쓰던 문은 작업자가 <mark>나갈 때까지</mark> 기다립니다</h2></header>
+  <figure class="fig">
+    <svg class="dg" viewBox="0 0 640 260" role="img" aria-label="문 개수를 넷에서 둘로 줄이면 두 문이 반납 중이 되고, 안 쓰던 문은 30초 뒤에, 쓰던 문은 작업자가 나간 뒤에 빈 문이 된다">
+      <g>
+        <text x="80" y="26" text-anchor="middle" class="b">줄이기 전</text>
+        <rect class="o f-bldg" x="8" y="40" width="144" height="70" rx="10"/>
+        <path class="o2 f-a" d="M18 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-a" d="M52 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-a" d="M86 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-a" d="M120 110 V68 a13 13 0 0 1 26 0 V110 Z"/>
+        <use href="#i-person" x="19" y="118" width="24" height="34" class="c-a"/><use href="#i-person" x="53" y="118" width="24" height="34" class="c-a"/><use href="#i-person" x="87" y="118" width="24" height="34" class="c-a"/>
+        <text x="80" y="180" text-anchor="middle" class="s">우리 팀 문 4개</text><text x="80" y="198" text-anchor="middle" class="s">3개를 작업자가 씀</text>
+      </g>
+      <path class="ln" d="M156 76 H170" marker-end="url(#ar)"/>
+      <g>
+        <text x="240" y="26" text-anchor="middle" class="b">2개로 줄인 직후</text>
+        <rect class="o f-bldg" x="168" y="40" width="144" height="70" rx="10"/>
+        <path class="o2 f-a" d="M178 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-a" d="M212 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-rel" d="M246 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-rel" d="M280 110 V68 a13 13 0 0 1 26 0 V110 Z"/>
+        <rect class="o2 f-paper" x="244" y="46" width="64" height="16" rx="5"/><text x="276" y="58" text-anchor="middle" style="font-size:11px">반납 중</text>
+        <use href="#i-person" x="179" y="118" width="24" height="34" class="c-a"/><use href="#i-person" x="213" y="118" width="24" height="34" class="c-a"/><use href="#i-person" x="247" y="118" width="24" height="34" class="c-a"/>
+        <text x="240" y="180" text-anchor="middle" class="s">노란 문 2개가 반납 중</text><text x="240" y="198" text-anchor="middle" class="s">새 작업자는 못 들어감</text>
+      </g>
+      <path class="ln" d="M316 76 H330" marker-end="url(#ar)"/>
+      <g>
+        <text x="400" y="26" text-anchor="middle" class="b">30초쯤 뒤</text>
+        <rect class="o f-bldg" x="328" y="40" width="144" height="70" rx="10"/>
+        <path class="o2 f-a" d="M338 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-a" d="M372 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-rel" d="M406 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-paper dashed" d="M440 110 V68 a13 13 0 0 1 26 0 V110 Z"/>
+        <use href="#i-person" x="339" y="118" width="24" height="34" class="c-a"/><use href="#i-person" x="373" y="118" width="24" height="34" class="c-a"/><use href="#i-person" x="407" y="118" width="24" height="34" class="c-a"/>
+        <text x="400" y="180" text-anchor="middle" class="s">안 쓰던 문은 빈 문으로</text><text x="400" y="198" text-anchor="middle" class="s">쓰던 문은 계속 기다림</text>
+      </g>
+      <path class="ln" d="M476 76 H490" marker-end="url(#ar)"/>
+      <g>
+        <text x="560" y="26" text-anchor="middle" class="b">작업자가 나간 뒤</text>
+        <rect class="o f-bldg" x="488" y="40" width="144" height="70" rx="10"/>
+        <path class="o2 f-a" d="M498 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-a" d="M532 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-paper dashed" d="M566 110 V68 a13 13 0 0 1 26 0 V110 Z"/><path class="o2 f-paper dashed" d="M600 110 V68 a13 13 0 0 1 26 0 V110 Z"/>
+        <use href="#i-person" x="499" y="118" width="24" height="34" class="c-a"/><use href="#i-person" x="533" y="118" width="24" height="34" class="c-a"/>
+        <text x="560" y="180" text-anchor="middle" class="s">반납 끝, 빈 문 2개</text><text x="560" y="198" text-anchor="middle" class="s">이제 다른 팀이 받음</text>
+      </g>
+      <text x="320" y="244" text-anchor="middle" class="s">쓰는 사람을 쫓아내지 않습니다. 다만 strict 노드를 프로젝트에서 빼면 Pod 를 내보낸 뒤 회수합니다.</text>
+    </svg>
+  </figure>
+  <p class="cap">Admin 이 문 개수를 줄여도 문은 바로 다른 팀에 넘어가지 않고 <b>반납 중</b>이 됩니다. 아무도 안 쓰던 문은 <b>30초쯤 뒤</b>에, 쓰던 문은 <b>작업자가 나갈 때까지</b> 기다렸다가 빈 문이 됩니다. 노드를 프로젝트에서 빼도 똑같이 반납합니다.</p>
+  <details class="more"><summary>조금 더 자세히</summary><div class="in">
+    <ul>
+      <li>반납할 장치에 <code>releasing: true</code> 가 붙습니다. 시스템은 안 쓰는 장치부터, 같으면 뒤쪽 장치부터 고릅니다. 주인은 회수가 끝날 때까지 그 프로젝트입니다.</li>
+      <li>반납 중에 개수를 다시 늘리면 반납 중인 자기 문부터 되살립니다.</li>
+      <li>PF 모드는 PF 를 통째로 반납하므로, 그 PF 를 나눠 쓰는 Pod 가 모두 끝나야 풀립니다.</li>
+      <li>줄인 숫자는 저장 즉시 다른 프로젝트의 "최대" 에 더해집니다. 장치는 회수가 끝나야 실제로 넘어가고, 그 사이 다른 프로젝트 배정은 회수가 끝난 뒤 채워집니다.</li>
+      <li>노드를 빼는 확인창은 노드의 <code>isolation-mode</code> 에 따라 안내가 다릅니다. lenient 는 "Pod가 종료될 때까지 InfiniBand가 회수되지 않습니다", strict 는 "사용 중인 Pod를 내보낸 뒤 InfiniBand를 회수합니다" 입니다.</li>
+    </ul>
+  </div></details>
+  <div class="go2"><button class="l2btn" type="button" aria-haspopup="dialog" aria-controls="l2-release"><span class="pl"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span><b>AIPub 화면에서 보기</b><small>프로젝트 상세 › Nodes 막대와 회수 안내 (Admin)</small></span></button></div>
+  <dialog class="modal" id="l2-release" aria-label="AIPub 화면에서 보기: 쓰던 문은 작업자가 나갈 때까지 기다립니다"><div class="m-head"><span class="m-k">AIPub 화면에서 보기</span><b>쓰던 문은 작업자가 나갈 때까지 기다립니다</b><button type="button" class="m-close" aria-label="닫기">✕</button></div>
+  <div class="l2">
+    <div class="l2-meta"><div class="mi"><span class="ml">하는 일</span><span class="chip fn update">수정</span><span class="chip fn read">조회</span></div><div class="mi"><span class="ml">누가</span><span class="rl"><svg class="av c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg>관리자</span></div><div class="mi"><span class="ml">어디서</span><span class="where">프로젝트 상세 <i>›</i> Nodes</span></div><a class="fig-link" href="#"><svg viewBox="0 0 12 18" aria-hidden="true"><path d="M3 0h3v6H3a3 3 0 0 1 0-6z" fill="#F24E1E"/><path d="M6 0h3a3 3 0 0 1 0 6H6z" fill="#FF7262"/><path d="M3 6h3v6H3a3 3 0 0 1 0-6z" fill="#A259FF"/><circle cx="9" cy="9" r="3" fill="#1ABCFE"/><path d="M3 12h3v3a3 3 0 1 1-3-3z" fill="#0ACF83"/></svg>Figma 에서 보기</a></div>
+    <p class="lead2">Admin 이 개수를 줄이면 노드 막대에 노란 회수 대기 칸이 생기고, 요약 줄 아래에 회수 안내가 뜹니다. 회수가 끝나면 노란 칸은 미할당으로 돌아가고 안내가 사라집니다.</p>
+    <div class="player" data-scene="release">
+      <div class="viewport"><div class="stage"><div class="mock">
+        <div class="ui app">
+          <div class="ui-chrome"><i></i><i></i><i></i><span class="ui-url" data-k="url">/projects/llm-team</span></div>
+          <div class="ui-body">
+            <div class="ui-h">Nodes <span class="n">2</span></div>
+            <div class="ui-sum ib" style="display:grid;gap:6px">
+              <div class="ui-row"><span>InfiniBand</span><span><span class="k">Assigned</span><b data-k="asg">8</b></span><span><span class="k">Nodes</span><b>2</b></span><span><span class="k">In use</span><b>3</b></span><span class="ui-btn" style="margin-left:auto">⚙ InfiniBand</span></div>
+              <div data-k="rel" hidden><span class="ui-mu">ⓘ</span> InfiniBand 장치를 회수하고 있습니다: <span class="ui-link">gpu-node-2</span> <span data-k="relx">2개.</span> <span data-k="wait">사용 중인 장치는 Pod가 종료되면 회수됩니다.</span></div>
+            </div>
+            <table class="ui-tbl"><tr><th>Name</th><th>GPU</th><th>InfiniBand</th></tr>
+              <tr><td class="ui-link">gpu-node-1</td><td>Block / L40</td><td><span class="ui-barw"><span class="ui-bar"><i class="a" style="flex-grow:4"></i><i class="o" style="flex-grow:2"></i><i class="u" style="flex-grow:10"></i></span><span class="ui-cnt"><b>4</b> <span>/ 16</span></span></span></td></tr>
+              <tr><td class="ui-link">gpu-node-2</td><td>Block / L40</td><td><span class="ui-barw" data-k="bar"><span class="ui-bar"><i class="a" data-k="ba" style="flex-grow:4"></i><i class="o" style="flex-grow:4"></i><i class="r" data-k="br" style="flex-grow:0"></i><i class="u" data-k="bu" style="flex-grow:8"></i></span><span class="ui-cnt"><b data-k="cnt">4</b> <span>/ 16</span></span></span></td></tr>
+            </table>
+            <div class="ui-pop" data-k="pop" hidden style="right:20px;top:190px">
+              <div class="legend" style="display:grid;gap:4px;font-size:12px"><span><i style="background:var(--bar-this)"></i>현재 프로젝트 할당 <b style="margin-left:auto">4</b></span><span><i style="background:var(--bar-other)"></i>다른 프로젝트 할당 <b style="margin-left:auto">4</b></span><span><i style="background:var(--bar-rel)"></i>회수 대기 (노드 전체) <b style="margin-left:auto">0</b></span><span><i style="background:var(--bar-un);outline:1px solid #A3A3A3"></i>미할당 <b style="margin-left:auto;padding-left:24px">8</b></span></div>
+            </div>
+            <div class="ui ui-dialog" data-k="dlg" hidden style="width:340px">
+              <div class="ui-body"><div class="ui-h">InfiniBand 설정</div>
+                <div class="ui-row"><span class="ui-link">gpu-node-2</span><span class="ui-step"><span data-k="minus">−</span><b data-k="n">4</b><span>+</span></span></div>
+                <div class="ui-row" style="justify-content:flex-end"><span class="ui-btn">Cancel</span><span class="ui-btn pri" data-k="save">Save</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="timeline"></div>
+    </div>
+    <p class="hint">숫자는 예시입니다. gpu-node-2 에서 이 프로젝트는 4개를 받았고 Pod 가 그중 1개를 쓰고 있다고 두었습니다.</p>
+    <div class="try" data-let="drop = Math.max(0, 4 - n); usedDrop = Math.max(0, drop - 1); rel = ended ? 0 : (a30 ? usedDrop : drop); un = 16 - 4 - n - rel; asg = n + rel">
+      <span class="ttl">값 바꿔 보기</span>
+      <p class="q">이 노드(문 16개)에서 이 프로젝트는 4개를 받았고, Pod 가 그중 3개를 쓰고 있습니다. 다른 프로젝트는 4개를 갖고 있습니다. 개수를 줄여 보세요.</p>
+      <div class="ctrls">
+        <span class="ctrl">새 개수 <span class="stp" data-var="n" data-min="0" data-max="12" data-val="2" aria-label="새 개수"></span></span>
+        <label class="ctrl" for="try-a30"><input type="checkbox" id="try-a30" data-var="a30"> 30초가 지났다</label>
+        <label class="ctrl" for="try-ended"><input type="checkbox" id="try-ended" data-var="ended"> Pod 가 모두 끝났다</label>
+      </div>
+      <div class="res"><span class="big" data-text="asg + ' / 16'"></span><span style="color:var(--ink-2)" data-text="'막대 옆 숫자 = 이 프로젝트 할당 ' + n + ' + 회수 대기 ' + rel"></span></div>
+      <div class="tbar"><div class="a" data-grow="n"></div><div class="o" data-grow="4"></div><div class="r" data-grow="rel"></div><div class="u" data-grow="un"></div></div>
+      <div class="legend"><span><i style="background:var(--bar-this)"></i>현재 프로젝트 할당</span><span><i style="background:var(--bar-other)"></i>다른 프로젝트 할당</span><span><i style="background:var(--bar-rel)"></i>회수 대기 (노드 전체)</span><span><i style="background:var(--bar-un);outline:1px solid #A3A3A3"></i>미할당</span></div>
+      <div class="verdict" data-cls="warn: rel>0; good: rel===0" data-text="drop===0 ? '회수할 문이 없습니다. 늘리면 반납 중인 자기 문부터 되살리고, 모자라면 빈 문을 받습니다.' : rel===0 ? '회수가 끝났습니다. 줄인 ' + drop + '개가 미할당으로 돌아갔고 안내도 사라집니다.' : 'InfiniBand 장치를 회수하고 있습니다: gpu-node-2 ' + rel + '개.' + (usedDrop>0 && !ended ? ' 사용 중인 장치는 Pod가 종료되면 회수됩니다.' : '')"></div>
+    </div>
+    <div class="links3">
+      <div class="lk"><span class="k">반납 중</span><span class="s">노란 칸 · Releasing 배지</span><code>SriovNodeState spec.vfs[].releasing</code></div>
+      <div class="lk"><span class="k">무엇을 기다리나</span><span class="s">회수 안내의 두 번째 문장</span><code>IBNetwork status.conditions[Releasing].reason = WaitingForPods</code></div>
+      <div class="lk"><span class="k">막대 네 칸</span><span class="s">노드 장치 막대 · 분포 팝오버</span><code>aggregateIbDevices() · IB_RELEASING_SCOPE = 'node'</code></div>
+    </div>
+  </div>
+  </dialog>
+</section>
+
+<!-- ═════════ 10 상태 ═════════ -->
+<section class="stop" id="status" data-stop>
+  <header class="sh"><span class="num">10</span><p class="ask"><svg class="av c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg><span>문이 고장 나면 어떻게 알까요?</span></p><h2>문마다 <mark>표시등</mark>이 있습니다</h2></header>
+  <figure class="fig">
+    <svg class="dg" viewBox="0 0 640 260" role="img" aria-label="문 여섯 개 위에 표시등이 있다. Pending 은 2분 안에 준비되면 Active, 아니면 Down 이 된다. 큰 문이 잠기면 Blocked, 작은 문이 고장 나면 Error, 주인을 모르면 Unknown 이다">
+      <path class="ln-ok" d="M146 52 Q108 14 70 52" marker-end="url(#ar)"/>
+      <path class="ln" d="M170 52 Q208 14 246 52" marker-end="url(#ar)" style="stroke:var(--bad)"/>
+      <text x="108" y="16" text-anchor="middle" class="s">2분 안에 준비</text>
+      <text x="208" y="16" text-anchor="middle" class="s">2분이 지나면</text>
+      <g>
+        <circle cx="57" cy="70" r="20" class="f-ok glow"/><circle cx="57" cy="70" r="12" class="o f-ok"/>
+        <path class="o f-tun" d="M30 172 V112 a27 27 0 0 1 54 0 V172 Z"/><circle cx="74" cy="142" r="2.6" class="f-line"/>
+        <text x="57" y="198" text-anchor="middle" class="b t-ok">Active</text><text x="57" y="218" text-anchor="middle" class="s">통신 가능</text><text x="57" y="236" text-anchor="middle" class="s">준비 끝</text>
+      </g>
+      <g>
+        <circle cx="158" cy="70" r="20" class="f-warn glow"/><circle cx="158" cy="70" r="12" class="o f-warn"/>
+        <path class="o f-tun" d="M131 172 V112 a27 27 0 0 1 54 0 V172 Z"/><circle cx="175" cy="142" r="2.6" class="f-line"/>
+        <text x="158" y="198" text-anchor="middle" class="b t-warn">Pending</text><text x="158" y="218" text-anchor="middle" class="s">기다리는 중</text><text x="158" y="236" text-anchor="middle" class="s">2분까지</text>
+      </g>
+      <g>
+        <circle cx="259" cy="70" r="20" class="f-bad glow"/><circle cx="259" cy="70" r="12" class="o f-bad"/>
+        <path class="o f-tun" d="M232 172 V112 a27 27 0 0 1 54 0 V172 Z"/><circle cx="276" cy="142" r="2.6" class="f-line"/>
+        <text x="259" y="198" text-anchor="middle" class="b t-bad">Down</text><text x="259" y="218" text-anchor="middle" class="s">2분이 지나도</text><text x="259" y="236" text-anchor="middle" class="s">안 열림</text>
+      </g>
+      <line x1="310" y1="40" x2="310" y2="240" class="ln dashed"/>
+      <g>
+        <circle cx="365" cy="70" r="20" class="f-bad glow"/><circle cx="365" cy="70" r="12" class="o f-bad"/>
+        <path class="o f-tun" d="M338 172 V112 a27 27 0 0 1 54 0 V172 Z"/>
+        <path class="o none" d="M358 140 v-6 a7 7 0 0 1 14 0 v6"/><rect class="o f-gold" x="354" y="139" width="22" height="18" rx="3"/>
+        <text x="365" y="198" text-anchor="middle" class="b t-bad">Blocked</text><text x="365" y="218" text-anchor="middle" class="s">큰 문이 잠김</text><text x="365" y="236" text-anchor="middle" class="s">안의 문도 모두</text>
+      </g>
+      <g>
+        <circle cx="466" cy="70" r="20" class="f-bad glow"/><circle cx="466" cy="70" r="12" class="o f-bad"/>
+        <path class="o f-tun" d="M439 172 V112 a27 27 0 0 1 54 0 V172 Z"/>
+        <path class="o none" d="M458 100 l8 16 l-8 10 l10 18" style="stroke-width:3"/>
+        <text x="466" y="198" text-anchor="middle" class="b t-bad">Error</text><text x="466" y="218" text-anchor="middle" class="s">작은 문 고장</text><text x="466" y="236" text-anchor="middle" class="s">SR-IOV 모드만</text>
+      </g>
+      <g>
+        <circle cx="567" cy="70" r="12" class="o f-mute"/>
+        <path class="o f-paper dashed" d="M540 172 V112 a27 27 0 0 1 54 0 V172 Z"/>
+        <text x="567" y="150" text-anchor="middle" class="b">?</text>
+        <text x="567" y="198" text-anchor="middle" class="b">Unknown</text><text x="567" y="218" text-anchor="middle" class="s">주인을 모름</text><text x="567" y="236" text-anchor="middle" class="s">또는 보고 전</text>
+      </g>
+    </svg>
+  </figure>
+  <p class="cap">문마다 <b>상태 표시등</b>이 있습니다. 새 문은 Pending 으로 시작해 <b>2분 안</b>에 번호표와 출입증을 받으면 Active 가 되고, 못 받으면 Down 이 됩니다. 큰 문이 잠기면(Blocked) 그 안의 작은 문도 함께 못 씁니다.</p>
+  <details class="more"><summary>조금 더 자세히</summary><div class="in">
+    <div class="tbl-wrap"><table class="plain">
+      <tr><th>배지</th><th>실제 뜻</th><th>데이터 phase</th></tr>
+      <tr><td><span class="ui-badge ok">Active</span></td><td>통신 가능. VF 는 LID 등록과 P-Key 적용까지 끝남</td><td><code>Ready</code></td></tr>
+      <tr><td><span class="ui-badge warn">Pending</span></td><td>준비 중. 장치는 120초까지 기다림</td><td><code>Pending</code></td></tr>
+      <tr><td><span class="ui-badge bad">Down</span></td><td>링크·SM·P-Key 를 확인해야 함</td><td><code>Degraded</code></td></tr>
+      <tr><td><span class="ui-badge bad">Blocked</span></td><td>PF 없음, 펌웨어에서 SR-IOV 꺼짐, VF 풀 생성 실패 등</td><td><code>Blocked</code></td></tr>
+      <tr><td><span class="ui-badge bad">Error</span></td><td>VF 없음, 다른 드라이버, 설정 실패 (SR-IOV 모드만)</td><td><code>Missing</code> · <code>ForeignDriver</code> · <code>SyncFailed</code></td></tr>
+      <tr><td><span class="ui-badge">Unknown</span></td><td>배정에서 빠졌지만 Pod 가 쓰는 중이거나 아직 보고 전</td><td><code>Unknown</code></td></tr>
+    </table></div>
+    <p>판정은 PF 다음에 장치 순서로 합니다. PF 가 막히면 그 아래 장치는 따로 판정하지 않고 PF 의 사유를 그대로 받아 Blocked 가 됩니다. 화면은 분기를 <code>reason</code> 으로 하고, <code>message</code> 는 원문 그대로 보여 줍니다.</p>
+    <p>노드 전체에 영향이 있으면 탭 맨 위에 배너를 띄우고, 여럿이면 Blocked, SM 없음, Degraded 순서로 위에서부터 쌓습니다. SR-IOV 모드에서 SM 만 돌리는 노드는 SR-IOV 가 꺼져 있는 것이 정상이라 회색 안내("이 노드는 Subnet Manager 전용으로 구성되어 VF를 만들지 않습니다.")로 보여 줍니다. PF 카드의 <code>Unhealthy n</code> 배지는 그 PF 아래 Down · Error 인 VF 만 셉니다.</p>
+  </div></details>
+  <div class="go2"><button class="l2btn" type="button" aria-haspopup="dialog" aria-controls="l2-status"><span class="pl"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span><span><b>AIPub 화면에서 보기</b><small>노드 상세 › 상태 배지와 배너 (Admin)</small></span></button></div>
+  <dialog class="modal" id="l2-status" aria-label="AIPub 화면에서 보기: 문마다 표시등이 있습니다"><div class="m-head"><span class="m-k">AIPub 화면에서 보기</span><b>문마다 표시등이 있습니다</b><button type="button" class="m-close" aria-label="닫기">✕</button></div>
+  <div class="l2">
+    <div class="l2-meta"><div class="mi"><span class="ml">하는 일</span><span class="chip fn read">조회</span></div><div class="mi"><span class="ml">누가</span><span class="rl"><svg class="av c-admin" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-admin"/></svg>관리자만</span></div><div class="mi"><span class="ml">어디서</span><span class="where">노드 상세 <i>›</i> InfiniBand 탭</span></div><a class="fig-link" href="#"><svg viewBox="0 0 12 18" aria-hidden="true"><path d="M3 0h3v6H3a3 3 0 0 1 0-6z" fill="#F24E1E"/><path d="M6 0h3a3 3 0 0 1 0 6H6z" fill="#FF7262"/><path d="M3 6h3v6H3a3 3 0 0 1 0-6z" fill="#A259FF"/><circle cx="9" cy="9" r="3" fill="#1ABCFE"/><path d="M3 12h3v3a3 3 0 1 1-3-3z" fill="#0ACF83"/></svg>Figma 에서 보기</a></div>
+    <p class="lead2">문 상태가 바뀌면 그 행의 배지가 바뀌고, 노드 전체에 영향이 있으면 탭 맨 위에 배너가 뜹니다. Down 과 Error 배지에만 ⓘ 가 붙습니다.</p>
+    <div class="player" data-scene="status">
+      <div class="viewport"><div class="stage"><div class="mock">
+        <div class="ui app">
+          <div class="ui-chrome"><i></i><i></i><i></i><span class="ui-url" data-k="url">/nodes/gpu-node-1</span></div>
+          <div class="ui-body">
+            <div class="ui-note err" data-k="bBlk" hidden><span class="ic">⛔</span><span><b>PF 1개를 사용할 수 없습니다.</b></span></div>
+            <div class="ui-note warn" data-k="bDeg" hidden><span class="ic">⚠</span><span><b>이 노드의 일부 VF가 통신할 수 없습니다.</b></span></div>
+            <div class="ui-sum"><span class="ui-badge blue">SR-IOV On</span><span><span class="k">PF</span><b>2</b></span><span><span class="k">VF</span><b data-k="sv">16</b></span><span><span class="k">Assigned</span><b data-k="sa">12 / 16</b></span><span><span class="k">In use</span><b data-k="su">8 / 16</b></span><span class="end">Fabric 정보 <span class="ui-more">···</span></span></div>
+            <div class="ui-card">
+              <div class="ui-card-h"><span><small>PF</small>0000:61:00.0 <span class="ui-mu">(ibp97s0f0)</span></span><span><small>Status</small><span class="ui-badge ok">Active</span> <span class="ui-badge bad" data-k="unh" hidden>Unhealthy 1</span></span><span><small>Project</small>llm-team <span class="ui-more">···</span></span><span><small>Assigned</small>6 / 8</span><span><small>In use</small>4 / 8</span><span class="ui-chev" style="transform:rotate(180deg)">⌄</span></div>
+              <div class="ui-card-b"><table class="ui-tbl"><tr><th>No</th><th>RDMA device</th><th>Project</th><th>Workload</th><th>Status</th></tr>
+                <tr><td>1</td><td>mlx5_12</td><td>llm-team</td><td>Workspace <span class="ui-link">train-ws</span></td><td><span class="ui-badge ok">Active</span></td></tr>
+                <tr><td>2</td><td>mlx5_13</td><td>llm-team</td><td>-</td><td><span class="ui-badge warn" data-k="s2">Pending</span> <span class="ui-i" data-k="i2" hidden style="color:var(--bad)"></span></td></tr>
+                <tr><td>3</td><td>mlx5_14</td><td>vision</td><td>Job <span class="ui-link">bench</span></td><td><span class="ui-badge ok">Active</span></td></tr>
+              </table></div>
+            </div>
+            <div class="ui-card">
+              <div class="ui-card-h"><span><small>PF</small>0000:e1:00.0 <span class="ui-mu">(ibp225s0f0)</span></span><span><small>Status</small><span class="ui-badge ok" data-k="p2s">Active</span></span><span><small>Project</small><span data-k="p2p">vision <span class="ui-more">···</span></span></span><span><small>Assigned</small><span data-k="p2a">6 / 8</span></span><span><small>In use</small><span data-k="p2b">4 / 8</span></span><span class="ui-chev">⌄</span></div>
+            </div>
+            <div class="ui-pop" data-k="pop" hidden style="right:20px;top:200px;width:340px">
+              <b>상태 진입 시점: -</b>
+              <span>Reason: VfNotActive<br>Message: <span class="mono">0000:61:00.0 vf 1: port Down, lid 0; not ready for 120s</span></span>
+            </div>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="timeline"></div>
+    </div>
+    <p class="hint">배지 문구와 팝오버 구성은 코드(<code>infiniband-devices.tsx</code>)를, message 모양은 BE 문서(cr-상태.md)를 따랐습니다. 노드와 숫자는 예시입니다.</p>
+    <div class="links3">
+      <div class="lk"><span class="k">표시등</span><span class="s">행마다 Status 배지</span><code>status.vfs[].phase (PF 모드는 index 0 항목)</code></div>
+      <div class="lk"><span class="k">표시등 짝표</span><span class="s">phase → 배지</span><code>BADGE_BY_PHASE · toIbBadge()</code></div>
+      <div class="lk"><span class="k">맨 위 안내</span><span class="s">우선순위대로 쌓는 배너</span><code>resolveIbNodeBanners()</code></div>
+    </div>
+  </div>
+  </dialog>
+</section>
+
+<!-- ═════════ 11 직접 보기 · 용어 ═════════ -->
+<section class="stop" id="see" data-stop>
+  <header class="sh"><span class="num">11</span><p class="ask"><svg class="av c-pd" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pd"/></svg><span>실제로는 어디서 볼 수 있을까요?</span></p><h2><mark>개발 클러스터</mark>에서 직접 봅니다</h2></header>
+  <p class="cap">실제 IB 장비가 있는 개발 클러스터는 건물 한 채, 큰 문 하나뿐입니다. 그래서 SR-IOV 모드, SM 없음, Blocked 같은 상태는 이 설명서의 화면 데모로만 볼 수 있습니다.</p>
+  <div class="tbl-wrap"><table class="plain">
+    <tr><th>보고 싶은 것</th><th>어디서</th><th>무엇이 보이나</th></tr>
+    <tr><td>노드의 문 상태</td><td><code>/nodes/gpu-node-3</code> › InfiniBand</td><td>SR-IOV Off, PF 1개 <code>0000:04:00.0</code> (<code>ib0</code>), 장치 <code>mlx5_0</code> (ConnectX-6, 200 Gb/s), Subnet <code>tenib</code>, test-fe 에 1개 배정</td></tr>
+    <tr><td>Pod 가 받은 문</td><td><code>/workspaces/test-ws?namespace=test-fe</code> › Containers</td><td><code>mlx5_0 +3</code>, 팝오버 4줄 모두 <code>mlx5_0</code>, IPoIB IP 열 없음. Workspace 는 <code>ten1010.io/ib-test-fe: 4</code> 를 요청합니다</td></tr>
+    <tr><td>배정 막대 · 설정 팝업</td><td><code>/projects/test-fe</code> › Nodes (Admin)</td><td>test-fe 에 배정된 노드 막대와 InfiniBand 설정 팝업</td></tr>
+    <tr><td>개수 입력 · 배치 가이드</td><td><code>/workspaces/create</code> › 리소스</td><td>프로젝트 test-fe, GPU L40 Block 을 고른 뒤 InfiniBand 사용 줄</td></tr>
+  </table></div>
+  <h3 class="sub-h">용어 짝꿍표</h3>
+  <div class="tbl-wrap"><table class="plain">
+    <tr><th>이 설명서의 비유</th><th>실제 이름</th><th>한 줄 뜻</th><th>AIPub 에서 보는 곳</th></tr>
+    <tr><td>건물</td><td>노드 (서버)</td><td>GPU 가 꽂힌 컴퓨터 한 대</td><td>노드 상세</td></tr>
+    <tr><td>복도</td><td>NVLink</td><td>서버 안 GPU 끼리 잇는 길</td><td>-</td></tr>
+    <tr><td>일반 도로</td><td>이더넷 (CNI)</td><td>모든 서버에 있는 기본 네트워크</td><td>Pod IP 열</td></tr>
+    <tr><td>전용 터널</td><td>InfiniBand, fabric</td><td>서버 사이 고속 전용망</td><td>노드 상세 InfiniBand 탭</td></tr>
+    <tr><td>창고에 바로 넣기</td><td>RDMA</td><td>카드가 상대 메모리에 직접 쓰는 전송</td><td>-</td></tr>
+    <tr><td>큰 문</td><td>PF</td><td>IB 카드의 실제 포트</td><td>PF 표 · PF 카드</td></tr>
+    <tr><td>작은 문</td><td>VF</td><td>PF 를 나눈 가상 장치</td><td>VF 표</td></tr>
+    <tr><td>칸막이</td><td>SR-IOV</td><td>PF 를 VF 로 나누는 기술</td><td>SR-IOV On 배지</td></tr>
+    <tr><td>자리</td><td>슬롯</td><td>PF 모드에서 PF 하나를 나눠 쓰는 단위, 기본 8</td><td>Workspace InfiniBand 개수</td></tr>
+    <tr><td>관제탑</td><td>Subnet Manager (SM)</td><td>번호표를 주고 출입증 명단을 적용</td><td>Fabric 정보 SM · SM 없음 경고</td></tr>
+    <tr><td>번호표</td><td>LID</td><td>SM 이 포트마다 주는 주소</td><td>-</td></tr>
+    <tr><td>팀 출입증</td><td>P-Key</td><td>같은 P-Key 끼리만 통신</td><td>Fabric 정보 P-Key 줄</td></tr>
+    <tr><td>팀</td><td>프로젝트</td><td>IB 를 배정받는 단위</td><td>프로젝트 상세</td></tr>
+    <tr><td>작업자 · 작업실</td><td>Pod · Workspace</td><td>문을 받아 쓰는 쪽</td><td>Workspace 생성 · 상세</td></tr>
+    <tr><td>터널 주소</td><td>IPoIB IP</td><td>IB 위에서 쓰는 IP, 장치마다 1개</td><td>IPoIB IP 열</td></tr>
+    <tr><td>계약서</td><td>IBNetwork</td><td>프로젝트별 노드당 희망 개수와 현황</td><td>InfiniBand 설정 팝업</td></tr>
+    <tr><td>건물 장부</td><td>SriovNodeState</td><td>노드별 장치 · 주인 · 상태</td><td>노드 막대 · 노드 상세</td></tr>
+    <tr><td>반납 중</td><td>회수 대기 (Releasing)</td><td>주인이 장치를 내놓는 중</td><td>노란 칸 · Releasing 배지</td></tr>
+  </table></div>
+</section>
+
+<!-- ═════════ Q&A ═════════ -->
+<section class="stop" id="qna" data-stop>
+  <header class="sh"><span class="num">?</span><p class="ask"><svg class="av c-pm" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pm"/></svg><span>자주 묻는 질문</span></p><h2>궁금한 것부터 <mark>골라 읽기</mark></h2></header>
+  <p class="cap">질문을 먼저 읽고 답을 떠올려 본 다음 펼쳐 보세요. 답 끝의 링크를 누르면 관련 칸으로 갑니다.</p>
+  <div class="qa-list col" style="width:100%">
+    <details class="qa"><summary>예전 ten1010.io/rdma 방식과 무엇이 달라졌나요?</summary><div class="a">
+      <p>예전에는 카드가 몇 장이든 노드마다 리소스가 1개라서 노드당 IB Workspace 가 하나로 묶였고, 다른 프로젝트 Pod 와도 통신할 수 있었습니다. 이제는 Admin 이 프로젝트마다 노드별 개수를 정하고, 리소스 이름도 <code>ten1010.io/ib-&lt;프로젝트&gt;</code> 로 프로젝트마다 따로 생깁니다.</p>
+      <p class="to"><a href="#why">1 왜 터널을 파나</a> · <a href="#ledger">6 계약서와 장부</a></p></div></details>
+    <details class="qa"><summary>Pod 가 mlx5_0 을 네 번 받았어요. 고장인가요?</summary><div class="a">
+      <p>고장이 아닙니다. PF 모드는 큰 문 하나를 자리 8개로 광고합니다. 노드에 큰 문이 하나뿐이면 같은 문의 자리를 여러 개 받아 장치 이름이 반복됩니다. 개발 클러스터의 test-ws 가 이 경우입니다.</p>
+      <p class="to"><a href="#mode">3 문을 빌려주는 방법</a></p></div></details>
+    <details class="qa"><summary>VF 를 많이 나누면 더 빨라지나요?</summary><div class="a">
+      <p>빨라지지 않습니다. 문만 늘고 터널 폭은 그대로라서, 여러 VF 가 동시에 많이 보내면 PF 의 대역폭을 나눠 씁니다.</p>
+      <p class="to"><a href="#door">2 큰 문과 작은 문</a></p></div></details>
+    <details class="qa"><summary>다른 프로젝트 Pod 와 InfiniBand 로 통신할 수 있나요?</summary><div class="a">
+      <p>출입증(P-Key)을 켠 설치에서는 막힙니다. 다른 팀 VF 와는 함께 속한 파티션이 기본 파티션뿐이고, 거기서 둘 다 제한 멤버이기 때문입니다. 다만 PF·SM·다른 조직 장비처럼 정식 멤버인 장비와는 통신합니다. 출입증을 끈 기본 설치(개발 클러스터)는 격리가 없습니다.</p>
+      <p class="to"><a href="#fence">4 관제탑과 출입증</a></p></div></details>
+    <details class="qa"><summary>관제탑(SM)이 모두 멈추면 학습이 끊기나요?</summary><div class="a">
+      <p>이미 통신 중인 장치는 대부분 계속 통신합니다. 그 사이 새 Pod 의 장치가 올라오지 않고, 배정 변경도 반영되지 않습니다. 그래서 화면은 오류가 아니라 경고로 알리고, 프로젝트 상세의 InfiniBand 설정 버튼을 잠급니다.</p>
+      <p class="to"><a href="#fence">4 관제탑과 출입증</a></p></div></details>
+    <details class="qa"><summary>노드를 붙였는데 Workspace 생성에 InfiniBand 줄이 안 보여요.</summary><div class="a">
+      <p>노드를 붙이면 문은 0개로 시작합니다. Admin 이 프로젝트 상세의 InfiniBand 설정에서 그 노드의 개수를 정해야 합니다. 또 InfiniBand 줄은 "GPU 사용" 탭에서 GPU 를 고르고, 그 GPU 가 있는 노드 중 하나라도 이 프로젝트 배정이 1개 이상일 때만 보입니다.</p>
+      <p class="to"><a href="#who">5 누가 무엇을 정하나</a> · <a href="#flow">7 문을 받기까지</a></p></div></details>
+    <details class="qa"><summary>배치 가이드에 용량 초과가 떠요.</summary><div class="a">
+      <p>요청한 개수가 그 노드의 이 프로젝트 몫(Total)보다 많다는 뜻입니다. 이 프로젝트 배정이 아예 없는 노드도 스위치를 켜면 용량 초과로 보입니다. 기다려도 들어가지 않으니 Admin 에게 배정을 늘려 달라고 하거나 요청을 줄입니다. 지금 비어 있는 수(Free)보다만 많으면 여유 부족입니다.</p>
+      <p class="to"><a href="#flow">7 문을 받기까지</a></p></div></details>
+    <details class="qa"><summary>Workspace 상세에 IPoIB IP 열이 없어요.</summary><div class="a">
+      <p>프로젝트에 터널 주소 대역(<code>spec.ipoib.cidr</code>)이 없어서입니다. 기본 설치는 대역이 비어 있고, 한 Workspace 의 장치 중 IP 가 하나라도 있을 때만 열이 나옵니다.</p>
+      <p class="to"><a href="#ipoib">8 터널 주소</a></p></div></details>
+    <details class="qa"><summary>Pod 가 VF 2개를 받으면 IP 는 모두 몇 개인가요?</summary><div class="a">
+      <p>대역이 있으면 3개입니다. 도로 주소(Pod IP) 1개에 문마다 터널 주소(IPoIB IP)가 1개씩 붙습니다.</p>
+      <p class="to"><a href="#ipoib">8 터널 주소</a></p></div></details>
+    <details class="qa"><summary>개수를 줄였는데 다른 팀이 그 문을 바로 못 써요.</summary><div class="a">
+      <p>줄인 문은 회수 대기가 되고, 주인은 회수가 끝날 때까지 원래 프로젝트입니다. 안 쓰던 문은 30초쯤 뒤에, 쓰던 문은 Pod 가 끝난 뒤에 미할당이 되고 그때 다른 팀으로 넘어갑니다.</p>
+      <p class="to"><a href="#release">9 문 반납</a></p></div></details>
+    <details class="qa"><summary>팀원에게는 노드 상세의 InfiniBand 탭이 왜 안 보이나요?</summary><div class="a">
+      <p>노드 장부 한 권에 그 노드를 쓰는 모든 프로젝트의 Pod 이름과 네트워크 이름이 들어 있어서, 노드 상세 InfiniBand 탭은 Admin 에게만 보입니다. 팀원은 Workspace 상세에서 자기 Pod 가 받은 장치만 봅니다.</p>
+      <p class="to"><a href="#ledger">6 계약서와 장부</a> · <a href="#ipoib">8 터널 주소</a></p></div></details>
+    <details class="qa"><summary>PF 카드가 Blocked 면 그 안의 VF 는요?</summary><div class="a">
+      <p>모두 쓸 수 없습니다. PF 가 막히면 그 아래 VF 는 PF 의 사유를 그대로 받아 Blocked 가 되고, 집계(VF 수 · Assigned)에서도 빠집니다.</p>
+      <p class="to"><a href="#status">10 문 상태 표시등</a></p></div></details>
+  </div>
+</section>
+
+<!-- ═════════ 출처 ═════════ -->
+<section class="stop" id="src" data-stop>
+  <header class="sh"><span class="num">※</span><p class="ask"><svg class="av c-pm" viewBox="0 0 40 56" aria-hidden="true"><use href="#i-pm"/></svg><span>출처</span></p><h2>이 설명서가 <mark>근거로 삼은 자료</mark></h2></header>
+  <div class="srcs">
+    <div class="sg"><h3>정책서 · Confluence</h3><ul>
+      <li><a href="#">SR-IOV (InfiniBand VF) 배경 지식</a></li>
+      <li><a href="#">화면 정책서 초안 · BE 답변</a></li>
+      <li><a href="#">프로젝트 상세 › Nodes</a></li>
+      <li><a href="#">노드 상세 › InfiniBand 탭</a></li>
+      <li><a href="#">Workspace 생성 › 리소스</a></li>
+      <li><a href="#">Workspace 상세</a></li></ul></div>
+    <div class="sg"><h3>기획 · 설계 · Confluence</h3><ul>
+      <li><a href="#">IPoIB/SR-IOV/P-Key 구성 및 배정 정책</a></li>
+      <li><a href="#">SR-IOV 개요</a></li>
+      <li><a href="#">ControllerManager</a> · <a href="#">NodeAgent</a> · <a href="#">SubnetManager</a></li></ul></div>
+    <div class="sg"><h3>디자인 · Figma</h3><ul>
+      <li><a href="#">InfiniBand 섹션 전체</a></li>
+      <li><a href="#">프로젝트 상세</a> · <a href="#">InfiniBand 설정 팝업</a> · <a href="#">회수</a></li>
+      <li><a href="#">노드 상세 SR-IOV Off</a> · <a href="#">SR-IOV On</a></li>
+      <li><a href="#">Workspace 생성</a> · <a href="#">Workspace 상세</a></li></ul></div>
+    <div class="sg"><h3>이슈 · Jira · GitHub</h3><ul>
+      <li><a href="#">Jira AIP-3537</a> · 에픽 <a href="#">AIP-3043</a></li>
+      <li><a href="#">aipub-web PR #1813</a></li></ul></div>
+    <div class="sg"><h3>논의 · Slack</h3><ul>
+      <li><a href="#">정책 논의 스레드 (10/20)</a></li></ul></div>
+    <div class="sg"><h3>실제 데이터 · 개발 클러스터</h3><ul>
+      <li>Node <code>gpu-node-3</code></li>
+      <li>Workspace <code>test-fe/test-ws</code>, Pod <code>test-ws-598b0f88-0</code></li></ul></div>
+  </div>
+  <div class="hist">
+    <h3 class="sub-h">고친 기록</h3>
+    <ol>
+      <li><b>2026-10-25</b> 처음 만들었습니다. 개발 클러스터 값(노드 gpu-node-3, 프로젝트 test-fe, Workspace test-ws)을 이날 읽었습니다.</li>
+    </ol>
+  </div>
+</section>
+
+</main>
+<div class="wrap foot">AIPub 개념 설명서 · InfiniBand</div>
+
+<script type="application/json" id="scenes">
+{
+ "tour": [
+  {
+   "cap": "관리자는 프로젝트 상세에서 InfiniBand 버튼을 눌러 노드마다 문 개수를 정합니다 (수정)",
+   "acts": [
+    [
+     "url",
+     "/projects/llm-team"
+    ],
+    [
+     "move",
+     "t1"
+    ],
+    [
+     "click",
+     "t1"
+    ],
+    [
+     "flash",
+     "t1"
+    ]
+   ]
+  },
+  {
+   "cap": "프로젝트 디벨로퍼는 Workspace 를 만들 때 Pod 하나에 문 몇 개가 필요한지 적습니다 (생성)",
+   "acts": [
+    [
+     "url",
+     "/workspaces/create"
+    ],
+    [
+     "hide",
+     "v1"
+    ],
+    [
+     "show",
+     "v2"
+    ],
+    [
+     "move",
+     "t2"
+    ],
+    [
+     "flash",
+     "t2"
+    ]
+   ]
+  },
+  {
+   "cap": "Workspace 상세의 Containers 표에서 Pod 마다 받은 문과 터널 주소를 봅니다 (조회)",
+   "acts": [
+    [
+     "url",
+     "/workspaces/train-ws?namespace=llm-team"
+    ],
+    [
+     "hide",
+     "v2"
+    ],
+    [
+     "show",
+     "v3"
+    ],
+    [
+     "move",
+     "t3"
+    ],
+    [
+     "click",
+     "t3"
+    ],
+    [
+     "flash",
+     "t3"
+    ]
+   ]
+  },
+  {
+   "cap": "관리자는 노드 상세의 InfiniBand 탭에서 문 하나하나의 주인과 상태를 봅니다 (조회)",
+   "acts": [
+    [
+     "url",
+     "/nodes/gpu-node-1"
+    ],
+    [
+     "hide",
+     "v3"
+    ],
+    [
+     "show",
+     "v4"
+    ],
+    [
+     "move",
+     "t4"
+    ],
+    [
+     "flash",
+     "t4"
+    ]
+   ]
+  }
+ ],
+ "door": [
+  {
+   "cap": "요약 줄: 큰 문(PF) 2개를 작은 문(VF) 16개로 나눈 노드입니다",
+   "acts": [
+    [
+     "move",
+     "sum"
+    ],
+    [
+     "flash",
+     "sum"
+    ]
+   ]
+  },
+  {
+   "cap": "첫 PF 카드는 펼쳐져 있습니다. 작은 문 한 줄마다 주인 프로젝트와 쓰는 Workload 가 나옵니다",
+   "acts": [
+    [
+     "move",
+     "r1"
+    ],
+    [
+     "flash",
+     "r1"
+    ],
+    [
+     "wait",
+     400
+    ],
+    [
+     "move",
+     "r3"
+    ],
+    [
+     "flash",
+     "r3"
+    ]
+   ]
+  },
+  {
+   "cap": "Releasing 배지는 주인 프로젝트가 반납하는 중인 문입니다",
+   "acts": [
+    [
+     "move",
+     "rel"
+    ],
+    [
+     "flash",
+     "rel"
+    ]
+   ]
+  },
+  {
+   "cap": "다른 PF 카드를 누르면 그 큰 문에서 나온 작은 문 표가 열립니다",
+   "acts": [
+    [
+     "move",
+     "chev2"
+    ],
+    [
+     "click",
+     "chev2"
+    ],
+    [
+     "css",
+     "chev2",
+     "transform",
+     "rotate(180deg)"
+    ],
+    [
+     "show",
+     "vfs2"
+    ]
+   ]
+  }
+ ],
+ "mode": [
+  {
+   "cap": "SR-IOV Off 배지에 마우스를 올리면 이 설치가 어떤 방법인지 알려 줍니다",
+   "acts": [
+    [
+     "move",
+     "badge"
+    ],
+    [
+     "show",
+     "tip"
+    ]
+   ]
+  },
+  {
+   "cap": "화면에는 방법을 바꾸는 스위치가 없습니다. 클러스터를 설치할 때 한 번 정합니다",
+   "acts": [
+    [
+     "flash",
+     "tip"
+    ],
+    [
+     "wait",
+     600
+    ]
+   ]
+  },
+  {
+   "cap": "PF 모드에서는 큰 문 한 줄에 그 문을 나눠 쓰는 Workload 가 모두 나옵니다",
+   "acts": [
+    [
+     "hide",
+     "tip"
+    ],
+    [
+     "move",
+     "wl"
+    ],
+    [
+     "flash",
+     "row"
+    ]
+   ]
+  },
+  {
+   "cap": "SR-IOV On 으로 설치한 클러스터라면 같은 탭이 PF 카드와 VF 표로 그려집니다",
+   "acts": [
+    [
+     "show",
+     "alt"
+    ],
+    [
+     "move",
+     "alt"
+    ]
+   ]
+  }
+ ],
+ "fence": [
+  {
+   "cap": "개발 클러스터 노드에서 Fabric 정보를 엽니다",
+   "acts": [
+    [
+     "move",
+     "fab"
+    ],
+    [
+     "click",
+     "fab"
+    ],
+    [
+     "show",
+     "pop1"
+    ]
+   ]
+  },
+  {
+   "cap": "P-Key Off: 출입증을 쓰지 않는 기본 설치라서 관제탑 상태를 따지지 않습니다",
+   "acts": [
+    [
+     "flash",
+     "pk"
+    ],
+    [
+     "wait",
+     500
+    ]
+   ]
+  },
+  {
+   "cap": "출입증을 켠 설치에서는 SM 과 Master GUID 줄이 나옵니다. 일반 노드라 SM 은 - 입니다",
+   "acts": [
+    [
+     "hide",
+     "pop1"
+    ],
+    [
+     "hide",
+     "v1"
+    ],
+    [
+     "show",
+     "v2"
+    ],
+    [
+     "url",
+     "/nodes/gpu-node-3"
+    ],
+    [
+     "move",
+     "fab2"
+    ],
+    [
+     "click",
+     "fab2"
+    ],
+    [
+     "show",
+     "pop2"
+    ]
+   ]
+  },
+  {
+   "cap": "관제탑 두 곳이 모두 멈추면 탭 맨 위에 경고가 뜹니다",
+   "acts": [
+    [
+     "hide",
+     "pop2"
+    ],
+    [
+     "show",
+     "ban"
+    ],
+    [
+     "flash",
+     "ban"
+    ]
+   ]
+  },
+  {
+   "cap": "프로젝트 상세에도 같은 경고가 뜨고, InfiniBand 설정 버튼이 잠깁니다",
+   "acts": [
+    [
+     "hide",
+     "v2"
+    ],
+    [
+     "show",
+     "v3"
+    ],
+    [
+     "url",
+     "/projects/llm-team"
+    ],
+    [
+     "move",
+     "sbtn"
+    ],
+    [
+     "flash",
+     "snote"
+    ]
+   ]
+  }
+ ],
+ "who": [
+  {
+   "cap": "Admin 이 요약 줄의 InfiniBand 버튼을 누르면 설정 팝업이 열립니다",
+   "acts": [
+    [
+     "move",
+     "btn"
+    ],
+    [
+     "click",
+     "btn"
+    ],
+    [
+     "show",
+     "dlg"
+    ]
+   ]
+  },
+  {
+   "cap": "아직 0개인 gpu-node-3 에 + 를 눌러 4개로 정합니다",
+   "acts": [
+    [
+     "move",
+     "p3"
+    ],
+    [
+     "click",
+     "p3"
+    ],
+    [
+     "text",
+     "n3",
+     "1"
+    ],
+    [
+     "wait",
+     180
+    ],
+    [
+     "click",
+     "p3"
+    ],
+    [
+     "text",
+     "n3",
+     "2"
+    ],
+    [
+     "wait",
+     180
+    ],
+    [
+     "click",
+     "p3"
+    ],
+    [
+     "text",
+     "n3",
+     "3"
+    ],
+    [
+     "wait",
+     180
+    ],
+    [
+     "click",
+     "p3"
+    ],
+    [
+     "text",
+     "n3",
+     "4"
+    ]
+   ]
+  },
+  {
+   "cap": "Blocked 노드는 늘릴 수 없어서 스테퍼 대신 배정 불가가 나옵니다",
+   "acts": [
+    [
+     "move",
+     "blk"
+    ],
+    [
+     "flash",
+     "blk"
+    ]
+   ]
+  },
+  {
+   "cap": "Save 를 누르면 바꾼 노드의 개수를 한 번에 저장하고, 요약 줄과 막대가 바뀝니다",
+   "acts": [
+    [
+     "move",
+     "save"
+    ],
+    [
+     "click",
+     "save"
+    ],
+    [
+     "hide",
+     "dlg"
+    ],
+    [
+     "text",
+     "asg",
+     "10"
+    ],
+    [
+     "hide",
+     "unset"
+    ],
+    [
+     "grow",
+     "b3a",
+     4
+    ],
+    [
+     "grow",
+     "b3u",
+     12
+    ],
+    [
+     "text",
+     "c3",
+     "4"
+    ]
+   ]
+  }
+ ],
+ "ledger": [
+  {
+   "cap": "Admin 이 gpu-node-1 을 1 에서 2 로 올립니다",
+   "acts": [
+    [
+     "move",
+     "plus"
+    ],
+    [
+     "click",
+     "plus"
+    ],
+    [
+     "text",
+     "n",
+     "2"
+    ]
+   ]
+  },
+  {
+   "cap": "Save 를 누르면 화면은 계약서의 그 칸만 바꾸는 JSON Patch 를 보냅니다",
+   "acts": [
+    [
+     "move",
+     "save"
+    ],
+    [
+     "click",
+     "save"
+    ],
+    [
+     "show",
+     "patch"
+    ],
+    [
+     "text",
+     "y1",
+     "numVfs: 2"
+    ],
+    [
+     "add",
+     "y1",
+     "hl"
+    ]
+   ]
+  },
+  {
+   "cap": "시스템이 장부에서 빈 문 하나를 골라 주인을 llm-team 으로 적습니다",
+   "acts": [
+    [
+     "wait",
+     300
+    ],
+    [
+     "show",
+     "o1"
+    ],
+    [
+     "add",
+     "o1",
+     "hl"
+    ]
+   ]
+  },
+  {
+   "cap": "노드는 그 문들을 ten1010.io/ib-llm-team 이라는 이름으로 2개 광고합니다",
+   "acts": [
+    [
+     "text",
+     "al",
+     "ten1010.io/ib-llm-team: 2"
+    ],
+    [
+     "add",
+     "al",
+     "hl"
+    ]
+   ]
+  }
+ ],
+ "flow": [
+  {
+   "cap": "스위치를 켜면 개수 입력이 나오고, 배치 가이드가 InfiniBand 까지 따집니다. 배정이 없는 gpu-node-3 은 바로 용량 초과입니다",
+   "acts": [
+    [
+     "move",
+     "sw"
+    ],
+    [
+     "click",
+     "sw"
+    ],
+    [
+     "add",
+     "sw",
+     "on"
+    ],
+    [
+     "show",
+     "grp"
+    ],
+    [
+     "show",
+     "ibt"
+    ],
+    [
+     "text",
+     "p2",
+     "1개"
+    ],
+    [
+     "text",
+     "p3",
+     "용량 초과"
+    ],
+    [
+     "add",
+     "p3",
+     "bad"
+    ],
+    [
+     "show",
+     "i3"
+    ]
+   ]
+  },
+  {
+   "cap": "+ 를 눌러 2개로 올리면 빈 문이 1개뿐인 gpu-node-2 는 여유 부족이 됩니다",
+   "acts": [
+    [
+     "move",
+     "plus"
+    ],
+    [
+     "click",
+     "plus"
+    ],
+    [
+     "text",
+     "n",
+     "2"
+    ],
+    [
+     "text",
+     "ibt",
+     "· InfiniBand 2"
+    ],
+    [
+     "text",
+     "p1",
+     "1개"
+    ],
+    [
+     "text",
+     "p2",
+     "여유 부족"
+    ],
+    [
+     "add",
+     "p2",
+     "warn"
+    ],
+    [
+     "show",
+     "i2"
+    ],
+    [
+     "flash",
+     "guide"
+    ]
+   ]
+  },
+  {
+   "cap": "용량 초과 옆 ⓘ 를 누르면 막은 리소스와 이유가 나옵니다",
+   "acts": [
+    [
+     "move",
+     "i3"
+    ],
+    [
+     "click",
+     "i3"
+    ],
+    [
+     "show",
+     "pop"
+    ]
+   ]
+  },
+  {
+   "cap": "Create 를 누르면 requests 와 limits 에 같은 개수를 저장합니다",
+   "acts": [
+    [
+     "hide",
+     "pop"
+    ],
+    [
+     "move",
+     "create"
+    ],
+    [
+     "click",
+     "create"
+    ],
+    [
+     "show",
+     "yaml"
+    ]
+   ]
+  }
+ ],
+ "ipoib": [
+  {
+   "cap": "InfiniBand 칸에는 첫 장치 이름과 나머지 개수(+1)가 나옵니다",
+   "acts": [
+    [
+     "move",
+     "c1"
+    ],
+    [
+     "flash",
+     "c1"
+    ]
+   ]
+  },
+  {
+   "cap": "··· 를 누르면 받은 문마다 한 줄씩 장치 이름과 터널 주소(IPoIB IP)가 나옵니다",
+   "acts": [
+    [
+     "move",
+     "m1"
+    ],
+    [
+     "click",
+     "m1"
+    ],
+    [
+     "show",
+     "pop1"
+    ]
+   ]
+  },
+  {
+   "cap": "Pod IP 는 도로 주소 하나이고, IPoIB IP 는 문마다 하나씩 붙습니다",
+   "acts": [
+    [
+     "move",
+     "pip"
+    ],
+    [
+     "flash",
+     "pip"
+    ],
+    [
+     "wait",
+     400
+    ],
+    [
+     "flash",
+     "ipc"
+    ]
+   ]
+  },
+  {
+   "cap": "개발 클러스터의 test-ws 는 대역이 없어서 IPoIB IP 열 없이 장치 이름만 나옵니다",
+   "acts": [
+    [
+     "hide",
+     "pop1"
+    ],
+    [
+     "hide",
+     "v1"
+    ],
+    [
+     "show",
+     "v2"
+    ],
+    [
+     "url",
+     "/workspaces/test-ws?namespace=test-fe"
+    ],
+    [
+     "move",
+     "m2"
+    ],
+    [
+     "click",
+     "m2"
+    ],
+    [
+     "show",
+     "pop2"
+    ]
+   ]
+  }
+ ],
+ "release": [
+  {
+   "cap": "막대를 누르면 이 노드의 문 16개가 어떻게 나뉘었는지 나옵니다",
+   "acts": [
+    [
+     "move",
+     "bar"
+    ],
+    [
+     "click",
+     "bar"
+    ],
+    [
+     "show",
+     "pop"
+    ]
+   ]
+  },
+  {
+   "cap": "Admin 이 설정 팝업에서 gpu-node-2 를 4 에서 2 로 줄이고 저장합니다",
+   "acts": [
+    [
+     "hide",
+     "pop"
+    ],
+    [
+     "show",
+     "dlg"
+    ],
+    [
+     "move",
+     "minus"
+    ],
+    [
+     "click",
+     "minus"
+    ],
+    [
+     "text",
+     "n",
+     "3"
+    ],
+    [
+     "wait",
+     200
+    ],
+    [
+     "click",
+     "minus"
+    ],
+    [
+     "text",
+     "n",
+     "2"
+    ],
+    [
+     "move",
+     "save"
+    ],
+    [
+     "click",
+     "save"
+    ],
+    [
+     "hide",
+     "dlg"
+    ]
+   ]
+  },
+  {
+   "cap": "줄인 2개는 바로 빈 문이 되지 않고 노란 회수 대기 칸이 됩니다. 막대 옆 숫자는 회수 대기까지 포함합니다",
+   "acts": [
+    [
+     "move",
+     "bar"
+    ],
+    [
+     "grow",
+     "ba",
+     2
+    ],
+    [
+     "grow",
+     "br",
+     2
+    ],
+    [
+     "show",
+     "rel"
+    ],
+    [
+     "flash",
+     "rel"
+    ]
+   ]
+  },
+  {
+   "cap": "아무도 안 쓰던 1개는 30초쯤 뒤에 미할당으로 돌아갑니다",
+   "acts": [
+    [
+     "move",
+     "cnt"
+    ],
+    [
+     "grow",
+     "br",
+     1
+    ],
+    [
+     "grow",
+     "bu",
+     9
+    ],
+    [
+     "text",
+     "cnt",
+     "3"
+    ],
+    [
+     "text",
+     "relx",
+     "1개."
+    ],
+    [
+     "text",
+     "asg",
+     "7"
+    ]
+   ]
+  },
+  {
+   "cap": "쓰던 1개는 Pod 가 끝나야 돌아오고, 그때 회수 안내도 사라집니다",
+   "acts": [
+    [
+     "grow",
+     "br",
+     0
+    ],
+    [
+     "grow",
+     "bu",
+     10
+    ],
+    [
+     "text",
+     "cnt",
+     "2"
+    ],
+    [
+     "hide",
+     "rel"
+    ],
+    [
+     "text",
+     "asg",
+     "6"
+    ]
+   ]
+  }
+ ],
+ "status": [
+  {
+   "cap": "새로 배정된 mlx5_13 은 Pending 으로 2분(120초)을 기다립니다",
+   "acts": [
+    [
+     "move",
+     "s2"
+    ],
+    [
+     "flash",
+     "s2"
+    ]
+   ]
+  },
+  {
+   "cap": "2분이 지나도 준비되지 않으면 Down 이 되고, 탭 맨 위에 Degraded 안내가 뜹니다",
+   "acts": [
+    [
+     "text",
+     "s2",
+     "Down"
+    ],
+    [
+     "rm",
+     "s2",
+     "warn"
+    ],
+    [
+     "add",
+     "s2",
+     "bad"
+    ],
+    [
+     "show",
+     "i2"
+    ],
+    [
+     "show",
+     "unh"
+    ],
+    [
+     "show",
+     "bDeg"
+    ]
+   ]
+  },
+  {
+   "cap": "ⓘ 를 누르면 상태 진입 시점과 Reason, Message 원문이 나옵니다",
+   "acts": [
+    [
+     "move",
+     "i2"
+    ],
+    [
+     "click",
+     "i2"
+    ],
+    [
+     "show",
+     "pop"
+    ]
+   ]
+  },
+  {
+   "cap": "큰 문 하나가 막히면 PF 카드가 Blocked 가 되고, 그 안내가 맨 위에 쌓입니다. 막힌 PF 의 VF 는 집계에서 빠집니다",
+   "acts": [
+    [
+     "hide",
+     "pop"
+    ],
+    [
+     "move",
+     "p2s"
+    ],
+    [
+     "text",
+     "p2s",
+     "Blocked"
+    ],
+    [
+     "rm",
+     "p2s",
+     "ok"
+    ],
+    [
+     "add",
+     "p2s",
+     "bad"
+    ],
+    [
+     "text",
+     "p2p",
+     "-"
+    ],
+    [
+     "text",
+     "p2a",
+     "-"
+    ],
+    [
+     "text",
+     "p2b",
+     "-"
+    ],
+    [
+     "text",
+     "sv",
+     "8"
+    ],
+    [
+     "text",
+     "sa",
+     "6 / 8"
+    ],
+    [
+     "text",
+     "su",
+     "4 / 8"
+    ],
+    [
+     "show",
+     "bBlk"
+    ]
+   ]
+  }
+ ]
+}
+</script>
+<script>
+// 데모 재생기. 장면 = 단계 목록, 단계 = 캡션 한 문장 + 동작 목록.
+// 동작: move·click(커서) · show·hide · text · add·rm(클래스) · css · grow(막대 칸) · flash · url · wait
+// 타임라인은 재생기가 그린다. 화면에 들어오면 저절로 재생하고, 마름모를 누르면 그 단계로 건너뛰고 멈춘다.
+// "직접 눌러 보기" 를 누르면 처음 화면에서 멈추고, 다음 단계의 move 대상 위에 깜빡이는 점을 띄운다. 점을 누르면 한 단계씩 진행한다.
+(() => {
+  const SCENES = JSON.parse(document.getElementById('scenes')?.textContent || '{}')
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const sleep = ms => new Promise(r => setTimeout(r, ms))
+  const pad = n => String(n).padStart(2, '0')
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
+  const ICON = {
+    play: '<svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg>',
+    pause: '<svg viewBox="0 0 16 16"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/></svg>',
+    restart: '<svg viewBox="0 0 16 16"><path d="M8 2.5a5.5 5.5 0 1 1-5.2 3.7l1.4.5A4 4 0 1 0 8 4v2L4.5 3.2 8 .5z"/></svg>',
+    hand: '<svg viewBox="0 0 16 16"><path d="M6 1.5a1 1 0 0 1 2 0V7h.5V3a1 1 0 0 1 2 0v4h.5V4a1 1 0 0 1 2 0v6.5A4.5 4.5 0 0 1 8.5 15h-1A4.5 4.5 0 0 1 3.4 12.4L1.6 8.7a1 1 0 0 1 1.7-1L5 9.6V1.5z"/></svg>',
+  }
+  const NAV = { projects: 'Projects', nodes: 'Nodes', 'workload-groups': 'WorkloadGroups', workspaces: 'Workspaces', operations: 'Operations', pvs: 'PVs', pvcs: 'PVCs', 'cluster-volumes': 'ClusterVolumes', 'file-servers': 'FileServers' }
+  const TOP = '<b class="app-logo">AIPub <i>Admin</i></b><span class="app-search">⌕ Ctrl + K</span><span class="app-tb">Docs</span><span class="app-tb">System</span>'
+  const SIDE = '<aside class="app-side"><span class="bm">Bookmark ▾</span><p>Management</p><span>Dashboard</span><span data-nav="projects">Projects</span><span>Users</span><span data-nav="nodes">Nodes</span><span>Prioritization</span><span>Usage</span><p>Images / Models</p><span>ImageHub</span><p>Workload</p><span>Templates</span><span data-nav="workload-groups">WorkloadGroups</span><span data-nav="workspaces">Workspaces</span><span>Jobs</span><span>CronJobs</span><span>ChainJobs</span><span data-nav="operations">Operations</span><p>Storage</p><span data-nav="pvs">PVs</span><span data-nav="pvcs">PVCs</span><span data-nav="cluster-volumes">ClusterVolumes</span><span data-nav="file-servers">FileServers</span></aside>'
+  // 화면 흉내(.ui.app)를 AIPub 앱 틀(위 막대 + 왼쪽 메뉴 + 경로)로 감싼다
+  const buildShell = ui => {
+    const body = ui.querySelector(':scope > .ui-body')
+    if (!body) return
+    const top = document.createElement('div')
+    top.className = 'app-top'; top.innerHTML = TOP
+    const chrome = ui.querySelector(':scope > .ui-chrome')
+    chrome ? chrome.after(top) : ui.prepend(top)
+    const wrap = document.createElement('div')
+    wrap.className = 'app-wrap'; wrap.innerHTML = SIDE
+    body.before(wrap)
+    const main = document.createElement('div')
+    main.className = 'app-main'; main.innerHTML = '<div class="app-crumb"></div>'
+    wrap.appendChild(main); main.appendChild(body)
+  }
+  const CURSOR = '<div class="cursor" aria-hidden="true"><span class="ring"></span><svg viewBox="0 0 20 20"><path d="M3 2 L3 16 L7 12.5 L9.6 18 L12 17 L9.5 11.6 L15 11.6 Z"/></svg></div>'
+
+  class Player {
+    constructor(el) {
+      this.el = el
+      this.steps = SCENES[el.dataset.scene] || []
+      this.stage = el.querySelector('.stage')
+      this.mock = el.querySelector('.mock')
+      this.mock.querySelectorAll('.ui.app').forEach(buildShell)
+      this.initial = this.mock.innerHTML
+      this.stage.insertAdjacentHTML('beforeend', CURSOR)
+      this.cursor = this.stage.querySelector('.cursor')
+      this.hot = document.createElement('button')
+      this.hot.type = 'button'
+      this.hot.className = 'hot'
+      this.hot.hidden = true
+      this.hot.innerHTML = '<span class="ring"></span><span class="lbl"></span>'
+      this.stage.appendChild(this.hot)
+      const n = this.steps.length
+      const pct = i => (n > 1 ? (i / (n - 1)) * 100 : 0)
+      const tl = el.querySelector('.timeline')
+      tl.innerHTML = `<div class="tl-ctl"><button type="button" class="tl-play"></button><button type="button" class="tl-restart" aria-label="처음부터 다시 재생">${ICON.restart}</button><button type="button" class="tl-try" aria-label="직접 눌러 보기">${ICON.hand}<span>직접 눌러 보기</span></button></div>
+        <p class="tl-cap" aria-live="polite"><span class="no"></span><span class="tx"></span></p>
+        <div class="tl-track"><div class="tl-ruler"></div><div class="tl-base"></div><div class="tl-done"></div><span class="tl-head"></span>
+        ${this.steps.map((s, i) => `<button type="button" class="kf" style="left:${pct(i)}%" aria-label="${i + 1}단계로 건너뛰기: ${esc(s.cap)}"></button>`).join('')}</div>`
+      this.pct = pct
+      this.btn = tl.querySelector('.tl-play')
+      this.tryBtn = tl.querySelector('.tl-try')
+      this.no = tl.querySelector('.no')
+      this.tx = tl.querySelector('.tx')
+      this.done = tl.querySelector('.tl-done')
+      this.head = tl.querySelector('.tl-head')
+      this.kfs = [...tl.querySelectorAll('.kf')]
+      this.gen = 0
+      this.cur = -1
+      this.playing = false
+      this.visible = false
+      this.trying = false
+      this.btn.addEventListener('click', () => (this.playing ? this.pause() : this.play(this.cur + 1 >= n ? 0 : this.cur + 1)))
+      tl.querySelector('.tl-restart').addEventListener('click', () => this.play(0))
+      this.tryBtn.addEventListener('click', () => (this.trying ? this.rest() : this.tryMode()))
+      this.hot.addEventListener('click', () => this.step(this.next))
+      this.kfs.forEach((k, i) => k.addEventListener('click', () => { const t = this.trying; this.seek(i); if (t) { this.trying = true; this.setBtn(); this.showHot(i + 1) } }))
+      this.setBtn()
+    }
+    q(k) { return this.mock.querySelector(`[data-k="${k}"]`) }
+    // 주소창을 바꾸면 왼쪽 메뉴와 경로도 따라 바꾼다
+    syncUrl(u) {
+      const el = this.q('url')
+      if (el) el.textContent = u
+      const seg = u.split('?')[0].split('/').filter(Boolean)
+      this.mock.querySelectorAll('[data-nav]').forEach(n => n.classList.toggle('on', n.dataset.nav === seg[0]))
+      const c = this.mock.querySelector('.app-crumb')
+      if (c) c.innerHTML = seg.map((x, i) => (i === 0 ? NAV[x] || x : x === 'create' ? 'Create' : x === 'edit' ? 'Edit' : `<b>${esc(x)}</b>`)).join('<i>›</i>')
+    }
+    setBtn() {
+      this.btn.innerHTML = this.playing ? ICON.pause : ICON.play
+      this.btn.setAttribute('aria-label', this.playing ? '일시정지' : '재생')
+      this.el.classList.toggle('paused', !this.playing)
+      this.tryBtn.classList.toggle('on', this.trying)
+      this.tryBtn.setAttribute('aria-pressed', String(this.trying))
+      if (!this.trying) { this.hot.hidden = true; this.kfs.forEach(k => k.classList.remove('next')) }
+    }
+    reset() {
+      this.stage.querySelectorAll('.flash-ring').forEach(r => r.remove())
+      this.mock.innerHTML = this.initial
+      const u = this.q('url')
+      if (u) this.syncUrl(u.textContent)
+      this.cursor.style.transform = 'translate(24px, 24px)'
+      this.el.classList.add('snap')
+      this.mark(-1)
+      void this.el.offsetWidth
+      this.el.classList.remove('snap')
+    }
+    mark(i) {
+      this.cur = i
+      this.kfs.forEach((k, j) => { k.classList.toggle('on', j <= i); k.classList.toggle('cur', j === i) })
+      const p = i < 0 ? 0 : this.pct(i)
+      this.done.style.width = `${p}%`
+      this.head.style.left = `${p}%`
+      const s = this.steps[i]
+      this.no.textContent = i < 0 ? '' : `${pad(i + 1)} / ${pad(this.steps.length)}`
+      this.tx.textContent = s ? s.cap : ''
+    }
+    at(el) {
+      const s = this.stage.getBoundingClientRect()
+      const r = el.getBoundingClientRect()
+      return [r.left - s.left + Math.min(r.width / 2, 40), r.top - s.top + r.height / 2]
+    }
+    // 강조는 대상 위에 같은 크기의 상자를 무대에 겹쳐 그린다. 대상에 직접 그리면 표 행(tr)이나 overflow 안쪽에서 잘린다
+    ring(el) {
+      if (el.closest('[hidden]')) return
+      const s = this.stage.getBoundingClientRect()
+      const r = el.getBoundingClientRect()
+      const d = document.createElement('span')
+      d.className = 'flash-ring'
+      Object.assign(d.style, { left: `${r.left - s.left}px`, top: `${r.top - s.top}px`, width: `${r.width}px`, height: `${r.height}px` })
+      const br = getComputedStyle(el).borderRadius
+      if (br !== '0px') d.style.borderRadius = br
+      d.addEventListener('animationend', () => d.remove())
+      this.stage.appendChild(d)
+    }
+    point(el) {
+      if (!el || el.closest('[hidden]')) return
+      const [x, y] = this.at(el)
+      this.cursor.style.transform = `translate(${x}px, ${y}px)`
+    }
+    async act([op, k, v, w], fast) {
+      if (op === 'wait') return fast ? null : sleep(k)
+      if (op === 'url') { this.syncUrl(k); return }
+      const el = this.q(k)
+      if (!el) return
+      if (op === 'move') { if (fast) return; this.point(el); return sleep(680) }
+      if (op === 'click') {
+        if (fast) return
+        this.cursor.classList.remove('click'); void this.cursor.offsetWidth; this.cursor.classList.add('click')
+        return sleep(260)
+      }
+      if (op === 'show') { el.hidden = false; if (!fast) el.classList.add('appear') }
+      if (op === 'hide') el.hidden = true
+      if (op === 'text') el.textContent = v
+      if (op === 'add') el.classList.add(v)
+      if (op === 'rm') el.classList.remove(v)
+      if (op === 'css') el.style[v] = w
+      if (op === 'grow') el.style.flexGrow = String(v)
+      if (op === 'flash' && !fast) this.ring(el)
+    }
+    // 0..i 단계를 바로 적용하고 그 단계의 마지막 커서 위치에 멈춘다
+    apply(i) {
+      this.reset()
+      let last = null
+      for (let j = 0; j <= i; j++) for (const a of this.steps[j].acts) { this.act(a, true); if (a[0] === 'move') last = a[1] }
+      this.mark(i)
+      this.point(last && this.q(last))
+    }
+    async play(from = 0) {
+      const gen = ++this.gen
+      this.playing = true; this.held = false; this.trying = false; this.setBtn()
+      if (from === 0) this.reset(); else this.apply(from - 1)
+      for (let i = from; i < this.steps.length; i++) {
+        if (gen !== this.gen) return
+        this.mark(i)
+        for (const a of this.steps[i].acts) { if (gen !== this.gen) return; await this.act(a, false) }
+        await sleep(1500)
+      }
+      // 모달을 열 때 한 번만 재생하고 마지막 장면에 멈춘다
+      if (gen === this.gen) { this.playing = false; this.held = true; this.setBtn() }
+    }
+    // held: 사용자가 멈추거나 단계를 고르면 다시 화면에 들어와도 저절로 재생하지 않는다
+    pause() { this.gen++; this.playing = false; this.held = true; this.setBtn() }
+    seek(i, held = true) { this.gen++; this.playing = false; this.trying = false; this.held = held; this.setBtn(); this.apply(i) }
+    rest() { this.seek(this.steps.length - 1, false) }
+    open() { return !!this.el.closest('dialog')?.open }
+    tryMode() {
+      this.gen++; this.playing = false; this.held = true; this.trying = true; this.setBtn()
+      this.reset()
+      this.showHot(0)
+    }
+    showHot(i) {
+      this.next = i
+      const n = this.steps.length
+      this.kfs.forEach((k, j) => k.classList.toggle('next', j === i))
+      if (i >= n) {
+        this.trying = false; this.setBtn()
+        this.no.textContent = `${pad(n)} / ${pad(n)}`
+        this.tx.textContent = '끝까지 눌러 봤습니다. 손 모양 버튼을 다시 누르면 처음부터 해 볼 수 있습니다.'
+        return
+      }
+      const key = (this.steps[i].acts.find(a => a[0] === 'move') || [])[1]
+      const el = key && this.q(key)
+      const lbl = this.hot.querySelector('.lbl')
+      const free = !(el && !el.closest('[hidden]'))
+      this.hot.classList.toggle('free', free)
+      if (!free) {
+        const [x, y] = this.at(el)
+        this.hot.style.left = `${x}px`; this.hot.style.top = `${y}px`
+        lbl.textContent = '여기를 눌러 보세요'
+      } else {
+        // 누를 화면 요소가 없는 단계는 점 대신 "다음 단계" 버튼을 띄운다
+        this.hot.style.left = '50%'; this.hot.style.top = `${this.stage.clientHeight - 64}px`
+        lbl.textContent = '다음 단계 ▶'
+      }
+      this.hot.hidden = false
+      this.no.textContent = `다음 ${pad(i + 1)}`
+      this.tx.textContent = this.steps[i].cap
+    }
+    async step(i) {
+      const gen = ++this.gen
+      this.hot.hidden = true
+      this.mark(i)
+      for (const a of this.steps[i].acts) { if (gen !== this.gen) return; await this.act(a, false) }
+      // 막 나타난 팝업·대화상자의 등장 애니메이션(.35초)이 끝난 뒤 위치를 잰다
+      await sleep(420)
+      if (gen === this.gen && this.trying) this.showHot(i + 1)
+    }
+  }
+
+  const players = new Map()
+  document.querySelectorAll('.player').forEach(el => { const p = new Player(el); players.set(el, p); p.rest() })
+  // 2층은 모달로 연다. 열면 처음부터 재생하고, 닫으면 마지막 장면에 멈춘다
+  document.querySelectorAll('.l2btn').forEach(btn => btn.addEventListener('click', () => {
+    const dlg = document.getElementById(btn.getAttribute('aria-controls'))
+    dlg.showModal()
+    const pl = dlg.querySelector('.player')
+    if (!pl) return
+    const p = players.get(pl)
+    p.held = false
+    requestAnimationFrame(() => (reduce ? p.rest() : p.play(0)))
+  }))
+  document.querySelectorAll('dialog.modal').forEach(d => {
+    d.addEventListener('close', () => { const pl = d.querySelector('.player'); if (pl) players.get(pl).rest() })
+    d.addEventListener('click', e => { if (e.target === d) d.close() })
+    d.querySelector('.m-close').addEventListener('click', () => d.close())
+  })
+})()
+
+// 목차와 점 막대: 지나온 칸을 칠한다. 이 브라우저에만 저장한다
+;(() => {
+  const KEY = 'ib2-seen'
+  let seen = new Set()
+  try { seen = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')) } catch {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify([...seen])) } catch {} }
+  const stops = [...document.querySelectorAll('[data-stop]')]
+  const gos = [...document.querySelectorAll('[data-go]')]
+  const paint = here => gos.forEach(b => { b.classList.toggle('seen', seen.has(b.dataset.go)); if (here) b.classList.toggle('here', b.dataset.go === here) })
+  // 화면 위에서 40% 지점을 지난 마지막 칸이 지금 칸이다. 누른 칸은 스크롤이 끝나기 전에 바로 표시한다
+  let lock = null
+  const current = () => {
+    const y = innerHeight * 0.4
+    let here = stops[0].id
+    for (const st of stops) if (st.getBoundingClientRect().top <= y) here = st.id
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) here = stops[stops.length - 1].id
+    return here
+  }
+  let raf = 0
+  const onScroll = () => {
+    if (raf) return
+    raf = requestAnimationFrame(() => {
+      raf = 0
+      const here = lock || current()
+      seen.add(here); save(); paint(here)
+    })
+  }
+  gos.forEach(b => b.addEventListener('click', () => {
+    lock = b.dataset.go
+    clearTimeout(b._t); b._t = setTimeout(() => { lock = null; onScroll() }, 900)
+    document.getElementById(lock)?.scrollIntoView({ block: 'start' })
+    onScroll()
+  }))
+  addEventListener('scroll', onScroll, { passive: true })
+  onScroll()
+})()
+
+// 화면 테마: 자동(기기 설정) → 라이트 → 다크. 이 브라우저에만 저장한다
+;(() => {
+  const b = document.getElementById('theme')
+  const order = ['system', 'light', 'dark']
+  const label = { system: '자동', light: '라이트', dark: '다크' }
+  let t = 'system'
+  try { t = localStorage.getItem('ib2-theme') || 'system' } catch {}
+  const apply = () => {
+    if (t === 'system') delete document.documentElement.dataset.theme
+    else document.documentElement.dataset.theme = t
+    b.querySelector('span').textContent = label[t]
+    b.setAttribute('aria-label', `화면 테마 ${label[t]}, 눌러서 바꾸기`)
+  }
+  b.addEventListener('click', () => { t = order[(order.indexOf(t) + 1) % 3]; try { localStorage.setItem('ib2-theme', t) } catch {} ; apply() })
+  apply()
+})()
+
+// 값 바꿔 보기: .try[data-let] 안에서 스테퍼·체크박스·선택 상자 값으로 식을 계산해 data-text·data-grow·data-if·data-cls·data-slots 를 그린다
+;(() => {
+  document.querySelectorAll('.try').forEach(box => {
+    const vars = {}
+    const calc = expr => { try { return Function(...Object.keys(vars), 'Math', `return (${expr})`)(...Object.values(vars), Math) } catch { return '' } }
+    const lets = (box.dataset.let || '').split(';').map(x => x.trim()).filter(Boolean).map(x => [x.slice(0, x.indexOf('=')).trim(), x.slice(x.indexOf('=') + 1)])
+    const render = () => {
+      for (const [k, e] of lets) vars[k] = calc(e)
+      box.querySelectorAll('.stp').forEach(s => {
+        const v = vars[s.dataset.var]
+        s.querySelector('output').textContent = v
+        s.querySelector('[data-d="-1"]').disabled = v <= +s.dataset.min
+        s.querySelector('[data-d="1"]').disabled = v >= +s.dataset.max
+      })
+      box.querySelectorAll('[data-text]').forEach(el => { el.textContent = calc(el.dataset.text) })
+      box.querySelectorAll('[data-grow]').forEach(el => { const g = Math.max(0, +calc(el.dataset.grow) || 0); el.style.flexGrow = String(g); el.textContent = g ? g : '' })
+      box.querySelectorAll('[data-if]').forEach(el => { el.hidden = !calc(el.dataset.if) })
+      box.querySelectorAll('[data-cls]').forEach(el => el.dataset.cls.split(';').forEach(pair => { const i = pair.indexOf(':'); el.classList.toggle(pair.slice(0, i).trim(), !!calc(pair.slice(i + 1))) }))
+      box.querySelectorAll('[data-slots]').forEach(el => {
+        const [total, on] = el.dataset.slots.split(':').map(calc)
+        el.innerHTML = Array.from({ length: +total || 0 }, (_, i) => `<i class="${i < on ? 'on' : ''}"></i>`).join('')
+      })
+    }
+    box.querySelectorAll('.stp').forEach(s => {
+      vars[s.dataset.var] = +s.dataset.val
+      const name = s.getAttribute('aria-label') || s.dataset.var
+      s.innerHTML = `<button type="button" data-d="-1" aria-label="${name} 줄이기">−</button><output aria-live="polite"></output><button type="button" data-d="1" aria-label="${name} 늘리기">+</button>`
+      s.addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b) return
+        vars[s.dataset.var] = Math.min(+s.dataset.max, Math.max(+s.dataset.min, vars[s.dataset.var] + +b.dataset.d))
+        render()
+      })
+    })
+    box.querySelectorAll('input[type=checkbox][data-var]').forEach(c => { vars[c.dataset.var] = c.checked ? 1 : 0; c.addEventListener('change', () => { vars[c.dataset.var] = c.checked ? 1 : 0; render() }) })
+    box.querySelectorAll('select[data-var]').forEach(c => { vars[c.dataset.var] = +c.value; c.addEventListener('change', () => { vars[c.dataset.var] = +c.value; render() }) })
+    render()
+  })
+})()
+</script>
