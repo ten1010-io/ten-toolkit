@@ -6,7 +6,7 @@ By [Ten](https://github.com/ten1010-io) — Claude Code plugins for AI-powered Q
 
 | Plugin | Version | Skills |
 |---|---|---|
-| [`ten-toolkit`](#commands) | `0.5.0` | `/aqa-inspect` · `/aqa-jira` · `/create-pr` · `/merge-check` |
+| [`ten-toolkit`](#commands) | `0.6.0` | `/aqa-inspect` · `/aqa-jira` · `/create-pr` · `/merge-check` · `/explain-concept` |
 | [`java-team`](#java-team-plugin) | `0.1.1` | `/java-team:meeting-prep` |
 
 Skills ship with their plugin — there is no separate skill version. Run `/plugin` to see what you have installed. **When you bump a plugin's `version`, update this table in the same commit.**
@@ -219,6 +219,40 @@ Dry-run merge check — fetches the latest target branch and tests if the curren
 
 ---
 
+### /explain-concept
+
+Turns one AIPub product topic (InfiniBand, Workspace, Job, PV/PVC, ...) into a single HTML explainer a newcomer can follow. Layer 1 explains the concept with one analogy; layer 2 opens a modal per section that replays where the concept lives in the AIPub UI with screen mock-ups and an animated cursor.
+
+**Usage:**
+
+```
+/explain-concept <topic>
+
+정책서:
+https://<site>.atlassian.net/wiki/spaces/<space>/pages/<id>/...
+Figma:
+https://www.figma.com/design/<file>/...?node-id=<frame-id>
+Jira:
+https://<site>.atlassian.net/browse/<KEY-123>
+Slack:
+https://<workspace>.slack.com/archives/<channel>/p<ts>
+```
+
+**Attach what you have:** without links the skill searches by topic name and may pick the wrong documents.
+
+| Source | Used for |
+|---|---|
+| Policy pages (Confluence) | Behavior, numbers, wording. A folder link pulls in its child pages |
+| Figma | Layout and real copy of the layer-2 screen mock-ups. Link the screen frames (with `node-id`). With only a file link the skill has to find the screens page by page, which is slower and may pick the wrong frames |
+| Codebase (aipub-web) | Screen names, routes, i18n copy. Run inside it or attach with `--add-dir` |
+| Jira ticket | Scope and decisions |
+| Slack threads | Why the policy changed. Only the conclusion goes into the page |
+
+**Prerequisites:**
+- Atlassian and Figma MCP servers to read policy pages and designs. Read access to a cluster if you want real resource values (it only reads).
+
+---
+
 ## java-team plugin
 
 A separate plugin in the same marketplace with shared skills for Ten's Java team (Dev Team 3). It is versioned independently of `ten-toolkit`.
@@ -308,7 +342,8 @@ ten-toolkit/
 │   ├── aqa-inspect.md
 │   ├── aqa-jira.md
 │   ├── create-pr.md
-│   └── merge-check.md
+│   ├── merge-check.md
+│   └── explain-concept.md
 ├── skills/
 │   ├── aqa-inspect/
 │   │   ├── SKILL.md
@@ -318,8 +353,13 @@ ten-toolkit/
 │   │   └── references/
 │   ├── create-pr/
 │   │   └── SKILL.md
-│   └── merge-check/
-│       └── SKILL.md
+│   ├── merge-check/
+│   │   └── SKILL.md
+│   └── explain-concept/
+│       ├── SKILL.md
+│       ├── runtime/
+│       ├── references/
+│       └── examples/
 └── plugins/
     └── java-team/
         ├── .claude-plugin/

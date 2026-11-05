@@ -1,7 +1,7 @@
 {
   "name": "ten-toolkit",
-  "version": "0.5.0",
-  "description": "AI-powered QA automation and Git workflow tools for Claude Code.",
+  "version": "0.6.0",
+  "description": "AI-powered QA automation, Git workflow, and AIPub concept explainer tools for Claude Code.",
   "author": {
     "name": "ten1010-io",
     "url": "https://github.com/ten1010-io"
@@ -21,6 +21,7 @@
     "pr",
     "git",
     "jira",
-    "playwright"
+    "playwright",
+    "explainer"
   ]
 }

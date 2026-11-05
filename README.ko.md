@@ -6,7 +6,7 @@
 
 | 플러그인 | 버전 | 스킬 |
 |---|---|---|
-| [`ten-toolkit`](#명령어) | `0.5.0` | `/aqa-inspect` · `/aqa-jira` · `/create-pr` · `/merge-check` |
+| [`ten-toolkit`](#명령어) | `0.6.0` | `/aqa-inspect` · `/aqa-jira` · `/create-pr` · `/merge-check` · `/explain-concept` |
 | [`java-team`](#java-team-플러그인) | `0.1.1` | `/java-team:meeting-prep` |
 
 스킬은 플러그인 버전을 따라간다 — 스킬마다 따로 버전을 매기지 않는다. 설치된 것은 `/plugin` 으로 확인한다. **플러그인의 `version` 을 올릴 때 이 표도 같은 커밋에서 갱신한다.**
@@ -189,6 +189,40 @@ claude plugin list                            # 설치된 버전 확인
 
 ---
 
+### /explain-concept
+
+AIPub 제품 주제 하나(InfiniBand, Workspace, Job, PV·PVC 등)를 처음 보는 사람도 따라올 수 있는 HTML 설명서 한 장으로 만든다. 1층은 비유 하나로 개념을 설명하고, 2층은 칸마다 모달을 열어 그 개념이 AIPub 의 어느 화면에서 어떻게 쓰이는지 화면 흉내와 커서 움직임으로 재생한다.
+
+**사용법:**
+
+```
+/explain-concept <주제>
+
+정책서:
+https://<site>.atlassian.net/wiki/spaces/<space>/pages/<id>/...
+Figma:
+https://www.figma.com/design/<file>/...?node-id=<frame-id>
+Jira:
+https://<site>.atlassian.net/browse/<KEY-123>
+Slack:
+https://<workspace>.slack.com/archives/<channel>/p<ts>
+```
+
+**같이 붙이면 정확해지는 것:** 링크가 없으면 주제 이름으로 검색해서 문서를 고르므로 엉뚱한 문서를 읽을 수 있다. 가진 것은 모두 붙인다.
+
+| 재료 | 설명서에서 쓰는 곳 |
+|---|---|
+| 정책서(Confluence) 링크 | 화면 동작·숫자·문구. 폴더 링크를 주면 하위 페이지까지 읽는다 |
+| Figma 링크 | 2층 화면 흉내의 모양과 실제 문구. 화면 프레임 링크(`node-id` 포함)를 붙인다. 파일 링크만 주면 스킬이 페이지에서 화면을 직접 찾아야 해서 느리고, 엉뚱한 프레임을 고를 수 있다 |
+| 코드베이스(aipub-web) | 화면 이름·라우트·문안. 작업 디렉터리에서 실행하거나 `--add-dir` 로 붙인다 |
+| Jira 티켓 | 기능의 범위와 결정 |
+| Slack 논의 스레드 | 정책이 바뀐 이유. 본문에는 결론만 쓴다 |
+
+**사전 요구사항:**
+- 정책서(Confluence)와 Figma 를 읽으려면 Atlassian·Figma MCP 가 연결되어 있어야 한다. 실제 리소스 값을 쓰려면 클러스터를 읽을 수 있어야 한다(읽기만 한다).
+
+---
+
 ## java-team 플러그인
 
 같은 마켓플레이스에 있는 별도 플러그인으로, Ten 개발3팀(JAVA팀) 공용 스킬을 담는다. 버전은 `ten-toolkit` 과 따로 관리한다.
@@ -278,7 +312,8 @@ ten-toolkit/
 │   ├── aqa-inspect.md
 │   ├── aqa-jira.md
 │   ├── create-pr.md
-│   └── merge-check.md
+│   ├── merge-check.md
+│   └── explain-concept.md
 ├── skills/
 │   ├── aqa-inspect/
 │   │   ├── SKILL.md
@@ -288,8 +323,13 @@ ten-toolkit/
 │   │   └── references/
 │   ├── create-pr/
 │   │   └── SKILL.md
-│   └── merge-check/
-│       └── SKILL.md
+│   ├── merge-check/
+│   │   └── SKILL.md
+│   └── explain-concept/
+│       ├── SKILL.md
+│       ├── runtime/
+│       ├── references/
+│       └── examples/
 └── plugins/
     └── java-team/
         ├── .claude-plugin/
